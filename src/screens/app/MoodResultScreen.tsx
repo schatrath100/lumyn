@@ -26,15 +26,15 @@ export function MoodResultScreen() {
       <div className="screen__body" style={{ padding: '0 24px' }}>
         <button type="button" className="btn-back" onClick={() => navigate(-1)}>← Back</button>
         <div className="eyebrow" style={{ marginBottom: 6 }}>You're feeling</div>
-        <div className="display" style={{ fontSize: 32, fontStyle: 'italic', marginBottom: 22 }}>{selectedMood.label}</div>
-        <div style={{ background: `linear-gradient(135deg, ${moodColor} 0%, ${moodColor}BB 100%)`, borderRadius: 20, padding: 24, marginBottom: 18 }}>
-          <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', marginBottom: 8 }}>Your matched word</div>
-          <div className="display" style={{ fontSize: 50, fontStyle: 'italic', lineHeight: 1, marginBottom: 6, color: 'white' }}>{selectedWord.word}</div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>{selectedWord.category}</div>
+        <div className="display" style={{ fontSize: 20, fontStyle: 'italic', marginBottom: 18 }}>{selectedMood.label}</div>
+        <div style={{ background: `linear-gradient(135deg, ${moodColor} 0%, ${moodColor}BB 100%)`, borderRadius: 14, padding: 24, marginBottom: 18 }}>
+          <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', marginBottom: 8 }}>Your matched word</div>
+          <div className="display" style={{ fontSize: 32, fontStyle: 'italic', lineHeight: 1, marginBottom: 6, color: 'white' }}>{selectedWord.word}</div>
+          <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.6)' }}>{selectedWord.category}</div>
         </div>
-        <div style={{ background: 'var(--bg-c)', borderRadius: 16, padding: 20, marginBottom: 18, border: '1px solid var(--bd)' }}>
+        <div style={{ background: 'var(--bg-c)', borderRadius: 11, padding: 16, marginBottom: 18, border: '1px solid var(--bd)' }}>
           <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>Guidance</div>
-          <p style={{ fontSize: 14, color: 'var(--ts)', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>{selectedMood.guidance}</p>
+          <p style={{ fontSize: 10, color: 'var(--ts)', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>{selectedMood.guidance}</p>
         </div>
       </div>
       <div className="screen__footer" style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>

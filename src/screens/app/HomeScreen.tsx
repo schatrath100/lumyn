@@ -36,8 +36,8 @@ export function HomeScreen() {
       <div className="screen__body" style={{ padding: '0 18px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div>
-            <div style={{ fontSize: 12, color: 'var(--tm)' }}>{daily.moonEmoji} {daily.moonLabel}</div>
-            <div className="display" style={{ fontSize: 22, marginTop: 2 }}>Today's Word</div>
+            <div style={{ fontSize: 8, color: 'var(--tm)', letterSpacing: '0.1em' }}>{daily.moonEmoji} {daily.moonLabel} ✦</div>
+            <div className="display" style={{ fontSize: 14, marginTop: 4, color: 'var(--tp)' }}>Today's Word</div>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button
@@ -62,19 +62,19 @@ export function HomeScreen() {
         <button
           type="button"
           onClick={openDaily}
-          style={{ width: '100%', textAlign: 'left', background: 'linear-gradient(135deg,#1E110A 0%,#3A2010 100%)', borderRadius: 22, padding: 24, marginBottom: 14, position: 'relative', overflow: 'hidden', cursor: 'pointer', border: 'none', boxShadow: '0 10px 36px rgba(30,17,10,0.28)' }}
+          style={{ width: '100%', textAlign: 'left', background: 'linear-gradient(135deg,#1E110A 0%,#3A2010 100%)', borderRadius: 14, padding: 14, marginBottom: 14, position: 'relative', overflow: 'hidden', cursor: 'pointer', border: 'none' }}
         >
-          <div style={{ position: 'absolute', width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle,rgba(242,196,74,0.18) 0%,transparent 70%)', top: -40, right: -40 }} />
-          <div style={{ fontSize: 10, color: 'rgba(242,196,74,0.65)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 10, position: 'relative', zIndex: 1 }}>
+          <div style={{ position: 'absolute', width: 100, height: 100, borderRadius: '50%', background: 'radial-gradient(circle,rgba(242,196,74,0.18) 0%,transparent 70%)', top: -20, right: -20 }} />
+          <div style={{ fontSize: 7, color: 'rgba(242,196,74,0.65)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8, position: 'relative', zIndex: 1 }}>
             Word of the Day{daily.isPersonalized ? ' · For You' : ''}
           </div>
-          <div className="display" style={{ fontSize: 46, color: '#F2C44A', fontStyle: 'italic', marginBottom: 6, position: 'relative', zIndex: 1 }}>{daily.word.word}</div>
-          <div style={{ fontSize: 12, color: 'rgba(255,248,242,0.5)', position: 'relative', zIndex: 1, marginBottom: 10, lineHeight: 1.5 }}>{daily.ritualPrompt}</div>
-          <div style={{ fontSize: 11, color: 'rgba(255,248,242,0.4)', position: 'relative', zIndex: 1, marginBottom: 14 }}>Repeat {daily.word.reps}×</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative', zIndex: 1 }}>
-            <div style={{ width: 26, height: 26, background: 'rgba(242,196,74,0.15)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13 }}>🔥</div>
-            <span style={{ fontSize: 12, color: 'rgba(255,248,242,0.75)', fontWeight: 500 }}>{state.streak} day streak</span>
-            <span style={{ fontSize: 11, color: 'rgba(242,196,74,0.45)', marginLeft: 'auto' }}>Tap to begin →</span>
+          <div className="display" style={{ fontSize: 30, color: '#F2C44A', fontStyle: 'italic', marginBottom: 6, position: 'relative', zIndex: 1 }}>{daily.word.word}</div>
+          <div style={{ fontSize: 9, color: 'rgba(255,248,242,0.45)', position: 'relative', zIndex: 1, marginBottom: 6, lineHeight: 1.5 }}>{daily.ritualPrompt}</div>
+          <div style={{ fontSize: 9, color: 'rgba(255,248,242,0.35)', position: 'relative', zIndex: 1, marginBottom: 8 }}>Repeat {daily.word.reps}×</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, position: 'relative', zIndex: 1 }}>
+            <span style={{ fontSize: 12 }}>🔥</span>
+            <span style={{ fontSize: 9, color: 'rgba(255,248,242,0.7)' }}>{state.streak} day streak</span>
+            <span style={{ fontSize: 9, color: 'rgba(242,196,74,0.45)', marginLeft: 'auto' }}>Tap to begin →</span>
           </div>
         </button>
 
@@ -120,17 +120,17 @@ export function HomeScreen() {
           </button>
         )}
 
-        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 13 }}>How are you feeling?</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 16 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--tm)', marginBottom: 10, letterSpacing: '0.08em' }}>How are you feeling?</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 16 }}>
           {MOODS.map((mood) => (
             <button
               key={mood.id}
               type="button"
               onClick={() => handleMood(mood)}
-              style={{ padding: '13px 12px', borderRadius: 14, border: 'none', background: 'var(--bg-s)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 2px 8px rgba(30,17,10,0.05)' }}
+              style={{ padding: 9, borderRadius: 10, border: 'none', background: 'var(--bg-s)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}
             >
-              <div style={{ width: 34, height: 34, borderRadius: 10, background: mood.tileBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, color: mood.color }}>{mood.sym}</div>
-              <span style={{ fontSize: 12, fontWeight: 500 }}>{mood.label}</span>
+              <div style={{ width: 22, height: 22, borderRadius: 10, background: mood.tileBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, color: mood.color }}>{mood.sym}</div>
+              <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--tp)' }}>{mood.label}</span>
             </button>
           ))}
         </div>

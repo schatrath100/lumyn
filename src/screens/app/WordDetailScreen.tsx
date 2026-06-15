@@ -34,18 +34,18 @@ export function WordDetailScreen() {
       <StatusBar />
       <div className="screen__body" style={{ padding: '0 24px' }}>
         <button type="button" className="btn-back" onClick={() => navigate(-1)}>← Back</button>
-        <div style={{ textAlign: 'center', padding: '28px 0 24px' }}>
-          <div className="eyebrow" style={{ marginBottom: 12 }}>{word.category}</div>
-          <div className="display" style={{ fontSize: 56, fontStyle: 'italic', lineHeight: 1, marginBottom: 16 }}>{word.word}</div>
+        <div style={{ textAlign: 'center', padding: '20px 0 20px' }}>
+          <div className="eyebrow" style={{ marginBottom: 10 }}>{word.category}</div>
+          <div className="display" style={{ fontSize: 44, fontStyle: 'italic', lineHeight: 1, marginBottom: 14 }}>{word.word}</div>
           <div style={{ display: 'inline-flex', padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600, color: word.color, background: `${word.color}1A` }}>✦ Repeat {word.reps}×</div>
         </div>
-        <div style={{ marginBottom: 20 }}>
-          <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600 }}>About this word</div>
-          <p style={{ fontSize: 14, color: 'var(--ts)', lineHeight: 1.75, margin: 0 }}>{word.description}</p>
+        <div style={{ marginBottom: 16 }}>
+          <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>About this word</div>
+          <p style={{ fontSize: 10, color: 'var(--ts)', lineHeight: 1.6, margin: 0 }}>{word.description}</p>
         </div>
-        <div style={{ background: 'var(--bg-c)', borderRadius: 16, padding: '18px 20px', marginBottom: 24, border: '1px solid var(--bd)' }}>
+        <div style={{ background: 'var(--bg-c)', borderRadius: 10, padding: '14px 16px', marginBottom: 24, border: '1px solid var(--bd)' }}>
           <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>How to use</div>
-          <p style={{ fontSize: 13, color: 'var(--ts)', lineHeight: 1.65, margin: 0, fontStyle: 'italic' }}>{word.how}</p>
+          <p style={{ fontSize: 9, color: 'var(--ts)', lineHeight: 1.5, margin: 0, fontStyle: 'italic' }}>{word.how}</p>
         </div>
       </div>
       <div className="screen__footer" style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>

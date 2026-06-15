@@ -18,7 +18,7 @@ export function ComboScreen() {
       <div className="screen__body" style={{ padding: '0 18px' }}>
         <div className="display" style={{ fontSize: 26, marginBottom: 16 }}>Combo Builder</div>
         <div style={{ marginBottom: 16 }}>
-          <label className="eyebrow" style={{ display: 'block', marginBottom: 7, fontWeight: 600 }}>Combo name</label>
+          <label className="eyebrow" style={{ display: 'block', marginBottom: 7, fontWeight: 600, fontSize: 10 }}>Combo name</label>
           <input
             className="input input--surface"
             value={comboName}
@@ -28,7 +28,7 @@ export function ComboScreen() {
           />
         </div>
         <div style={{ marginBottom: 16 }}>
-          <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600 }}>Add words</div>
+          <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600, fontSize: 10 }}>Add words</div>
           <div className="chip-scroll" style={{ flexWrap: 'nowrap', paddingBottom: 8 }}>
             {SWITCH_WORDS.map((w) => {
               const inCombo = comboWords.some((cw) => cw.id === w.id);
@@ -59,7 +59,7 @@ export function ComboScreen() {
         </div>
         {comboWords.length > 0 && (
           <div style={{ marginBottom: 16 }}>
-            <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600 }}>Your combo</div>
+            <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600, fontSize: 10 }}>Your combo</div>
             {comboWords.map((w, i) => (
               <div key={w.id} style={{ background: 'var(--bg-s)', borderRadius: 9, padding: '9px 10px', display: 'flex', alignItems: 'center', gap: 8, border: '1px solid var(--bd)', marginBottom: 8 }}>
                 <div style={{ width: 28, height: 28, background: 'rgba(232,120,75,0.12)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--co)' }}>{i + 1}</div>

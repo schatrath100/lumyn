@@ -48,7 +48,7 @@ export function AnalyticsScreen() {
         </div>
 
         <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }}>
-          <div className="eyebrow" style={{ marginBottom: 12, fontWeight: 600 }}>Most used words</div>
+          <div className="eyebrow" style={{ marginBottom: 12, fontWeight: 600, fontSize: 10 }}>Most used words</div>
           {wordCounts.length === 0 ? (
             <p style={{ fontSize: 13, color: 'var(--tm)', margin: 0 }}>Log journal entries to see your patterns.</p>
           ) : (
@@ -68,7 +68,7 @@ export function AnalyticsScreen() {
         </div>
 
         <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }}>
-          <div className="eyebrow" style={{ marginBottom: 12, fontWeight: 600 }}>Recent mood trend</div>
+          <div className="eyebrow" style={{ marginBottom: 12, fontWeight: 600, fontSize: 10 }}>Recent mood trend</div>
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 80 }}>
             {recentMoods.length === 0 ? (
               <p style={{ fontSize: 13, color: 'var(--tm)', margin: 0 }}>No entries yet.</p>
@@ -84,13 +84,13 @@ export function AnalyticsScreen() {
         </div>
 
         <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }}>
-          <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>Signs logged</div>
+          <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600, fontSize: 10 }}>Signs logged</div>
           <div className="display" style={{ fontSize: 40, color: '#7A6CF0' }}>{state.synchronicityEntries.length}</div>
           <div style={{ fontSize: 12, color: 'var(--ts)', marginTop: 4 }}>synchronicities in your pattern map</div>
         </div>
 
         <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }}>
-          <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>Sessions logged</div>
+          <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600, fontSize: 10 }}>Sessions logged</div>
           <div className="display" style={{ fontSize: 40, color: 'var(--co)' }}>{state.journalEntries.length}</div>
           <div style={{ fontSize: 12, color: 'var(--ts)', marginTop: 4 }}>journal entries tracking your practice</div>
         </div>

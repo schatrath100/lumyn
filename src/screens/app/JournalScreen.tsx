@@ -80,7 +80,7 @@ export function JournalScreen() {
             {showNew && (
               <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }} className="pop-in">
                 <div className="eyebrow" style={{ marginBottom: 6 }}>Word used</div>
-                <div className="display" style={{ fontSize: 17, fontStyle: 'italic', color: 'var(--co)', marginBottom: 14 }}>{word}</div>
+                <div className="display" style={{ fontSize: 17, fontStyle: 'italic', color: 'var(--co)', marginBottom: 12 }}>{word}</div>
                 <div className="eyebrow" style={{ marginBottom: 8, fontWeight: 600 }}>Mood before</div>
                 <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
                   {MOOD_EMOJIS.map((em) => (

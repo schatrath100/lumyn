@@ -29,7 +29,7 @@ export function LibraryScreen() {
     <>
       <StatusBar />
       <div style={{ padding: '4px 18px 10px', flexShrink: 0 }}>
-        <div className="display" style={{ fontSize: 26, marginBottom: 12 }}>Library</div>
+        <div className="display" style={{ fontSize: 18, marginBottom: 12 }}>Library</div>
         <div style={{ position: 'relative', marginBottom: 10 }}>
           <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 15, color: 'var(--tm)' }}>⌕</span>
           <input
@@ -59,15 +59,15 @@ export function LibraryScreen() {
             key={w.id}
             type="button"
             onClick={() => { setSelectedWord(w); navigate(`/library/${w.id}`); }}
-            style={{ width: '100%', textAlign: 'left', background: 'var(--bg-s)', border: 'none', borderRadius: 14, padding: '14px 16px', marginBottom: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12, boxShadow: '0 1px 6px rgba(30,17,10,0.05)' }}
+            style={{ width: '100%', textAlign: 'left', background: 'var(--bg-s)', border: 'none', borderRadius: 10, padding: '9px 10px', marginBottom: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}
           >
             <div style={{ width: 4, height: 40, borderRadius: 2, background: w.color, flexShrink: 0 }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                <span className="display" style={{ fontSize: 17, fontStyle: 'italic' }}>{w.word}</span>
-                <span style={{ padding: '3px 8px', borderRadius: 10, fontSize: 10, fontWeight: 600, color: w.color, background: `${w.color}1A` }}>{w.category}</span>
+                <span className="display" style={{ fontSize: 13, fontStyle: 'italic' }}>{w.word}</span>
+                <span style={{ padding: '3px 8px', borderRadius: 10, fontSize: 9, fontWeight: 600, color: w.color, background: `${w.color}1A` }}>{w.category}</span>
               </div>
-              <div style={{ fontSize: 11, color: 'var(--tm)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{w.intention}</div>
+              <div style={{ fontSize: 9, color: 'var(--tm)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{w.intention}</div>
             </div>
             <span style={{ fontSize: 13, color: 'var(--tm)' }}>›</span>
           </button>
