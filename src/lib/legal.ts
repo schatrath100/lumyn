@@ -4,7 +4,7 @@ export const LEGAL = {
   /** Apple standard EULA — link in Settings and any paywall. */
   termsOfUse: 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/',
   supportEmail: 'hello@whyteboard.com',
-  productPage: 'https://www.whyteboard.com',
+  productPage: 'https://www.whyteboard.com/lumyn',
 } as const;
 
 export function openExternal(url: string): void {

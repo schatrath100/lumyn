@@ -7,49 +7,62 @@
 - **React 19** + **TypeScript** + **Vite**
 - **React Router** for navigation
 - **localStorage** for offline persistence (primary cache)
-- **Supabase** (optional) for cloud backup + community combo feed
+- **Supabase** (optional) for cloud backup, community feed, feedback
+- **Capacitor** `@capacitor/local-notifications` for native reminders
 - Golden Dawn design system (Playfair Display + DM Sans)
 
-## Features (v1)
+## Features (v1.1)
 
 | Feature | Route | Status |
 |---|---|---|
-| Onboarding (7 screens) | `/onboarding/*` | ✅ |
+| Onboarding (8 steps) | `/onboarding/*` | ✅ |
+| Mandatory paywall (3-day trial) | `/onboarding/paywall` | ✅ (IAP stub on web) |
 | Home + Daily Word + Mood Tiles | `/` | ✅ |
-| Switch Word Library | `/library` | ✅ |
+| Switch Word Library (541) | `/library` | ✅ |
 | Word Detail + Session | `/library/:id`, `/session/:id` | ✅ |
-| Mantra Mode (voice + ambient) | `/mantra/:id` | ✅ |
+| Mantra Mode | `/mantra/:id` | ✅ |
 | Mood Check-in (16 colours) | `/mood` | ✅ |
 | Combo Builder | `/combo` | ✅ |
 | Saved Combos + Share + Sigil | `/combos`, `/share/:id`, `/sigil/:id` | ✅ |
+| Publish combo to community | Saved Combos → ↑ | ✅ |
 | Community Combo Exchange | `/discover` | ✅ |
-| Journal + Synchronicity Log | `/journal` (Practice / Signs tabs) | ✅ |
+| Journal + Synchronicity Log | `/journal` | ✅ |
 | Analytics | `/analytics` | ✅ |
-| Numerology (Chaldean + Pythagorean, life path) | `/profile/number` | ✅ |
-| Moon-phase daily word personalization | Home daily card | ✅ |
-| Daily Word Widget (PWA shortcut) | `/widget` | ✅ |
-| Settings | `/settings` | ✅ |
+| Numerology | `/profile/number` | ✅ |
+| Moon-phase daily word | Home | ✅ |
+| Reminders (off/daily/weekly) | Settings sheet | ✅ |
+| Edit intentions | Settings sheet | ✅ |
+| In-app feedback | Settings sheet | ✅ |
+| Profile + avatar | `/settings/profile` | ✅ |
+| Daily Word Widget | `/widget` | ✅ |
+| Settings + cloud backup | `/settings` | ✅ |
+
+**Feature map:** see `plot.md` for all nodes, guards, and migration order.
 
 ## Data
 
-- 541 switch words (CSV database) + 14 canonical mood/numerology entries; 22 source categories mapped to 9 library filters
+- 541 switch words (CSV + `scripts/generate-switch-words.py`) + 14 canonical entries
 - 8 home mood tiles + 16 colour-grid moods
 - Chaldean personal number profiles (1–9, 11, 22)
-- All content lives in `src/data/`
+- Content in `src/data/`
 
 ## Supabase setup (optional cloud backup)
 
 1. Create a project at [supabase.com](https://supabase.com)
-2. **Authentication → Providers** — enable **Anonymous** (preferred) and **Email** (fallback when anonymous is off). Under Email, disable **Confirm email** so device sign-up returns a session immediately.
-3. Run migrations in **SQL Editor** (in order): `supabase/migrations/00001_lumyn_schema.sql`, then `00002_profile_moods.sql`
-4. Copy `.env.example` → `.env` and set `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`
-5. Restart dev server. In **Settings → Cloud Backup**, tap **Enable**
+2. **Authentication → Providers** — enable **Anonymous** + **Email**; disable **Confirm email** on Email
+3. Run migrations **in order**: `00001` → `00005` in `supabase/migrations/`
+4. Copy `.env.example` → `.env` with `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`
+5. Restart dev server; **Settings → Cloud Backup → Enable**
 
-**Tables:** `profiles` (incl. first_name, last_name, email, avatar_emoji), `saved_combos`, `journal_entries`, `synchronicity_entries`, `saved_words`, `mood_checkins`, `community_combos`, `community_upvotes`
+**Tables:** `profiles`, `saved_combos`, `journal_entries`, `synchronicity_entries`, `saved_words`, `mood_checkins`, `community_combos`, `community_upvotes`, `feedback`
 
-**Sync model:** Offline-first. localStorage is always written; when cloud backup is on, changes debounce-push to Supabase. First enable uploads local data if no remote profile exists.
+**Auth:** `ensureSupabaseSession()` tries anonymous auth, then per-device email/password (`device-auth.ts`).
 
-**Delete data:** Settings → Delete All Data calls `delete_my_data()` RPC when cloud is linked, then wipes local storage.
+**Sync:** Offline-first; debounced push when cloud backup on.
+
+**Delete:** `delete_my_data()` RPC + local wipe.
+
+**Keepalive:** `.github/workflows/supabase-keepalive.yml` + `SUPABASE_SERVICE_ROLE_KEY` GitHub secret.
 
 ## Development
 
@@ -62,33 +75,31 @@ npm run preview
 
 ## Design Reference
 
-Built from `Lumyn_prototype.html` and README design handoff (Golden Dawn direction). Open the prototype in a browser for pixel-level reference.
+`Lumyn_prototype.html` — Golden Dawn direction.
 
 ## App Store compliance (pre-ship checklist)
 
-Mirror fixes from prior Whyteboard submissions:
-
 | Requirement | Lumyn status |
 |---|---|
-| `ITSAppUsesNonExemptEncryption = NO` in Info.plist | ✅ `ios/Info.plist` template |
-| Terms of Use → Apple EULA URL in Settings | ✅ `LEGAL.termsOfUse` in Settings |
-| Privacy Policy link | ✅ Settings → `/legal/privacy` + whyteboard.com |
-| Delete account / all user data | ✅ Settings → Delete All Data (local + `delete_my_data` RPC) |
-| Skip personal info during onboarding | ✅ Skip on splash, intentions, personal number |
-| No forced name/email before core app | ✅ No login; profile fields optional |
-| User-facing error copy (not raw errors) | ✅ `USER_ERROR_MESSAGE` in `src/lib/errors.ts` |
-| `userCancelled` on purchases (no crash) | ✅ `src/lib/purchases.ts` stub for future IAP |
-| Paywall 4-item feature list | ✅ `PAYWALL_FEATURES` in `src/data/paywall-features.ts` |
-| StoreKit config removed from release scheme | ⚠️ When wrapping iOS — remove `.storekit` from Release scheme |
+| `ITSAppUsesNonExemptEncryption = NO` | ✅ `ios/Info.plist` |
+| Terms of Use → Apple EULA | ✅ Settings |
+| Privacy Policy | ✅ |
+| Delete account / all user data | ✅ |
+| Skip personal info in onboarding | ✅ |
+| No forced login | ✅ |
+| User-facing errors | ✅ `USER_ERROR_MESSAGE` |
+| `userCancelled` on purchases | ✅ `purchases.ts` |
+| Paywall 4-item feature list | ✅ `PAYWALL_FEATURES` |
+| Native StoreKit on ship | ⚠️ Replace web stub in `purchases.ts` |
+| Remove `.storekit` from Release scheme | ⚠️ When wrapping iOS |
 
-When adding Capacitor/native shell: copy `ios/Info.plist` keys into the Xcode target. Link EULA in App Store Connect app description too.
+## Out of Scope (current)
 
-## Out of Scope (v1)
-
-- Email/password accounts (anonymous cloud backup only)
-- Real push notifications (UI only)
-- Native iOS/Android lock screen widgets (web widget at `/widget` + PWA manifest shortcut)
+- Email/password accounts
+- Server-side web push (VAPID)
+- Native lock screen widgets
+- Gratitude journal / affirmation voice library
 
 ## Repo
 
-`github.com/whyteboard/lumyn` (when published)
+`github.com/schatrath100/lumyn`
