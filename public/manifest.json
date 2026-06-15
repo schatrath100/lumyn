@@ -1,0 +1,24 @@
+{
+  "name": "Lumyn",
+  "short_name": "Lumyn",
+  "description": "Switch words, mood tiles, and daily rituals that shift your world.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F2",
+  "theme_color": "#E8784B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Word",
+      "url": "/widget",
+      "description": "Glanceable daily switch word"
+    }
+  ]
+}
