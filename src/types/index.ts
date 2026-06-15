@@ -46,6 +46,8 @@ export interface Combo {
   name: string;
   words: string[];
   date: string;
+  /** Set after publishing to community exchange. */
+  communityPublishedId?: string | null;
 }
 
 export interface CommunityCombo {
@@ -83,7 +85,22 @@ export interface AppSettings {
   mantraBinaural: boolean;
 }
 
+export interface MoodCheckin {
+  id: string;
+  date: string;
+  moodId: string;
+  moodLabel: string;
+  matchWord: string;
+  source: 'tile' | 'color_grid';
+}
+
+export type SubscriptionPlanId = 'weekly' | 'quarterly';
+
 export interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarEmoji: string;
   selectedIntentions: string[];
   userName: string;
   birthDate: string;
@@ -91,6 +108,9 @@ export interface UserProfile {
   personalNumber: number | null;
   lifePathNumber: number | null;
   onboardingComplete: boolean;
+  isSubscribed: boolean;
+  trialStartDate: string | null;
+  subscriptionPlan: SubscriptionPlanId | null;
 }
 
 export interface PersistedState {
@@ -100,6 +120,7 @@ export interface PersistedState {
   journalEntries: JournalEntry[];
   synchronicityEntries: SynchronicityEntry[];
   communityUpvotes: string[];
+  moodCheckins: MoodCheckin[];
   streak: number;
   lastActiveDate: string | null;
   savedWords: string[];

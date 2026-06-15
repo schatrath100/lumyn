@@ -10,10 +10,13 @@ import {
 } from 'react';
 import type {
   Combo,
+  CommunityCombo,
   JournalEntry,
+  MoodCheckin,
   MoodSelection,
   NumerologySystem,
   PersistedState,
+  SubscriptionPlanId,
   SynchronicityEntry,
   SwitchWord,
 } from '../types';
@@ -23,11 +26,16 @@ import { newId } from '../lib/id';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import {
   deleteRemoteData,
+  publishCommunityCombo,
   pullRemoteState,
   pushRemoteState,
   toggleRemoteUpvote,
 } from '../lib/supabase-sync';
 import { USER_ERROR_MESSAGE } from '../lib/errors';
+import { ensureSupabaseSession } from '../lib/supabase-session';
+import { getDisplayName } from '../lib/profile';
+import { getResonanceNumber } from '../lib/numerology';
+import { syncDailyReminders } from '../lib/reminder-scheduler';
 
 export type CloudSyncStatus = 'off' | 'connecting' | 'synced' | 'error';
 
@@ -59,6 +67,7 @@ interface AppContextValue {
   setPersonalNumber: (n: number | null) => void;
   setLifePathNumber: (n: number | null) => void;
   completeOnboarding: () => void;
+  grantSubscription: (planId: SubscriptionPlanId) => void;
   toggleDarkMode: () => void;
   toggleNotif: () => void;
   setReminderTime: (time: string) => void;
@@ -77,6 +86,7 @@ interface AppContextValue {
   enableCloudSync: () => Promise<void>;
   disableCloudSync: () => Promise<void>;
   deleteAllData: () => Promise<void>;
+  publishComboToCommunity: (comboId: string, tag: string) => Promise<CommunityCombo>;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -105,6 +115,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', state.settings.darkMode ? 'dark' : 'light');
   }, [state.settings.darkMode]);
+
+  useEffect(() => {
+    void syncDailyReminders(state.settings.notifEnabled, state.settings.reminderTime, state.profile);
+  }, [
+    state.settings.notifEnabled,
+    state.settings.reminderTime,
+    state.profile.personalNumber,
+    state.profile.lifePathNumber,
+  ]);
 
   const scheduleCloudPush = useCallback((userId: string) => {
     if (!supabase) return;
@@ -163,14 +182,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCloudSyncStatus('connecting');
     setCloudSyncError(null);
     try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      let userId = sessionData.session?.user?.id;
-      if (!userId) {
-        const { data, error } = await supabase.auth.signInAnonymously();
-        if (error) throw error;
-        userId = data.user?.id;
-      }
-      if (!userId) throw new Error('No user');
+      const session = await ensureSupabaseSession(supabase);
+      const userId = session.user.id;
 
       const remote = await pullRemoteState(userId);
       if (remote) {
@@ -201,6 +214,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const pickMood = useCallback((mood: MoodSelection): SwitchWord => {
     const word = getWordByName(mood.matchWord) ?? getWordByName('ELATE')!;
+    const source: MoodCheckin['source'] = 'sym' in mood ? 'tile' : 'color_grid';
+    const checkin: MoodCheckin = {
+      id: newId(),
+      date: formatDate(),
+      moodId: mood.id,
+      moodLabel: mood.label,
+      matchWord: mood.matchWord,
+      source,
+    };
+    setState((prev) => ({
+      ...prev,
+      moodCheckins: [checkin, ...prev.moodCheckins].slice(0, 200),
+    }));
     setSelectedMood(mood);
     setSelectedWord(word);
     return word;
@@ -270,6 +296,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const completeOnboarding = useCallback(() => {
     updateProfile({ onboardingComplete: true });
   }, [updateProfile]);
+
+  const grantSubscription = useCallback(
+    (planId: SubscriptionPlanId) => {
+      setState((prev) => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          isSubscribed: true,
+          trialStartDate: prev.profile.trialStartDate ?? new Date().toISOString(),
+          subscriptionPlan: planId,
+          onboardingComplete: true,
+        },
+      }));
+    },
+    [],
+  );
 
   const toggleDarkMode = useCallback(() => {
     setState((prev) => ({
@@ -370,6 +412,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const publishComboToCommunity = useCallback(async (comboId: string, tag: string) => {
+    if (!supabase) throw new Error('Community publishing requires cloud connection.');
+    const combo = stateRef.current.savedCombos.find((c) => c.id === comboId);
+    if (!combo) throw new Error('Combo not found.');
+    if (combo.communityPublishedId) throw new Error('This combo is already in the exchange.');
+
+    const session = await ensureSupabaseSession(supabase);
+    const profile = stateRef.current.profile;
+    const published = await publishCommunityCombo(session.user.id, {
+      name: combo.name,
+      words: combo.words,
+      authorDisplay: getDisplayName(profile),
+      tag,
+      resonanceNumber: getResonanceNumber(profile.personalNumber, profile.lifePathNumber),
+    });
+
+    setState((prev) => ({
+      ...prev,
+      savedCombos: prev.savedCombos.map((c) =>
+        c.id === comboId ? { ...c, communityPublishedId: published.id } : c,
+      ),
+    }));
+
+    return published;
+  }, []);
+
   const deleteAllData = useCallback(async () => {
     if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
     if (supabase && cloudUserId) {
@@ -421,6 +489,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setPersonalNumber: (n) => updateProfile({ personalNumber: n }),
       setLifePathNumber: (n) => updateProfile({ lifePathNumber: n }),
       completeOnboarding,
+      grantSubscription,
       toggleDarkMode,
       toggleNotif,
       setReminderTime,
@@ -439,6 +508,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       enableCloudSync,
       disableCloudSync,
       deleteAllData,
+      publishComboToCommunity,
     }),
     [
       state,
@@ -459,6 +529,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       pickMood,
       toggleIntention,
       completeOnboarding,
+      grantSubscription,
       toggleDarkMode,
       toggleNotif,
       setReminderTime,
@@ -475,6 +546,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       enableCloudSync,
       disableCloudSync,
       deleteAllData,
+      publishComboToCommunity,
     ],
   );
 

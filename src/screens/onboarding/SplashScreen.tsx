@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { StatusBar } from '../../components/StatusBar';
-import { useApp } from '../../context/AppContext';
 
 export function SplashScreen() {
   const navigate = useNavigate();
-  const { completeOnboarding } = useApp();
 
-  const skipToApp = () => {
-    completeOnboarding();
-    navigate('/', { replace: true });
+  const skipToPaywall = () => {
+    navigate('/onboarding/paywall', { replace: true });
   };
 
   return (
@@ -23,7 +20,7 @@ export function SplashScreen() {
       </div>
       <div style={{ padding: '0 28px 44px', position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <button type="button" className="btn-primary" onClick={() => navigate('/onboarding/intro')}>Begin Your Journey</button>
-        <button type="button" className="btn-ghost" style={{ color: 'rgba(122,92,69,0.65)' }} onClick={skipToApp}>Skip for now</button>
+        <button type="button" className="btn-ghost" style={{ color: 'rgba(122,92,69,0.65)' }} onClick={skipToPaywall}>Skip to trial</button>
       </div>
     </div>
   );

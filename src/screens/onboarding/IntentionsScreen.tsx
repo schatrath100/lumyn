@@ -12,7 +12,7 @@ export function IntentionsScreen() {
   return (
     <div className="screen screen--card">
       <StatusBar />
-      <ProgressDots active={4} />
+      <ProgressDots total={8} active={3} />
       <div className="screen__body" style={{ padding: '0 24px' }}>
         <h1 className="display" style={{ fontSize: 32, fontWeight: 400, margin: '0 0 6px', lineHeight: 1.2 }}>What draws<br />you here?</h1>
         <p style={{ fontSize: 13, color: 'var(--ts)', margin: '0 0 20px' }}>Choose up to 3 intentions. We'll curate your library.</p>
@@ -44,8 +44,8 @@ export function IntentionsScreen() {
         </div>
       </div>
       <div className="screen__footer" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button type="button" className="btn-primary" onClick={() => navigate('/onboarding/number')}>Continue</button>
-        <button type="button" className="btn-ghost" onClick={() => navigate('/onboarding/number')}>Skip for now</button>
+        <button type="button" className="btn-primary" onClick={() => navigate('/onboarding/profile')}>Continue</button>
+        <button type="button" className="btn-ghost" onClick={() => navigate('/onboarding/profile')}>Skip for now</button>
       </div>
     </div>
   );

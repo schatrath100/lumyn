@@ -27,9 +27,9 @@ export function DeleteDataScreen() {
       <StatusBar />
       <div className="screen__body" style={{ padding: '0 24px' }}>
         <button type="button" className="btn-back" onClick={() => navigate(-1)}>← Back</button>
-        <div className="display" style={{ fontSize: 26, marginBottom: 12 }}>Delete All Data</div>
+        <div className="display" style={{ fontSize: 26, marginBottom: 12 }}>Delete Account</div>
         <p style={{ fontSize: 14, color: 'var(--ts)', lineHeight: 1.65, margin: '0 0 20px' }}>
-          Lumyn stores your journal, combos, numerology profile, and settings on this device.
+          This permanently deletes your Lumyn profile, mood history, journal, combos, numerology settings, and preferences on this device.
           {cloudUserId ? ' Cloud backup for your account will also be permanently removed.' : ''}
           {' '}This cannot be undone.
         </p>
@@ -49,7 +49,7 @@ export function DeleteDataScreen() {
           onClick={() => void confirm()}
           style={{ width: '100%', padding: 16, background: '#C44B4B', color: 'white', fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 600, border: 'none', borderRadius: 15, cursor: busy ? 'wait' : 'pointer', opacity: busy ? 0.7 : 1 }}
         >
-          {busy ? 'Deleting…' : 'Delete All Data'}
+          {busy ? 'Deleting…' : 'Delete Account & Data'}
         </button>
         <button type="button" className="btn-ghost" onClick={() => navigate(-1)} disabled={busy}>Cancel</button>
       </div>

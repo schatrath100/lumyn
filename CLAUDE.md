@@ -14,7 +14,7 @@
 
 | Feature | Route | Status |
 |---|---|---|
-| Onboarding (6 screens) | `/onboarding/*` | ✅ |
+| Onboarding (7 screens) | `/onboarding/*` | ✅ |
 | Home + Daily Word + Mood Tiles | `/` | ✅ |
 | Switch Word Library | `/library` | ✅ |
 | Word Detail + Session | `/library/:id`, `/session/:id` | ✅ |
@@ -32,7 +32,7 @@
 
 ## Data
 
-- 20 switch words with categories, reps, guidance
+- 541 switch words (CSV database) + 14 canonical mood/numerology entries; 22 source categories mapped to 9 library filters
 - 8 home mood tiles + 16 colour-grid moods
 - Chaldean personal number profiles (1–9, 11, 22)
 - All content lives in `src/data/`
@@ -40,12 +40,12 @@
 ## Supabase setup (optional cloud backup)
 
 1. Create a project at [supabase.com](https://supabase.com)
-2. **Authentication → Providers → Anonymous** — enable anonymous sign-in
-3. Run the migration in **SQL Editor**: `supabase/migrations/00001_lumyn_schema.sql`
+2. **Authentication → Providers** — enable **Anonymous** (preferred) and **Email** (fallback when anonymous is off). Under Email, disable **Confirm email** so device sign-up returns a session immediately.
+3. Run migrations in **SQL Editor** (in order): `supabase/migrations/00001_lumyn_schema.sql`, then `00002_profile_moods.sql`
 4. Copy `.env.example` → `.env` and set `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`
 5. Restart dev server. In **Settings → Cloud Backup**, tap **Enable**
 
-**Tables:** `profiles`, `saved_combos`, `journal_entries`, `synchronicity_entries`, `saved_words`, `community_combos`, `community_upvotes`
+**Tables:** `profiles` (incl. first_name, last_name, email, avatar_emoji), `saved_combos`, `journal_entries`, `synchronicity_entries`, `saved_words`, `mood_checkins`, `community_combos`, `community_upvotes`
 
 **Sync model:** Offline-first. localStorage is always written; when cloud backup is on, changes debounce-push to Supabase. First enable uploads local data if no remote profile exists.
 

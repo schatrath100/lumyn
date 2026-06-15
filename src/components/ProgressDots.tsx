@@ -3,7 +3,7 @@ interface ProgressDotsProps {
   active: number;
 }
 
-export function ProgressDots({ total = 6, active }: ProgressDotsProps) {
+export function ProgressDots({ total = 7, active }: ProgressDotsProps) {
   return (
     <div className="progress-dots">
       {Array.from({ length: total }, (_, i) => (

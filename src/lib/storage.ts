@@ -1,9 +1,15 @@
 import type { PersistedState, SynchronicityEntry } from '../types';
+import { resetDeviceAuth } from './device-auth';
+import { clearSubscriptionCache } from './purchases';
 
 const STORAGE_KEY = 'lumyn-state-v2';
 
 export const defaultState: PersistedState = {
   profile: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    avatarEmoji: '✦',
     selectedIntentions: [],
     userName: '',
     birthDate: '',
@@ -11,6 +17,9 @@ export const defaultState: PersistedState = {
     personalNumber: null,
     lifePathNumber: null,
     onboardingComplete: false,
+    isSubscribed: false,
+    trialStartDate: null,
+    subscriptionPlan: null,
   },
   settings: {
     darkMode: false,
@@ -19,26 +28,34 @@ export const defaultState: PersistedState = {
     mantraAmbient: false,
     mantraBinaural: false,
   },
-  savedCombos: [
-    { id: 'seed-combo-1', name: 'Morning Abundance Ritual', words: ['TOGETHER', 'COUNT', 'OPEN', 'DIVINE'], date: 'Jun 12' },
-    { id: 'seed-combo-2', name: 'Healing & Restore', words: ['RESTORE', 'LOVE', 'CLEAR'], date: 'Jun 10' },
-    { id: 'seed-combo-3', name: 'Clarity Focus Blend', words: ['CRYSTAL', 'FIND'], date: 'Jun 8' },
-  ],
-  journalEntries: [
-    { id: 'seed-journal-1', date: 'Jun 14', word: 'ELATE', moodBefore: 2, moodAfter: 4, note: 'Felt lighter after 3 rounds.' },
-    { id: 'seed-journal-2', date: 'Jun 13', word: 'TOGETHER', moodBefore: 3, moodAfter: 5, note: '' },
-    { id: 'seed-journal-3', date: 'Jun 12', word: 'CLEAR', moodBefore: 1, moodAfter: 3, note: 'Mind fog lifted quickly.' },
-    { id: 'seed-journal-4', date: 'Jun 11', word: 'RESTORE', moodBefore: 2, moodAfter: 4, note: '' },
-  ],
-  synchronicityEntries: [
-    { id: 'seed-sync-1', date: 'Jun 13', word: 'TOGETHER', sign: 'Saw 111 on a receipt right after my session', note: 'Felt like confirmation.' },
-    { id: 'seed-sync-2', date: 'Jun 11', word: 'OPEN', sign: 'Unexpected call from an old friend', note: '' },
-  ],
+  savedCombos: [],
+  journalEntries: [],
+  synchronicityEntries: [],
   communityUpvotes: [],
-  streak: 12,
+  moodCheckins: [],
+  streak: 0,
   lastActiveDate: null,
   savedWords: [],
 };
+
+function stripSeedData(state: PersistedState): PersistedState {
+  const isSeed = (id: string) => id.startsWith('seed-');
+  const savedCombos = state.savedCombos.filter((c) => !isSeed(c.id));
+  const journalEntries = state.journalEntries.filter((e) => !isSeed(e.id));
+  const synchronicityEntries = state.synchronicityEntries.filter((e) => !isSeed(e.id));
+  const streak = state.streak === 12 && state.lastActiveDate == null ? 0 : state.streak;
+
+  if (
+    savedCombos.length === state.savedCombos.length &&
+    journalEntries.length === state.journalEntries.length &&
+    synchronicityEntries.length === state.synchronicityEntries.length &&
+    streak === state.streak
+  ) {
+    return state;
+  }
+
+  return { ...state, savedCombos, journalEntries, synchronicityEntries, streak };
+}
 
 function normalizeStringIds(parsed: Record<string, unknown>): PersistedState {
   const asState = parsed as unknown as PersistedState;
@@ -59,9 +76,16 @@ function migrateV1(parsed: Record<string, unknown>): PersistedState {
     profile: {
       ...defaultState.profile,
       ...profile,
+      firstName: (profile?.firstName as string) ?? '',
+      lastName: (profile?.lastName as string) ?? '',
+      email: (profile?.email as string) ?? '',
+      avatarEmoji: (profile?.avatarEmoji as string) ?? '✦',
       birthDate: (profile?.birthDate as string) ?? '',
       numerologySystem: (profile?.numerologySystem as 'chaldean' | 'pythagorean') ?? 'chaldean',
       lifePathNumber: (profile?.lifePathNumber as number | null) ?? null,
+      isSubscribed: (profile?.isSubscribed as boolean) ?? false,
+      trialStartDate: (profile?.trialStartDate as string | null) ?? null,
+      subscriptionPlan: (profile?.subscriptionPlan as PersistedState['profile']['subscriptionPlan']) ?? null,
     },
     settings: {
       ...defaultState.settings,
@@ -70,20 +94,27 @@ function migrateV1(parsed: Record<string, unknown>): PersistedState {
       mantraBinaural: (settings?.mantraBinaural as boolean) ?? false,
     },
     synchronicityEntries: (parsed.synchronicityEntries as SynchronicityEntry[]) ?? defaultState.synchronicityEntries,
+    moodCheckins: (parsed.moodCheckins as PersistedState['moodCheckins']) ?? [],
     communityUpvotes: (parsed.communityUpvotes as string[]) ?? [],
   } as PersistedState;
-  return normalizeStringIds(migrated as unknown as Record<string, unknown>);
+  return stripSeedData(normalizeStringIds(migrated as unknown as Record<string, unknown>));
 }
 
 export function loadState(): PersistedState {
   try {
     const v2 = localStorage.getItem(STORAGE_KEY);
-    if (v2) return migrateV1(JSON.parse(v2));
+    if (v2) {
+      const loaded = migrateV1(JSON.parse(v2));
+      const cleaned = stripSeedData(loaded);
+      if (JSON.stringify(cleaned) !== JSON.stringify(loaded)) saveState(cleaned);
+      return cleaned;
+    }
     const v1 = localStorage.getItem('lumyn-state-v1');
     if (v1) {
       const migrated = migrateV1(JSON.parse(v1));
-      saveState(migrated);
-      return migrated;
+      const cleaned = stripSeedData(migrated);
+      saveState(cleaned);
+      return cleaned;
     }
     return defaultState;
   } catch {
@@ -108,5 +139,7 @@ export function todayKey(): string {
 export function resetAllData(): PersistedState {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem('lumyn-state-v1');
+  resetDeviceAuth();
+  clearSubscriptionCache();
   return defaultState;
 }

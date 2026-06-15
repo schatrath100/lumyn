@@ -1,7 +1,15 @@
-import type { Combo, CommunityCombo, JournalEntry, PersistedState, SynchronicityEntry } from '../types';
+import type { Combo, CommunityCombo, JournalEntry, MoodCheckin, PersistedState, SynchronicityEntry } from '../types';
 import { supabase } from './supabase';
 import { formatDate } from './storage';
 import { newId, isUuid } from './id';
+
+export interface PublishComboInput {
+  name: string;
+  words: string[];
+  authorDisplay: string;
+  tag: string;
+  resonanceNumber: number | null;
+}
 
 function formatRowDate(iso: string): string {
   return formatDate(new Date(iso));
@@ -10,13 +18,14 @@ function formatRowDate(iso: string): string {
 export async function pullRemoteState(userId: string): Promise<PersistedState | null> {
   if (!supabase) return null;
 
-  const [profileRes, combosRes, journalRes, syncRes, wordsRes, upvotesRes] = await Promise.all([
+  const [profileRes, combosRes, journalRes, syncRes, wordsRes, upvotesRes, moodsRes] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', userId).maybeSingle(),
     supabase.from('saved_combos').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
     supabase.from('journal_entries').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
     supabase.from('synchronicity_entries').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
     supabase.from('saved_words').select('word').eq('user_id', userId),
     supabase.from('community_upvotes').select('combo_id').eq('user_id', userId),
+    supabase.from('mood_checkins').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
   ]);
 
   if (profileRes.error) throw profileRes.error;
@@ -44,9 +53,21 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
     sign: r.sign,
     note: r.note ?? '',
   }));
+  const moodCheckins: MoodCheckin[] = (moodsRes.data ?? []).map((r) => ({
+    id: r.id,
+    date: formatRowDate(r.created_at),
+    moodId: r.mood_id,
+    moodLabel: r.mood_label,
+    matchWord: r.match_word,
+    source: r.source as 'tile' | 'color_grid',
+  }));
 
   return {
     profile: {
+      firstName: p.first_name ?? '',
+      lastName: p.last_name ?? '',
+      email: p.email ?? '',
+      avatarEmoji: p.avatar_emoji ?? '✦',
       userName: p.user_name ?? '',
       birthDate: p.birth_date ?? '',
       numerologySystem: p.numerology_system as 'chaldean' | 'pythagorean',
@@ -54,6 +75,9 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
       lifePathNumber: p.life_path_number,
       selectedIntentions: p.selected_intentions ?? [],
       onboardingComplete: p.onboarding_complete ?? false,
+      isSubscribed: p.is_subscribed ?? false,
+      trialStartDate: p.trial_start_date ?? null,
+      subscriptionPlan: p.subscription_plan as PersistedState['profile']['subscriptionPlan'],
     },
     settings: {
       darkMode: p.dark_mode ?? false,
@@ -65,6 +89,7 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
     savedCombos,
     journalEntries,
     synchronicityEntries,
+    moodCheckins,
     communityUpvotes: (upvotesRes.data ?? []).map((r) => r.combo_id as string),
     streak: p.streak ?? 0,
     lastActiveDate: p.last_active_date,
@@ -79,6 +104,10 @@ export async function pushRemoteState(userId: string, state: PersistedState): Pr
 
   const { error: profileError } = await supabase.from('profiles').upsert({
     id: userId,
+    first_name: profile.firstName,
+    last_name: profile.lastName,
+    email: profile.email,
+    avatar_emoji: profile.avatarEmoji,
     user_name: profile.userName,
     birth_date: profile.birthDate || null,
     numerology_system: profile.numerologySystem,
@@ -86,6 +115,9 @@ export async function pushRemoteState(userId: string, state: PersistedState): Pr
     life_path_number: profile.lifePathNumber,
     selected_intentions: profile.selectedIntentions,
     onboarding_complete: profile.onboardingComplete,
+    is_subscribed: profile.isSubscribed,
+    trial_start_date: profile.trialStartDate,
+    subscription_plan: profile.subscriptionPlan,
     streak: state.streak,
     last_active_date: state.lastActiveDate,
     dark_mode: settings.darkMode,
@@ -153,6 +185,53 @@ export async function pushRemoteState(userId: string, state: PersistedState): Pr
     );
     if (error) throw error;
   }
+
+  await supabase.from('mood_checkins').delete().eq('user_id', userId);
+  if (state.moodCheckins.length) {
+    const { error } = await supabase.from('mood_checkins').insert(
+      state.moodCheckins.map((m) => ({
+        id: isUuid(m.id) ? m.id : newId(),
+        user_id: userId,
+        mood_id: m.moodId,
+        mood_label: m.moodLabel,
+        match_word: m.matchWord,
+        source: m.source,
+      })),
+    );
+    if (error) throw error;
+  }
+}
+
+export async function publishCommunityCombo(
+  userId: string,
+  input: PublishComboInput,
+): Promise<CommunityCombo> {
+  if (!supabase) throw new Error('Cloud sync is not configured.');
+
+  const { data, error } = await supabase
+    .from('community_combos')
+    .insert({
+      name: input.name,
+      words: input.words,
+      author_display: input.authorDisplay,
+      tag: input.tag,
+      resonance_number: input.resonanceNumber,
+      submitted_by: userId,
+    })
+    .select('id, name, words, author_display, tag, resonance_number')
+    .single();
+
+  if (error) throw error;
+
+  return {
+    id: data.id as string,
+    name: data.name as string,
+    words: (data.words as string[]) ?? [],
+    author: data.author_display as string,
+    tag: data.tag as string,
+    resonance: (data.resonance_number as number) ?? 0,
+    upvotes: 0,
+  };
 }
 
 export async function fetchCommunityCombos(): Promise<CommunityCombo[]> {

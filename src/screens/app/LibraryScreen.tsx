@@ -18,7 +18,8 @@ export function LibraryScreen() {
           !sq ||
           w.word.toLowerCase().includes(sq) ||
           w.intention.toLowerCase().includes(sq) ||
-          w.category.toLowerCase().includes(sq);
+          w.category.toLowerCase().includes(sq) ||
+          w.description.toLowerCase().includes(sq);
         const matchesCat = selectedCategory === 'All' || w.category === selectedCategory;
         return matchesSearch && matchesCat;
       }),
@@ -37,7 +38,7 @@ export function LibraryScreen() {
             style={{ paddingLeft: 36, fontSize: 14, padding: '12px 14px 12px 36px' }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search words or intentions…"
+            placeholder="Search words, categories, or descriptions…"
           />
         </div>
         <div className="chip-scroll">

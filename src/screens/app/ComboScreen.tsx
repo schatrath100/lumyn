@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatusBar } from '../../components/StatusBar';
 import { SWITCH_WORDS } from '../../data/switch-words';
@@ -6,6 +7,19 @@ import { useApp } from '../../context/AppContext';
 export function ComboScreen() {
   const navigate = useNavigate();
   const { comboWords, comboName, setComboName, addToCombo, removeFromCombo, saveCombo } = useApp();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredWords = useMemo(() => {
+    const sq = searchQuery.trim().toLowerCase();
+    if (!sq) return SWITCH_WORDS.slice(0, 48);
+    return SWITCH_WORDS.filter(
+      (w) =>
+        w.word.toLowerCase().includes(sq) ||
+        w.intention.toLowerCase().includes(sq) ||
+        w.category.toLowerCase().includes(sq) ||
+        w.description.toLowerCase().includes(sq),
+    ).slice(0, 48);
+  }, [searchQuery]);
 
   const handleSave = () => {
     saveCombo();
@@ -29,8 +43,15 @@ export function ComboScreen() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <div className="eyebrow" style={{ marginBottom: 10, fontWeight: 600, fontSize: 10 }}>Add words</div>
+          <input
+            className="input input--surface"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search 540+ words…"
+            style={{ marginBottom: 10, fontSize: 14 }}
+          />
           <div className="chip-scroll" style={{ flexWrap: 'nowrap', paddingBottom: 8 }}>
-            {SWITCH_WORDS.map((w) => {
+            {filteredWords.map((w) => {
               const inCombo = comboWords.some((cw) => cw.id === w.id);
               return (
                 <button
@@ -56,6 +77,9 @@ export function ComboScreen() {
               );
             })}
           </div>
+          {!searchQuery && (
+            <p style={{ fontSize: 11, color: 'var(--tm)', margin: '8px 0 0' }}>Showing popular picks — search to browse the full library.</p>
+          )}
         </div>
         {comboWords.length > 0 && (
           <div style={{ marginBottom: 16 }}>

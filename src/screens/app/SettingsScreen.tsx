@@ -1,11 +1,17 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ReminderTimePicker } from '../../components/ReminderTimePicker';
 import { StatusBar } from '../../components/StatusBar';
 import { Toggle } from '../../components/Toggle';
+import { UserAvatar } from '../../components/UserAvatar';
 import { PERSONAL_NUMBER_PROFILES } from '../../data/personal-numbers';
+import { APP_VERSION } from '../../lib/app-meta';
 import { LEGAL, openExternal } from '../../lib/legal';
+import { getDisplayName } from '../../lib/profile';
+import { enableDailyReminders } from '../../lib/reminder-scheduler';
 import { useApp } from '../../context/AppContext';
 
-function LegalRow({ label, onClick }: { label: string; onClick: () => void }) {
+function LegalRow({ label, onClick, danger }: { label: string; onClick: () => void; danger?: boolean }) {
   return (
     <button
       type="button"
@@ -13,25 +19,57 @@ function LegalRow({ label, onClick }: { label: string; onClick: () => void }) {
       onClick={onClick}
       style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}
     >
-      <div className="settings-row__label">{label}</div>
-      <span style={{ color: 'var(--tm)' }}>›</span>
+      <div className="settings-row__label" style={danger ? { color: '#C44B4B' } : undefined}>{label}</div>
+      <span style={{ color: danger ? '#C44B4B' : 'var(--tm)' }}>›</span>
     </button>
   );
 }
 
 export function SettingsScreen() {
   const navigate = useNavigate();
-  const { state, toggleDarkMode, toggleNotif, toggleMantraAmbient, toggleMantraBinaural, updateProfile, cloudUserId, cloudSyncStatus, cloudSyncError, isCloudAvailable, enableCloudSync, disableCloudSync } = useApp();
+  const { state, toggleDarkMode, toggleNotif, setReminderTime, toggleMantraAmbient, toggleMantraBinaural, updateProfile, cloudUserId, cloudSyncStatus, cloudSyncError, isCloudAvailable, enableCloudSync, disableCloudSync } = useApp();
   const { settings, profile } = state;
+  const [notifNotice, setNotifNotice] = useState<string | null>(null);
   const pnProfile = profile.personalNumber ? PERSONAL_NUMBER_PROFILES[profile.personalNumber] : null;
   const lpProfile = profile.lifePathNumber ? PERSONAL_NUMBER_PROFILES[profile.lifePathNumber] : null;
+  const displayName = getDisplayName(profile);
+
+  const handleReminderTimeChange = (time: string) => {
+    setReminderTime(time);
+    if (!settings.notifEnabled) toggleNotif();
+  };
+
+  const handleToggleNotif = async () => {
+    setNotifNotice(null);
+    if (settings.notifEnabled) {
+      toggleNotif();
+      return;
+    }
+    const result = await enableDailyReminders(profile, settings.reminderTime);
+    if (result.ok) {
+      toggleNotif();
+      return;
+    }
+    setNotifNotice(result.message ?? 'Could not enable notifications.');
+  };
 
   return (
     <div className="screen">
       <StatusBar />
       <div className="screen__body" style={{ padding: '0 18px' }}>
         <button type="button" className="btn-back" onClick={() => navigate(-1)}>← Back</button>
-        <div className="display" style={{ fontSize: 26, marginBottom: 20 }}>Settings</div>
+        <div className="display" style={{ fontSize: 26, marginBottom: 16 }}>Settings</div>
+
+        <button type="button" className="settings-profile-card" onClick={() => navigate('/settings/profile')}>
+          <UserAvatar profile={profile} size={58} />
+          <div className="settings-profile-card__copy">
+            <div className="settings-profile-card__name">{displayName}</div>
+            <div className="settings-profile-card__sub">
+              {profile.email || 'Tap to add name, email & avatar'}
+            </div>
+          </div>
+          <span className="settings-profile-card__chevron">›</span>
+        </button>
 
         <div className="settings-group">
           <div className="settings-group__title">Notifications</div>
@@ -41,13 +79,17 @@ export function SettingsScreen() {
                 <div className="settings-row__label">Daily Word Reminder</div>
                 <div className="settings-row__sub">{settings.notifEnabled ? 'On' : 'Off'}</div>
               </div>
-              <Toggle on={settings.notifEnabled} onToggle={toggleNotif} label="Toggle notifications" />
+              <Toggle on={settings.notifEnabled} onToggle={handleToggleNotif} label="Toggle notifications" />
             </div>
-            <div className="settings-row">
-              <div>
-                <div className="settings-row__label">Reminder Time</div>
-                <div className="settings-row__sub">{settings.reminderTime}</div>
-              </div>
+            {notifNotice && (
+              <div style={{ fontSize: 11, color: 'var(--tm)', padding: '0 0 10px', lineHeight: 1.5 }}>{notifNotice}</div>
+            )}
+            <div className="settings-row" style={{ borderTop: '1px solid var(--bd)', paddingTop: 14, alignItems: 'stretch' }}>
+              <ReminderTimePicker
+                time={settings.reminderTime}
+                onTimeChange={handleReminderTimeChange}
+                timeSize={20}
+              />
             </div>
           </div>
         </div>
@@ -113,14 +155,6 @@ export function SettingsScreen() {
         </div>
 
         <div className="settings-group">
-          <div className="settings-group__title">Legal</div>
-          <div className="settings-card">
-            <LegalRow label="Privacy Policy" onClick={() => navigate('/legal/privacy')} />
-            <LegalRow label="Terms of Use (Apple EULA)" onClick={() => openExternal(LEGAL.termsOfUse)} />
-          </div>
-        </div>
-
-        <div className="settings-group">
           <div className="settings-group__title">Cloud Backup</div>
           <div className="settings-card">
             <div className="settings-row">
@@ -132,12 +166,12 @@ export function SettingsScreen() {
                   {!isCloudAvailable
                     ? 'Add Supabase keys to enable'
                     : cloudSyncStatus === 'synced'
-                      ? 'Journal, combos & profile sync across devices'
+                      ? 'Profile, moods, journal & combos sync across devices'
                       : cloudSyncStatus === 'connecting'
                         ? 'Connecting…'
                         : cloudSyncStatus === 'error'
                           ? (cloudSyncError ?? 'Sync error')
-                          : 'Optional — no login required'}
+                          : 'Optional — silent device session'}
                 </div>
               </div>
               {isCloudAvailable && (
@@ -161,19 +195,24 @@ export function SettingsScreen() {
               )}
             </div>
           </div>
+        </div>
+
+        <div className="settings-group">
+          <div className="settings-group__title">Account</div>
+          <div className="settings-card">
+            <LegalRow label="Delete Account & Data" onClick={() => navigate('/settings/delete-data')} danger />
+          </div>
           <p style={{ fontSize: 11, color: 'var(--tm)', margin: '8px 0 0', lineHeight: 1.5 }}>
-            Uses anonymous sign-in. No email or password. Delete cloud data anytime below.
+            Permanently removes your profile, moods, journal, and combos{cloudUserId ? ' from this device and cloud' : ''}.
           </p>
         </div>
 
         <div className="settings-group">
-          <div className="settings-group__title">Data</div>
+          <div className="settings-group__title">Legal</div>
           <div className="settings-card">
-            <LegalRow label="Delete All Data" onClick={() => navigate('/settings/delete-data')} />
+            <LegalRow label="Privacy Policy" onClick={() => navigate('/legal/privacy')} />
+            <LegalRow label="Terms of Use (Apple EULA)" onClick={() => openExternal(LEGAL.termsOfUse)} />
           </div>
-          <p style={{ fontSize: 11, color: 'var(--tm)', margin: '8px 0 0', lineHeight: 1.5 }}>
-            Removes on-device data{cloudUserId ? ' and cloud backup' : ''}. Required for App Store.
-          </p>
         </div>
 
         <div className="settings-group">
@@ -181,7 +220,7 @@ export function SettingsScreen() {
           <div className="settings-card">
             <div className="settings-row">
               <div className="settings-row__label">Version</div>
-              <div style={{ fontSize: 13, color: 'var(--tm)' }}>1.0.0</div>
+              <div style={{ fontSize: 13, color: 'var(--tm)' }}>{APP_VERSION}</div>
             </div>
             <LegalRow label="Support" onClick={() => openExternal(`mailto:${LEGAL.supportEmail}`)} />
           </div>

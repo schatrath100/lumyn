@@ -8,7 +8,7 @@ export function IntroScreen() {
   return (
     <div className="screen screen--card">
       <StatusBar />
-      <ProgressDots active={2} />
+      <ProgressDots total={8} active={2} />
       <div className="screen__body" style={{ padding: '0 28px' }}>
         <div className="eyebrow" style={{ marginBottom: 8 }}>What is a</div>
         <h1 className="display" style={{ fontSize: 22, fontWeight: 400, margin: '0 0 18px', lineHeight: 1.15 }}>Switch Word?</h1>

@@ -1,13 +1,15 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
-import { AppGuard, OnboardingGuard } from './components/Guards';
+import { AppGuard, OnboardingGuard, PaywallGuard } from './components/Guards';
 import { AppLayout } from './layouts/AppLayout';
 import { SplashScreen } from './screens/onboarding/SplashScreen';
 import { IntroScreen } from './screens/onboarding/IntroScreen';
 import { IntentionsScreen } from './screens/onboarding/IntentionsScreen';
 import { PersonalNumberScreen } from './screens/onboarding/PersonalNumberScreen';
+import { ProfileScreen } from './screens/onboarding/ProfileScreen';
 import { RemindersScreen } from './screens/onboarding/RemindersScreen';
 import { WelcomeScreen } from './screens/onboarding/WelcomeScreen';
+import { PaywallScreen } from './screens/onboarding/PaywallScreen';
 import { HomeScreen } from './screens/app/HomeScreen';
 import { LibraryScreen } from './screens/app/LibraryScreen';
 import { WordDetailScreen } from './screens/app/WordDetailScreen';
@@ -25,6 +27,7 @@ import { SigilScreen } from './screens/app/SigilScreen';
 import { MantraScreen } from './screens/app/MantraScreen';
 import { WidgetScreen } from './screens/app/WidgetScreen';
 import { DeleteDataScreen } from './screens/app/DeleteDataScreen';
+import { EditProfileScreen } from './screens/app/EditProfileScreen';
 import { PrivacyScreen } from './screens/legal/PrivacyScreen';
 import { TermsScreen } from './screens/legal/TermsScreen';
 
@@ -38,9 +41,14 @@ function App() {
               <Route path="/onboarding" element={<SplashScreen />} />
               <Route path="/onboarding/intro" element={<IntroScreen />} />
               <Route path="/onboarding/intentions" element={<IntentionsScreen />} />
+              <Route path="/onboarding/profile" element={<ProfileScreen />} />
               <Route path="/onboarding/number" element={<PersonalNumberScreen />} />
               <Route path="/onboarding/reminders" element={<RemindersScreen />} />
               <Route path="/onboarding/welcome" element={<WelcomeScreen />} />
+            </Route>
+
+            <Route element={<PaywallGuard />}>
+              <Route path="/onboarding/paywall" element={<PaywallScreen />} />
             </Route>
 
             <Route element={<AppGuard />}>
@@ -61,6 +69,7 @@ function App() {
               <Route path="/mood/result" element={<MoodResultScreen />} />
               <Route path="/analytics" element={<AnalyticsScreen />} />
               <Route path="/settings" element={<SettingsScreen />} />
+              <Route path="/settings/profile" element={<EditProfileScreen />} />
               <Route path="/settings/delete-data" element={<DeleteDataScreen />} />
               <Route path="/legal/privacy" element={<PrivacyScreen />} />
               <Route path="/legal/terms" element={<TermsScreen />} />

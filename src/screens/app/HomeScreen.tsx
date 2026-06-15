@@ -73,7 +73,9 @@ export function HomeScreen() {
           <div style={{ fontSize: 9, color: 'rgba(255,248,242,0.35)', position: 'relative', zIndex: 1, marginBottom: 8 }}>Repeat {daily.word.reps}×</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, position: 'relative', zIndex: 1 }}>
             <span style={{ fontSize: 12 }}>🔥</span>
-            <span style={{ fontSize: 9, color: 'rgba(255,248,242,0.7)' }}>{state.streak} day streak</span>
+            <span style={{ fontSize: 9, color: 'rgba(255,248,242,0.7)' }}>
+              {state.streak > 0 ? `${state.streak} day streak` : 'Start your streak'}
+            </span>
             <span style={{ fontSize: 9, color: 'rgba(242,196,74,0.45)', marginLeft: 'auto' }}>Tap to begin →</span>
           </div>
         </button>

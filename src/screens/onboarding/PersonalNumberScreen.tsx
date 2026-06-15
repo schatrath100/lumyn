@@ -33,7 +33,7 @@ export function PersonalNumberScreen() {
           <button type="button" className="btn-back" onClick={() => navigate('/settings')}>← Back</button>
         </div>
       ) : (
-        <ProgressDots active={5} />
+        <ProgressDots total={8} active={5} />
       )}
       <div className="screen__body" style={{ padding: '0 28px' }}>
         <div className="eyebrow" style={{ marginBottom: 8 }}>Chaldean Numerology</div>
