@@ -1,3 +1,6 @@
+import { shouldFireReminder as checkSchedule } from './reminder-schedule';
+import type { ReminderSchedule } from './reminder-schedule';
+
 const LAST_FIRED_KEY = 'lumyn-reminder-last-fired';
 
 export type NotificationPermissionState = 'unsupported' | 'default' | 'granted' | 'denied';
@@ -68,30 +71,25 @@ export function clearReminderFireMarker(): void {
   localStorage.removeItem(LAST_FIRED_KEY);
 }
 
-export function shouldFireReminder(enabled: boolean, time: string, now = new Date()): boolean {
-  if (!enabled || getNotificationPermission() !== 'granted') return false;
+export function shouldFireReminder(schedule: ReminderSchedule, now = new Date()): boolean {
+  if (getNotificationPermission() !== 'granted') return false;
   if (alreadyFiredToday()) return false;
+  return checkSchedule(schedule, now);
+}
 
-  const parsed = time.match(/(\d+):(\d+)\s*(AM|PM)/i);
-  if (!parsed) return false;
-
-  let hours = parseInt(parsed[1], 10);
-  const minutes = parseInt(parsed[2], 10);
-  const period = parsed[3].toUpperCase();
-  if (period === 'PM' && hours !== 12) hours += 12;
-  if (period === 'AM' && hours === 12) hours = 0;
-
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  const targetMinutes = hours * 60 + minutes;
-  return currentMinutes >= targetMinutes;
+/** @deprecated Use shouldFireReminder with ReminderSchedule */
+export function shouldFireReminderLegacy(enabled: boolean, time: string, now = new Date()): boolean {
+  return shouldFireReminder(
+    { frequency: enabled ? 'daily' : 'off', time, weekday: 2 },
+    now,
+  );
 }
 
 export async function fireReminderIfDue(
-  enabled: boolean,
-  time: string,
+  schedule: ReminderSchedule,
   payload: DailyReminderPayload,
 ): Promise<boolean> {
-  if (!shouldFireReminder(enabled, time)) return false;
+  if (!shouldFireReminder(schedule)) return false;
   await showDailyReminder(payload);
   markFiredToday();
   return true;

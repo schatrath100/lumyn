@@ -77,10 +77,16 @@ export interface SynchronicityEntry {
   note: string;
 }
 
+export type ReminderFrequency = 'off' | 'daily' | 'weekly';
+
 export interface AppSettings {
   darkMode: boolean;
-  notifEnabled: boolean;
+  /** @deprecated Use reminderFrequency — migrated on load. */
+  notifEnabled?: boolean;
+  reminderFrequency: ReminderFrequency;
   reminderTime: string;
+  /** Calendar weekday 1=Sun … 7=Sat (default 2 = Monday). */
+  reminderWeekday: number;
   mantraAmbient: boolean;
   mantraBinaural: boolean;
 }

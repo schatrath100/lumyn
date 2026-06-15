@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReminderTimePicker } from '../../components/ReminderTimePicker';
+import { FeedbackSheet } from '../../components/FeedbackSheet';
+import { IntentionsEditorSheet } from '../../components/IntentionsEditorSheet';
+import { formatIntentionsSummary } from '../../components/IntentionsGrid';
+import { RemindersSheet } from '../../components/RemindersSheet';
 import { StatusBar } from '../../components/StatusBar';
 import { Toggle } from '../../components/Toggle';
 import { UserAvatar } from '../../components/UserAvatar';
@@ -8,10 +11,10 @@ import { PERSONAL_NUMBER_PROFILES } from '../../data/personal-numbers';
 import { APP_VERSION } from '../../lib/app-meta';
 import { LEGAL, openExternal } from '../../lib/legal';
 import { getDisplayName } from '../../lib/profile';
-import { enableDailyReminders } from '../../lib/reminder-scheduler';
+import { formatReminderSummary } from '../../lib/reminder-summary';
 import { useApp } from '../../context/AppContext';
 
-function LegalRow({ label, onClick, danger }: { label: string; onClick: () => void; danger?: boolean }) {
+function LegalRow({ label, onClick, danger, value }: { label: string; onClick: () => void; danger?: boolean; value?: string }) {
   return (
     <button
       type="button"
@@ -19,7 +22,10 @@ function LegalRow({ label, onClick, danger }: { label: string; onClick: () => vo
       onClick={onClick}
       style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}
     >
-      <div className="settings-row__label" style={danger ? { color: '#C44B4B' } : undefined}>{label}</div>
+      <div>
+        <div className="settings-row__label" style={danger ? { color: '#C44B4B' } : undefined}>{label}</div>
+        {value && <div className="settings-row__sub">{value}</div>}
+      </div>
       <span style={{ color: danger ? '#C44B4B' : 'var(--tm)' }}>›</span>
     </button>
   );
@@ -27,31 +33,14 @@ function LegalRow({ label, onClick, danger }: { label: string; onClick: () => vo
 
 export function SettingsScreen() {
   const navigate = useNavigate();
-  const { state, toggleDarkMode, toggleNotif, setReminderTime, toggleMantraAmbient, toggleMantraBinaural, updateProfile, cloudUserId, cloudSyncStatus, cloudSyncError, isCloudAvailable, enableCloudSync, disableCloudSync } = useApp();
+  const { state, toggleDarkMode, updateSettings, toggleMantraAmbient, toggleMantraBinaural, updateProfile, cloudUserId, cloudSyncStatus, cloudSyncError, isCloudAvailable, enableCloudSync, disableCloudSync } = useApp();
   const { settings, profile } = state;
-  const [notifNotice, setNotifNotice] = useState<string | null>(null);
+  const [showReminders, setShowReminders] = useState(false);
+  const [showIntentions, setShowIntentions] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const pnProfile = profile.personalNumber ? PERSONAL_NUMBER_PROFILES[profile.personalNumber] : null;
   const lpProfile = profile.lifePathNumber ? PERSONAL_NUMBER_PROFILES[profile.lifePathNumber] : null;
   const displayName = getDisplayName(profile);
-
-  const handleReminderTimeChange = (time: string) => {
-    setReminderTime(time);
-    if (!settings.notifEnabled) toggleNotif();
-  };
-
-  const handleToggleNotif = async () => {
-    setNotifNotice(null);
-    if (settings.notifEnabled) {
-      toggleNotif();
-      return;
-    }
-    const result = await enableDailyReminders(profile, settings.reminderTime);
-    if (result.ok) {
-      toggleNotif();
-      return;
-    }
-    setNotifNotice(result.message ?? 'Could not enable notifications.');
-  };
 
   return (
     <div className="screen">
@@ -72,25 +61,18 @@ export function SettingsScreen() {
         </button>
 
         <div className="settings-group">
-          <div className="settings-group__title">Notifications</div>
+          <div className="settings-group__title">Practice</div>
           <div className="settings-card">
-            <div className="settings-row">
-              <div>
-                <div className="settings-row__label">Daily Word Reminder</div>
-                <div className="settings-row__sub">{settings.notifEnabled ? 'On' : 'Off'}</div>
-              </div>
-              <Toggle on={settings.notifEnabled} onToggle={handleToggleNotif} label="Toggle notifications" />
-            </div>
-            {notifNotice && (
-              <div style={{ fontSize: 11, color: 'var(--tm)', padding: '0 0 10px', lineHeight: 1.5 }}>{notifNotice}</div>
-            )}
-            <div className="settings-row" style={{ borderTop: '1px solid var(--bd)', paddingTop: 14, alignItems: 'stretch' }}>
-              <ReminderTimePicker
-                time={settings.reminderTime}
-                onTimeChange={handleReminderTimeChange}
-                timeSize={20}
-              />
-            </div>
+            <LegalRow
+              label="Your intentions"
+              value={formatIntentionsSummary(profile.selectedIntentions)}
+              onClick={() => setShowIntentions(true)}
+            />
+            <LegalRow
+              label="Practice reminder"
+              value={formatReminderSummary(settings)}
+              onClick={() => setShowReminders(true)}
+            />
           </div>
         </div>
 
@@ -222,6 +204,7 @@ export function SettingsScreen() {
               <div className="settings-row__label">Version</div>
               <div style={{ fontSize: 13, color: 'var(--tm)' }}>{APP_VERSION}</div>
             </div>
+            <LegalRow label="Feedback" value="Share a note" onClick={() => setShowFeedback(true)} />
             <LegalRow label="Support" onClick={() => openExternal(`mailto:${LEGAL.supportEmail}`)} />
           </div>
         </div>
@@ -235,6 +218,17 @@ export function SettingsScreen() {
           Replay onboarding
         </button>
       </div>
+
+      {showReminders && (
+        <RemindersSheet
+          settings={settings}
+          profile={profile}
+          onClose={() => setShowReminders(false)}
+          onChange={updateSettings}
+        />
+      )}
+      {showIntentions && <IntentionsEditorSheet onClose={() => setShowIntentions(false)} />}
+      {showFeedback && <FeedbackSheet onClose={() => setShowFeedback(false)} />}
     </div>
   );
 }

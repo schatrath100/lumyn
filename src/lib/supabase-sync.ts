@@ -1,7 +1,8 @@
-import type { Combo, CommunityCombo, JournalEntry, MoodCheckin, PersistedState, SynchronicityEntry } from '../types';
+import type { Combo, CommunityCombo, JournalEntry, MoodCheckin, PersistedState, ReminderFrequency, SynchronicityEntry } from '../types';
 import { supabase } from './supabase';
 import { formatDate } from './storage';
 import { newId, isUuid } from './id';
+import { ensureSupabaseSession } from './supabase-session';
 
 export interface PublishComboInput {
   name: string;
@@ -13,6 +14,26 @@ export interface PublishComboInput {
 
 function formatRowDate(iso: string): string {
   return formatDate(new Date(iso));
+}
+
+function parseReminderFrequency(
+  frequency: string | null | undefined,
+  legacyNotifEnabled: boolean | null | undefined,
+): ReminderFrequency {
+  if (frequency === 'daily' || frequency === 'weekly' || frequency === 'off') return frequency;
+  return legacyNotifEnabled ? 'daily' : 'off';
+}
+
+export async function submitFeedback(message: string, appVersion: string): Promise<void> {
+  if (!supabase) throw new Error('Feedback requires cloud connection.');
+
+  const session = await ensureSupabaseSession(supabase);
+  const { error } = await supabase.from('feedback').insert({
+    user_id: session.user.id,
+    message: message.trim(),
+    app_version: appVersion,
+  });
+  if (error) throw error;
 }
 
 export async function pullRemoteState(userId: string): Promise<PersistedState | null> {
@@ -81,8 +102,9 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
     },
     settings: {
       darkMode: p.dark_mode ?? false,
-      notifEnabled: p.notif_enabled ?? true,
+      reminderFrequency: parseReminderFrequency(p.reminder_frequency, p.notif_enabled),
       reminderTime: p.reminder_time ?? '8:00 AM',
+      reminderWeekday: (p.reminder_weekday as number | null) ?? 2,
       mantraAmbient: p.mantra_ambient ?? false,
       mantraBinaural: p.mantra_binaural ?? false,
     },
@@ -121,7 +143,9 @@ export async function pushRemoteState(userId: string, state: PersistedState): Pr
     streak: state.streak,
     last_active_date: state.lastActiveDate,
     dark_mode: settings.darkMode,
-    notif_enabled: settings.notifEnabled,
+    notif_enabled: settings.reminderFrequency !== 'off',
+    reminder_frequency: settings.reminderFrequency,
+    reminder_weekday: settings.reminderWeekday,
     reminder_time: settings.reminderTime,
     mantra_ambient: settings.mantraAmbient,
     mantra_binaural: settings.mantraBinaural,

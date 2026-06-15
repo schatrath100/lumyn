@@ -35,7 +35,7 @@ import { USER_ERROR_MESSAGE } from '../lib/errors';
 import { ensureSupabaseSession } from '../lib/supabase-session';
 import { getDisplayName } from '../lib/profile';
 import { getResonanceNumber } from '../lib/numerology';
-import { syncDailyReminders } from '../lib/reminder-scheduler';
+import { syncReminders } from '../lib/reminder-scheduler';
 
 export type CloudSyncStatus = 'off' | 'connecting' | 'synced' | 'error';
 
@@ -69,7 +69,7 @@ interface AppContextValue {
   completeOnboarding: () => void;
   grantSubscription: (planId: SubscriptionPlanId) => void;
   toggleDarkMode: () => void;
-  toggleNotif: () => void;
+  updateSettings: (partial: Partial<PersistedState['settings']>) => void;
   setReminderTime: (time: string) => void;
   toggleMantraAmbient: () => void;
   toggleMantraBinaural: () => void;
@@ -117,10 +117,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [state.settings.darkMode]);
 
   useEffect(() => {
-    void syncDailyReminders(state.settings.notifEnabled, state.settings.reminderTime, state.profile);
+    void syncReminders(state.settings, state.profile);
   }, [
-    state.settings.notifEnabled,
+    state.settings.reminderFrequency,
     state.settings.reminderTime,
+    state.settings.reminderWeekday,
     state.profile.personalNumber,
     state.profile.lifePathNumber,
   ]);
@@ -320,19 +321,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
-  const toggleNotif = useCallback(() => {
+  const updateSettings = useCallback((partial: Partial<PersistedState['settings']>) => {
     setState((prev) => ({
       ...prev,
-      settings: { ...prev.settings, notifEnabled: !prev.settings.notifEnabled },
+      settings: { ...prev.settings, ...partial },
     }));
   }, []);
 
   const setReminderTime = useCallback((time: string) => {
-    setState((prev) => ({
-      ...prev,
-      settings: { ...prev.settings, reminderTime: time },
-    }));
-  }, []);
+    updateSettings({ reminderTime: time });
+  }, [updateSettings]);
 
   const toggleMantraAmbient = useCallback(() => {
     setState((prev) => ({
@@ -491,7 +489,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       completeOnboarding,
       grantSubscription,
       toggleDarkMode,
-      toggleNotif,
+      updateSettings,
       setReminderTime,
       toggleMantraAmbient,
       toggleMantraBinaural,
@@ -531,7 +529,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       completeOnboarding,
       grantSubscription,
       toggleDarkMode,
-      toggleNotif,
+      updateSettings,
       setReminderTime,
       toggleMantraAmbient,
       toggleMantraBinaural,

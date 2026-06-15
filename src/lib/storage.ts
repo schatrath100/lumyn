@@ -1,4 +1,4 @@
-import type { PersistedState, SynchronicityEntry } from '../types';
+import type { PersistedState, ReminderFrequency, SynchronicityEntry } from '../types';
 import { resetDeviceAuth } from './device-auth';
 import { clearSubscriptionCache } from './purchases';
 
@@ -23,8 +23,9 @@ export const defaultState: PersistedState = {
   },
   settings: {
     darkMode: false,
-    notifEnabled: true,
+    reminderFrequency: 'off',
     reminderTime: '8:00 AM',
+    reminderWeekday: 2,
     mantraAmbient: false,
     mantraBinaural: false,
   },
@@ -67,6 +68,23 @@ function normalizeStringIds(parsed: Record<string, unknown>): PersistedState {
   };
 }
 
+function normalizeSettings(settings: Record<string, unknown> | undefined): PersistedState['settings'] {
+  const legacyNotif = settings?.notifEnabled as boolean | undefined;
+  let frequency = settings?.reminderFrequency as ReminderFrequency | undefined;
+  if (!frequency) {
+    frequency = legacyNotif ? 'daily' : 'off';
+  }
+  const weekday = (settings?.reminderWeekday as number | undefined) ?? 2;
+  return {
+    darkMode: (settings?.darkMode as boolean) ?? false,
+    reminderFrequency: frequency,
+    reminderTime: (settings?.reminderTime as string) ?? '8:00 AM',
+    reminderWeekday: weekday >= 1 && weekday <= 7 ? weekday : 2,
+    mantraAmbient: (settings?.mantraAmbient as boolean) ?? false,
+    mantraBinaural: (settings?.mantraBinaural as boolean) ?? false,
+  };
+}
+
 function migrateV1(parsed: Record<string, unknown>): PersistedState {
   const profile = parsed.profile as Record<string, unknown> | undefined;
   const settings = parsed.settings as Record<string, unknown> | undefined;
@@ -87,12 +105,7 @@ function migrateV1(parsed: Record<string, unknown>): PersistedState {
       trialStartDate: (profile?.trialStartDate as string | null) ?? null,
       subscriptionPlan: (profile?.subscriptionPlan as PersistedState['profile']['subscriptionPlan']) ?? null,
     },
-    settings: {
-      ...defaultState.settings,
-      ...settings,
-      mantraAmbient: (settings?.mantraAmbient as boolean) ?? false,
-      mantraBinaural: (settings?.mantraBinaural as boolean) ?? false,
-    },
+    settings: normalizeSettings(settings),
     synchronicityEntries: (parsed.synchronicityEntries as SynchronicityEntry[]) ?? defaultState.synchronicityEntries,
     moodCheckins: (parsed.moodCheckins as PersistedState['moodCheckins']) ?? [],
     communityUpvotes: (parsed.communityUpvotes as string[]) ?? [],

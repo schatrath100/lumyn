@@ -1,4 +1,4 @@
-import type { UserProfile } from '../types';
+import type { AppSettings, UserProfile } from '../types';
 import { getDailyWord } from './daily-word';
 import {
   clearReminderFireMarker,
@@ -9,6 +9,8 @@ import {
   type DailyReminderPayload,
 } from './reminder-notifications';
 import { scheduleCapacitorReminder, cancelCapacitorReminder } from './reminder-notifications-native';
+import type { ReminderSchedule } from './reminder-schedule';
+import { isRemindersEnabled } from './reminder-summary';
 
 const CHECK_INTERVAL_MS = 30_000;
 let checkTimer: ReturnType<typeof setInterval> | null = null;
@@ -22,6 +24,14 @@ function buildPayload(profile: UserProfile): DailyReminderPayload {
   };
 }
 
+function toSchedule(settings: AppSettings): ReminderSchedule {
+  return {
+    frequency: settings.reminderFrequency,
+    time: settings.reminderTime,
+    weekday: settings.reminderWeekday,
+  };
+}
+
 function stopWebScheduler(): void {
   if (checkTimer) {
     clearInterval(checkTimer);
@@ -29,19 +39,20 @@ function stopWebScheduler(): void {
   }
 }
 
-function startWebScheduler(enabled: boolean, time: string, profile: UserProfile): void {
+function startWebScheduler(settings: AppSettings, profile: UserProfile): void {
   stopWebScheduler();
-  if (!enabled || getNotificationPermission() !== 'granted') return;
+  if (!isRemindersEnabled(settings) || getNotificationPermission() !== 'granted') return;
 
+  const schedule = toSchedule(settings);
   const tick = () => {
-    void fireReminderIfDue(enabled, time, buildPayload(profile));
+    void fireReminderIfDue(schedule, buildPayload(profile));
   };
 
   tick();
   checkTimer = setInterval(tick, CHECK_INTERVAL_MS);
 }
 
-export async function enableDailyReminders(profile: UserProfile, time: string): Promise<{
+export async function requestRemindersPermission(): Promise<{
   ok: boolean;
   permission: ReturnType<typeof getNotificationPermission>;
   message?: string;
@@ -52,24 +63,33 @@ export async function enableDailyReminders(profile: UserProfile, time: string): 
     return { ok: false, permission, message: 'Notifications are not supported in this browser.' };
   }
   if (permission === 'denied') {
-    return { ok: false, permission, message: 'Enable notifications in your device settings to get daily reminders.' };
+    return {
+      ok: false,
+      permission,
+      message: 'Enable notifications in your device or browser settings to receive reminders.',
+    };
   }
-
-  clearReminderFireMarker();
-  const native = await scheduleCapacitorReminder(time, buildPayload(profile));
-  if (!native) startWebScheduler(true, time, profile);
-
   return { ok: true, permission };
 }
 
-export async function syncDailyReminders(
-  enabled: boolean,
-  time: string,
+export async function enableReminders(
+  settings: AppSettings,
   profile: UserProfile,
-): Promise<void> {
+): Promise<ReturnType<typeof requestRemindersPermission>> {
+  const result = await requestRemindersPermission();
+  if (!result.ok) return result;
+
+  clearReminderFireMarker();
+  const native = await scheduleCapacitorReminder(toSchedule(settings), buildPayload(profile));
+  if (!native) startWebScheduler(settings, profile);
+
+  return result;
+}
+
+export async function syncReminders(settings: AppSettings, profile: UserProfile): Promise<void> {
   await registerServiceWorker();
 
-  if (!enabled) {
+  if (!isRemindersEnabled(settings)) {
     stopWebScheduler();
     await cancelCapacitorReminder();
     return;
@@ -82,9 +102,15 @@ export async function syncDailyReminders(
   }
 
   const payload = buildPayload(profile);
-  const native = await scheduleCapacitorReminder(time, payload);
-  if (!native) startWebScheduler(true, time, profile);
+  const native = await scheduleCapacitorReminder(toSchedule(settings), payload);
+  if (!native) startWebScheduler(settings, profile);
 }
+
+/** @deprecated Use enableReminders */
+export const enableDailyReminders = enableReminders;
+
+/** @deprecated Use syncReminders */
+export const syncDailyReminders = syncReminders;
 
 export async function disableDailyReminders(): Promise<void> {
   stopWebScheduler();
