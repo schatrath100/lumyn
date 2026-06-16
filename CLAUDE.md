@@ -1,102 +1,91 @@
 # Lumyn
 
-**Words that shift your world** — a mobile-first web app for switch word practice, mood-matched affirmations, and daily rituals.
+**Words that shift your world** — a native iOS app for switch word practice, mood-matched affirmations, and daily rituals.
 
 ## Tech Stack
 
-- **React 19** + **TypeScript** + **Vite**
-- **React Router** for navigation
-- **localStorage** for offline persistence (primary cache)
-- **Supabase** (optional) for cloud backup, community feed, feedback
-- **Capacitor** `@capacitor/local-notifications` for native reminders
-- Golden Dawn design system (Playfair Display + DM Sans)
+- **SwiftUI** + **Swift 5.9** + **XcodeGen** (`project.yml`)
+- **StoreKit 2** for subscriptions (3-day trial)
+- **UserDefaults** for offline persistence (primary cache)
+- **Supabase** (optional, v1.1) for cloud backup, live community feed, feedback
+- Golden Dawn design system (system serif/rounded fallbacks; Playfair Display + DM Sans planned)
 
-## Features (v1.1)
+## Features (v1.0 native)
 
-| Feature | Route | Status |
-|---|---|---|
-| Onboarding (8 steps) | `/onboarding/*` | ✅ |
-| Mandatory paywall (3-day trial) | `/onboarding/paywall` | ✅ (IAP stub on web) |
-| Home + Daily Word + Mood Tiles | `/` | ✅ |
-| Switch Word Library (541) | `/library` | ✅ |
-| Word Detail + Session | `/library/:id`, `/session/:id` | ✅ |
-| Mantra Mode | `/mantra/:id` | ✅ |
-| Mood Check-in (16 colours) | `/mood` | ✅ |
-| Combo Builder | `/combo` | ✅ |
-| Saved Combos + Share + Sigil | `/combos`, `/share/:id`, `/sigil/:id` | ✅ |
-| Publish combo to community | Saved Combos → ↑ | ✅ |
-| Community Combo Exchange | `/discover` | ✅ |
-| Journal + Synchronicity Log | `/journal` | ✅ |
-| Analytics | `/analytics` | ✅ |
-| Numerology | `/profile/number` | ✅ |
-| Moon-phase daily word | Home | ✅ |
-| Reminders (off/daily/weekly) | Settings sheet | ✅ |
-| Edit intentions | Settings sheet | ✅ |
-| In-app feedback | Settings sheet | ✅ |
-| Profile + avatar | `/settings/profile` | ✅ |
-| Daily Word Widget | `/widget` | ✅ |
-| Settings + cloud backup | `/settings` | ✅ |
+| Feature | Status |
+|---|---|
+| Onboarding (8 steps) | ✅ |
+| Mandatory paywall (3-day trial) | ✅ StoreKit |
+| Home + Daily Word + Mood Tiles | ✅ |
+| Switch Word Library (555) | ✅ |
+| Word Detail + Session | ✅ |
+| Mantra Mode | ✅ |
+| Mood Check-in (16 colours) | ✅ |
+| Combo Builder + Saved Combos | ✅ |
+| Community Combo Exchange (bundled seed data) | ✅ |
+| Journal + Synchronicity Log | ✅ |
+| Numerology (onboarding) | ✅ |
+| Moon-phase daily word | ✅ |
+| Reminders (off/daily/weekly) | ✅ |
+| Settings + delete all data | ✅ |
+| Cloud backup / Supabase sync | 🔜 v1.1 |
+| Analytics, Share card, Sigil, Widget | 🔜 v1.1 |
 
-**Feature map:** see `plot.md` for all nodes, guards, and migration order.
+**Feature map:** see `plot.md` (update as native screens land).
 
 ## Data
 
-- 541 switch words (CSV + `scripts/generate-switch-words.py`) + 14 canonical entries
+- 541 switch words (`data/switch-words-source.csv` + `scripts/generate-switch-words.py`) + 14 canonical entries
+- Bundled JSON in `Lumyn/Data/`
 - 8 home mood tiles + 16 colour-grid moods
 - Chaldean personal number profiles (1–9, 11, 22)
-- Content in `src/data/`
 
-## Supabase setup (optional cloud backup)
+Regenerate bundled word JSON after editing the CSV:
 
-1. Create a project at [supabase.com](https://supabase.com)
-2. **Authentication → Providers** — enable **Anonymous** + **Email**; disable **Confirm email** on Email
-3. Run migrations **in order**: `00001` → `00005` in `supabase/migrations/`
-4. Copy `.env.example` → `.env` with `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`
-5. Restart dev server; **Settings → Cloud Backup → Enable**
-
-**Tables:** `profiles`, `saved_combos`, `journal_entries`, `synchronicity_entries`, `saved_words`, `mood_checkins`, `community_combos`, `community_upvotes`, `feedback`
-
-**Auth:** `ensureSupabaseSession()` tries anonymous auth, then per-device email/password (`device-auth.ts`).
-
-**Sync:** Offline-first; debounced push when cloud backup on.
-
-**Delete:** `delete_my_data()` RPC + local wipe.
-
-**Keepalive:** `.github/workflows/supabase-keepalive.yml` + `SUPABASE_SERVICE_ROLE_KEY` GitHub secret.
+```bash
+python3 scripts/generate-switch-words.py
+```
 
 ## Development
 
+Requires **Xcode 16+** and **iOS 17+** deployment target.
+
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build
-npm run preview
+# Generate Xcode project (after editing project.yml)
+xcodegen generate
+
+# Build for simulator
+xcodebuild -scheme Lumyn -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
-## Design Reference
+Open `Lumyn.xcodeproj` in Xcode. StoreKit testing uses `Lumyn/Config/Products.storekit` (Debug scheme only).
 
-`Lumyn_prototype.html` — Golden Dawn direction.
+**Bundle ID:** `com.whyteboard.lumyn`  
+**Product IDs:** `com.whyteboard.lumyn.premium.weekly`, `com.whyteboard.lumyn.premium.quarterly`
 
-## App Store compliance (pre-ship checklist)
+## Supabase (optional cloud backup — v1.1)
 
-| Requirement | Lumyn status |
+Migrations live in `supabase/migrations/`. Native sync not yet wired; schema preserved from web prototype.
+
+## App Store compliance
+
+| Requirement | Status |
 |---|---|
-| `ITSAppUsesNonExemptEncryption = NO` | ✅ `ios/Info.plist` |
-| Terms of Use → Apple EULA | ✅ Settings |
+| `ITSAppUsesNonExemptEncryption = NO` | ✅ `Lumyn/Info.plist` |
+| Terms of Use → Apple EULA | ✅ Settings + Paywall |
 | Privacy Policy | ✅ |
-| Delete account / all user data | ✅ |
+| Delete all user data | ✅ |
 | Skip personal info in onboarding | ✅ |
 | No forced login | ✅ |
-| User-facing errors | ✅ `USER_ERROR_MESSAGE` |
-| `userCancelled` on purchases | ✅ `purchases.ts` |
-| Paywall 4-item feature list | ✅ `PAYWALL_FEATURES` |
-| Native StoreKit on ship | ⚠️ Replace web stub in `purchases.ts` |
-| Remove `.storekit` from Release scheme | ⚠️ When wrapping iOS |
+| `userCancelled` on purchases | ✅ StoreKit |
+| Paywall 4-item feature list | ✅ |
+| Auto-renew legal copy | ✅ Paywall |
+| Remove `.storekit` from Release scheme | ⚠️ Before App Store submit |
 
 ## Out of Scope (current)
 
 - Email/password accounts
-- Server-side web push (VAPID)
+- Web / Capacitor shell (removed)
 - Native lock screen widgets
 - Gratitude journal / affirmation voice library
 

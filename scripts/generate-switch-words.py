@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate src/data/switch-words.ts from src/data/switch-words-source.csv."""
+"""Generate Lumyn/Data/switch-words.json from data/switch-words-source.csv."""
 
 from __future__ import annotations
 
@@ -8,8 +8,8 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CSV_PATH = ROOT / "src/data/switch-words-source.csv"
-OUT_PATH = ROOT / "src/data/switch-words.ts"
+CSV_PATH = ROOT / "data/switch-words-source.csv"
+OUT_JSON = ROOT / "Lumyn/Data/switch-words.json"
 
 # Map 22 CSV categories → 9 Lumyn library categories + color
 CATEGORY_MAP: dict[str, tuple[str, str]] = {
@@ -213,51 +213,10 @@ def main() -> None:
         {"id": legacy_start + i, **item} for i, item in enumerate(LEGACY_CANONICAL)
     ]
 
-    def fmt_word(w: dict) -> str:
-        return (
-            f"  {{ id: {w['id']}, word: {esc(w['word'])}, category: {esc(w['category'])}, "
-            f"intention: {esc(w['intention'])}, description: {esc(w['description'])}, "
-            f"reps: {w['reps']}, how: {esc(w['how'])}, color: {esc(w['color'])} }}"
-        )
-
-    lines = [
-        "import type { SwitchWord } from '../types';",
-        "",
-        f"/** {len(entries)} words from switch-words-source.csv + {len(legacy_entries)} canonical mood/numerology entries. */",
-        "export const SWITCH_WORDS: SwitchWord[] = [",
-        *[fmt_word(w) + "," for w in entries],
-        "];",
-        "",
-        "/** Preferred definitions for mood matching and numerology (when CSV has alternate meanings). */",
-        "export const CANONICAL_WORDS: SwitchWord[] = [",
-        *[fmt_word(w) + "," for w in legacy_entries],
-        "];",
-        "",
-        "export const CATEGORIES = ['All', 'Abundance', 'Spiritual', 'Clarity', 'Heart', 'Healing', 'Growth', 'Joy', 'Attraction'] as const;",
-        "",
-        "export const WORD_COLOR_MAP = Object.fromEntries(",
-        "  [...SWITCH_WORDS, ...CANONICAL_WORDS].map((w) => [w.word, w.color]),",
-        ") as Record<string, string>;",
-        "",
-        "export function getWordByName(name: string): SwitchWord | undefined {",
-        "  const upper = name.toUpperCase();",
-        "  return (",
-        "    CANONICAL_WORDS.find((w) => w.word === upper) ??",
-        "    SWITCH_WORDS.find((w) => w.word === upper)",
-        "  );",
-        "}",
-        "",
-        "export function getWordById(id: number): SwitchWord | undefined {",
-        "  return (",
-        "    CANONICAL_WORDS.find((w) => w.id === id) ??",
-        "    SWITCH_WORDS.find((w) => w.id === id)",
-        "  );",
-        "}",
-        "",
-    ]
-
-    OUT_PATH.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {len(entries)} + {len(legacy_entries)} words to {OUT_PATH}")
+    all_words = entries + legacy_entries
+    OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
+    OUT_JSON.write_text(json.dumps(all_words, indent=2), encoding="utf-8")
+    print(f"Wrote {len(all_words)} words to {OUT_JSON}")
 
 
 if __name__ == "__main__":

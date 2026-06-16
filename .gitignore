@@ -26,3 +26,14 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3

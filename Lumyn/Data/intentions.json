@@ -1,0 +1,42 @@
+[
+  {
+    "id": "abundance",
+    "label": "Abundance",
+    "icon": "\u2b21"
+  },
+  {
+    "id": "love",
+    "label": "Love & Relationships",
+    "icon": "\u2661"
+  },
+  {
+    "id": "healing",
+    "label": "Healing",
+    "icon": "\u2726"
+  },
+  {
+    "id": "clarity",
+    "label": "Clarity & Focus",
+    "icon": "\u25ce"
+  },
+  {
+    "id": "confidence",
+    "label": "Confidence",
+    "icon": "\u25b2"
+  },
+  {
+    "id": "peace",
+    "label": "Inner Peace",
+    "icon": "\u224b"
+  },
+  {
+    "id": "creativity",
+    "label": "Creativity",
+    "icon": "\u25d0"
+  },
+  {
+    "id": "growth",
+    "label": "Personal Growth",
+    "icon": "\u25c8"
+  }
+]

@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A9869AA5DDAF6A8E5E2EFAA /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B7B6848473D67553A9820 /* OnboardingContainerView.swift */; };
+		0AA44BF8B5EE0FE152B70ADC /* Color+Lumyn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C722FB2892CE316C17BC279 /* Color+Lumyn.swift */; };
+		0CA179DB3B7637F58D854841 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AB5D638796A8DEC9BF9459A8 /* PrivacyInfo.xcprivacy */; };
+		142676CF1ADFDD2EBCE38696 /* DailyWordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */; };
+		15F45612BBC58CD46430F181 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A316A4B8543B7A8A921440 /* SubscriptionManager.swift */; };
+		17943C6B4DC8D757172913DB /* ComboBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EEE9AECC8ECD446E4514CE /* ComboBuilderView.swift */; };
+		183BD35D4CFC68920C79C094 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */; };
+		19890DA47DBB76E3CB2E8042 /* LumynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1CDD3614220CFA2E970ED /* LumynLayout.swift */; };
+		227A64EF3B750E0942D6DCCD /* LumynModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */; };
+		2D46411B1C18EE7615348AAB /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8403A2A06B432F666711920 /* JournalView.swift */; };
+		409072940A77CF01D54EB7C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45852625012FE46C5A58699E /* Assets.xcassets */; };
+		4A4FC6064F04B46726FC5BAC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6F30B9A4BF01F250421A3 /* HomeView.swift */; };
+		4C9CE6D7E0F879D763529694 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A3DFB18EF15D5C5058A00 /* MainTabView.swift */; };
+		512DCB9556A643768E12AC1A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A530BDF93E2253B6984DD1 /* HapticManager.swift */; };
+		531B9169EDEAC54892ECCD25 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B78AF27DA0A79B8593912 /* SessionView.swift */; };
+		586F90D53B732E795ACE961B /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9086A82A6E206AFEEA1E98 /* LibraryView.swift */; };
+		58A1A381323CA610C4ADF0BF /* DataCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */; };
+		6708CDBB53B4510FE09EAC37 /* MantraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DF2E3BEB711BCF88CADE /* MantraView.swift */; };
+		7EC746A4D21561CB1F4B4C19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1085AA3161D877F21F194DF /* ContentView.swift */; };
+		86FC9956E66C6E61FEFC4D53 /* OnboardingStepViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */; };
+		948D290B2A64DDD79AEC877C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1EEF5BD00A023A5D38135E /* AppDelegate.swift */; };
+		9701591BD321EEFE7C516B19 /* MoodResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A978A461AB7F97F8F549F9CF /* MoodResultView.swift */; };
+		9FDF88349654B5AFC988C62C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7E55FAE89962BEFA992BD /* SplashView.swift */; };
+		A59274C58101F7E988CB6129 /* NumerologyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C6EA4C957B2921AD5F280C /* NumerologyService.swift */; };
+		A83981B6669472CA1E145B7D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC86EAE84801A5663E234F5 /* AppState.swift */; };
+		A9FB10A2296414F866679CAE /* LumynApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3877F445215DEE3B9D29D1EF /* LumynApp.swift */; };
+		B08EFCE1DE46937D404B88C0 /* Secrets.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D8D07F4B145E76DB80986E0 /* Secrets.example.plist */; };
+		B3DC7A21A8AFA3CE380BCEFA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A569576560B753CD5E60840 /* NotificationManager.swift */; };
+		B6B06BB9579CABE5F69151FE /* MoonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */; };
+		BCD5B900B5176E2A01A9EB3C /* SavedCombosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1AE9DC6EBEED30CE2B009 /* SavedCombosView.swift */; };
+		C07A7FE2317DF71389662EA4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */; };
+		C9340FC7FC9DC9825EDB23C3 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */; };
+		D7843A37D7835C6A76BBD1CB /* MoodCheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */; };
+		E4B05F9665EB5A9D211FEEA7 /* LumynComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728787051FBE97458851ED78 /* LumynComponents.swift */; };
+		E5FD8B304464048599291F20 /* LumynTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870052082435C94016F6EDC /* LumynTypography.swift */; };
+		E8949F70C5D042798B0AAB3C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4915C2CAD77FCC70903C /* PaywallView.swift */; };
+		E9E2C495DAE730A981532E6D /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF6101604B8B2C8120A3081 /* WordDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04D6F30B9A4BF01F250421A3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1CC1AE9DC6EBEED30CE2B009 /* SavedCombosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCombosView.swift; sourceTree = "<group>"; };
+		1D8D07F4B145E76DB80986E0 /* Secrets.example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secrets.example.plist; sourceTree = "<group>"; };
+		24C6EA4C957B2921AD5F280C /* NumerologyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumerologyService.swift; sourceTree = "<group>"; };
+		35F7E55FAE89962BEFA992BD /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		3877F445215DEE3B9D29D1EF /* LumynApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynApp.swift; sourceTree = "<group>"; };
+		3B96DF2E3BEB711BCF88CADE /* MantraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantraView.swift; sourceTree = "<group>"; };
+		3C722FB2892CE316C17BC279 /* Color+Lumyn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Lumyn.swift"; sourceTree = "<group>"; };
+		44A1CDD3614220CFA2E970ED /* LumynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynLayout.swift; sourceTree = "<group>"; };
+		45852625012FE46C5A58699E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47A530BDF93E2253B6984DD1 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		4E63F343B3889102FA5EF18D /* Lumyn.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Lumyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckinView.swift; sourceTree = "<group>"; };
+		581A3DFB18EF15D5C5058A00 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		5A569576560B753CD5E60840 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCatalog.swift; sourceTree = "<group>"; };
+		728787051FBE97458851ED78 /* LumynComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynComponents.swift; sourceTree = "<group>"; };
+		732B7B6848473D67553A9820 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		841E4915C2CAD77FCC70903C /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		9870052082435C94016F6EDC /* LumynTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynTypography.swift; sourceTree = "<group>"; };
+		A8403A2A06B432F666711920 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		A978A461AB7F97F8F549F9CF /* MoodResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodResultView.swift; sourceTree = "<group>"; };
+		AB5D638796A8DEC9BF9459A8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		ADF6101604B8B2C8120A3081 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
+		BB0A8071FF722F891F014A64 /* Lumyn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lumyn.entitlements; sourceTree = "<group>"; };
+		BB9086A82A6E206AFEEA1E98 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		BC6B78AF27DA0A79B8593912 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		BDC86EAE84801A5663E234F5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		C4A316A4B8543B7A8A921440 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
+		C6EEE9AECC8ECD446E4514CE /* ComboBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBuilderView.swift; sourceTree = "<group>"; };
+		CC1EEF5BD00A023A5D38135E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynModels.swift; sourceTree = "<group>"; };
+		D19248A38F249D10043D7649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViews.swift; sourceTree = "<group>"; };
+		EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonService.swift; sourceTree = "<group>"; };
+		ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordService.swift; sourceTree = "<group>"; };
+		F1085AA3161D877F21F194DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0179775D1CD0F32C86C8DB35 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				728787051FBE97458851ED78 /* LumynComponents.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		0509B5ACDEF7B8C640BEE6B3 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BB9086A82A6E206AFEEA1E98 /* LibraryView.swift */,
+				ADF6101604B8B2C8120A3081 /* WordDetailView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		087CCE96C61BD89D407C4438 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BDC86EAE84801A5663E234F5 /* AppState.swift */,
+				D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1DB3613DD2B81D5416DB7D2B /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				3B96DF2E3BEB711BCF88CADE /* MantraView.swift */,
+				BC6B78AF27DA0A79B8593912 /* SessionView.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		1FCEA4C33BA1EED69CFCDA40 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3C722FB2892CE316C17BC279 /* Color+Lumyn.swift */,
+				44A1CDD3614220CFA2E970ED /* LumynLayout.swift */,
+				9870052082435C94016F6EDC /* LumynTypography.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		206C23D36EA01861ED9D8AA5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		25D32159E5DBC90C06650E65 /* Combo */ = {
+			isa = PBXGroup;
+			children = (
+				C6EEE9AECC8ECD446E4514CE /* ComboBuilderView.swift */,
+				1CC1AE9DC6EBEED30CE2B009 /* SavedCombosView.swift */,
+			);
+			path = Combo;
+			sourceTree = "<group>";
+		};
+		2AD92E38FACCFD3B110C4D5E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */,
+				642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */,
+				47A530BDF93E2253B6984DD1 /* HapticManager.swift */,
+				EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */,
+				5A569576560B753CD5E60840 /* NotificationManager.swift */,
+				24C6EA4C957B2921AD5F280C /* NumerologyService.swift */,
+				FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */,
+				C4A316A4B8543B7A8A921440 /* SubscriptionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		375343B750CDDDDD3B8BCD46 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				841E4915C2CAD77FCC70903C /* PaywallView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+		485647FC37405421140280D1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				732B7B6848473D67553A9820 /* OnboardingContainerView.swift */,
+				DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		499E8C0BE8D8020217751D58 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45852625012FE46C5A58699E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5A9F29E8D68CF238C3683BEE /* Mood */ = {
+			isa = PBXGroup;
+			children = (
+				546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */,
+				A978A461AB7F97F8F549F9CF /* MoodResultView.swift */,
+			);
+			path = Mood;
+			sourceTree = "<group>";
+		};
+		646BEF196A71586618A36E3D /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		75FB175533C4E5C11B49E3E6 /* Lumyn */ = {
+			isa = PBXGroup;
+			children = (
+				CC1EEF5BD00A023A5D38135E /* AppDelegate.swift */,
+				F1085AA3161D877F21F194DF /* ContentView.swift */,
+				D19248A38F249D10043D7649 /* Info.plist */,
+				BB0A8071FF722F891F014A64 /* Lumyn.entitlements */,
+				3877F445215DEE3B9D29D1EF /* LumynApp.swift */,
+				AB5D638796A8DEC9BF9459A8 /* PrivacyInfo.xcprivacy */,
+				E8E94CA17E2DAB05C33ED356 /* Config */,
+				1FCEA4C33BA1EED69CFCDA40 /* Extensions */,
+				2AD92E38FACCFD3B110C4D5E /* Managers */,
+				087CCE96C61BD89D407C4438 /* Models */,
+				499E8C0BE8D8020217751D58 /* Resources */,
+				E3651E0BE2AC3B37C9EFE1B4 /* Views */,
+			);
+			path = Lumyn;
+			sourceTree = "<group>";
+		};
+		7959C9BB1C2E70307F17990A = {
+			isa = PBXGroup;
+			children = (
+				75FB175533C4E5C11B49E3E6 /* Lumyn */,
+				9D5619B44D360F9ABB74E13D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		829B49845691CFA273FA9298 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04D6F30B9A4BF01F250421A3 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9D5619B44D360F9ABB74E13D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E63F343B3889102FA5EF18D /* Lumyn.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D3114082DB1071F12A384323 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				581A3DFB18EF15D5C5058A00 /* MainTabView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E3651E0BE2AC3B37C9EFE1B4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				25D32159E5DBC90C06650E65 /* Combo */,
+				646BEF196A71586618A36E3D /* Discover */,
+				829B49845691CFA273FA9298 /* Home */,
+				F0A107692DE8E6973B6B06D0 /* Journal */,
+				E8880DEDCA994B403CBD20C4 /* Launch */,
+				0509B5ACDEF7B8C640BEE6B3 /* Library */,
+				D3114082DB1071F12A384323 /* Main */,
+				5A9F29E8D68CF238C3683BEE /* Mood */,
+				485647FC37405421140280D1 /* Onboarding */,
+				375343B750CDDDDD3B8BCD46 /* Paywall */,
+				1DB3613DD2B81D5416DB7D2B /* Session */,
+				206C23D36EA01861ED9D8AA5 /* Settings */,
+				0179775D1CD0F32C86C8DB35 /* Shared */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E8880DEDCA994B403CBD20C4 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				35F7E55FAE89962BEFA992BD /* SplashView.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		E8E94CA17E2DAB05C33ED356 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				1D8D07F4B145E76DB80986E0 /* Secrets.example.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		F0A107692DE8E6973B6B06D0 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				A8403A2A06B432F666711920 /* JournalView.swift */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB593CF4A54ACF2BDC99352C /* Lumyn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1E08DF92A34D13FB84BA2D1 /* Build configuration list for PBXNativeTarget "Lumyn" */;
+			buildPhases = (
+				9F973DE674180FA774EEB527 /* Sources */,
+				7023B9AA451B6764E7A8E1A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lumyn;
+			packageProductDependencies = (
+			);
+			productName = Lumyn;
+			productReference = 4E63F343B3889102FA5EF18D /* Lumyn.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFF0BA1894618C631EB63ADE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					FB593CF4A54ACF2BDC99352C = {
+						DevelopmentTeam = Y76U82LCJ5;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5ADB982B9753BB54A6A6F249 /* Build configuration list for PBXProject "Lumyn" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7959C9BB1C2E70307F17990A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9D5619B44D360F9ABB74E13D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB593CF4A54ACF2BDC99352C /* Lumyn */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7023B9AA451B6764E7A8E1A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				409072940A77CF01D54EB7C7 /* Assets.xcassets in Resources */,
+				0CA179DB3B7637F58D854841 /* PrivacyInfo.xcprivacy in Resources */,
+				B08EFCE1DE46937D404B88C0 /* Secrets.example.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9F973DE674180FA774EEB527 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				948D290B2A64DDD79AEC877C /* AppDelegate.swift in Sources */,
+				A83981B6669472CA1E145B7D /* AppState.swift in Sources */,
+				0AA44BF8B5EE0FE152B70ADC /* Color+Lumyn.swift in Sources */,
+				17943C6B4DC8D757172913DB /* ComboBuilderView.swift in Sources */,
+				7EC746A4D21561CB1F4B4C19 /* ContentView.swift in Sources */,
+				142676CF1ADFDD2EBCE38696 /* DailyWordService.swift in Sources */,
+				58A1A381323CA610C4ADF0BF /* DataCatalog.swift in Sources */,
+				C9340FC7FC9DC9825EDB23C3 /* DiscoverView.swift in Sources */,
+				512DCB9556A643768E12AC1A /* HapticManager.swift in Sources */,
+				4A4FC6064F04B46726FC5BAC /* HomeView.swift in Sources */,
+				2D46411B1C18EE7615348AAB /* JournalView.swift in Sources */,
+				586F90D53B732E795ACE961B /* LibraryView.swift in Sources */,
+				A9FB10A2296414F866679CAE /* LumynApp.swift in Sources */,
+				E4B05F9665EB5A9D211FEEA7 /* LumynComponents.swift in Sources */,
+				19890DA47DBB76E3CB2E8042 /* LumynLayout.swift in Sources */,
+				227A64EF3B750E0942D6DCCD /* LumynModels.swift in Sources */,
+				E5FD8B304464048599291F20 /* LumynTypography.swift in Sources */,
+				4C9CE6D7E0F879D763529694 /* MainTabView.swift in Sources */,
+				6708CDBB53B4510FE09EAC37 /* MantraView.swift in Sources */,
+				D7843A37D7835C6A76BBD1CB /* MoodCheckinView.swift in Sources */,
+				9701591BD321EEFE7C516B19 /* MoodResultView.swift in Sources */,
+				B6B06BB9579CABE5F69151FE /* MoonService.swift in Sources */,
+				B3DC7A21A8AFA3CE380BCEFA /* NotificationManager.swift in Sources */,
+				A59274C58101F7E988CB6129 /* NumerologyService.swift in Sources */,
+				0A9869AA5DDAF6A8E5E2EFAA /* OnboardingContainerView.swift in Sources */,
+				86FC9956E66C6E61FEFC4D53 /* OnboardingStepViews.swift in Sources */,
+				E8949F70C5D042798B0AAB3C /* PaywallView.swift in Sources */,
+				183BD35D4CFC68920C79C094 /* PersistenceManager.swift in Sources */,
+				BCD5B900B5176E2A01A9EB3C /* SavedCombosView.swift in Sources */,
+				531B9169EDEAC54892ECCD25 /* SessionView.swift in Sources */,
+				C07A7FE2317DF71389662EA4 /* SettingsView.swift in Sources */,
+				9FDF88349654B5AFC988C62C /* SplashView.swift in Sources */,
+				15F45612BBC58CD46430F181 /* SubscriptionManager.swift in Sources */,
+				E9E2C495DAE730A981532E6D /* WordDetailView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2C4C14262FAB74E9D8838F65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4CD0684311C8D374B9A2D3F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lumyn/Lumyn.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y76U82LCJ5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Lumyn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whyteboard.lumyn;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9D838225734C58FAB9B09E80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lumyn/Lumyn.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y76U82LCJ5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Lumyn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whyteboard.lumyn;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A017AD6BCDC4D595E1DCD4E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5ADB982B9753BB54A6A6F249 /* Build configuration list for PBXProject "Lumyn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A017AD6BCDC4D595E1DCD4E4 /* Debug */,
+				2C4C14262FAB74E9D8838F65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1E08DF92A34D13FB84BA2D1 /* Build configuration list for PBXNativeTarget "Lumyn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D838225734C58FAB9B09E80 /* Debug */,
+				4CD0684311C8D374B9A2D3F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFF0BA1894618C631EB63ADE /* Project object */;
+}
