@@ -235,6 +235,7 @@ final class AppState {
     // MARK: - Persistence
     func save() {
         PersistenceManager.shared.save(persistedSnapshot)
+        WidgetDataStore.sync(profile: profile)
     }
 
     private func load() {

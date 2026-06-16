@@ -64,11 +64,11 @@ flowchart TD
 | **settings** | Home → gear | ✅ | `SettingsView.swift` | profile/settings 🔜 |
 | **share-card** | — | 🔜 v1.1 | — | — |
 | **sigil** | — | 🔜 v1.1 | — | — |
-| **analytics** | — | 🔜 v1.1 | — | local |
-| **widget** | — | 🔜 v1.1 | — | — |
+| **analytics** | Settings → Analytics | ✅ | `AnalyticsView.swift`, `AnalyticsService.swift` | — (local) |
+| **widget** | Settings → Daily Word Widget | ✅ | `LumynWidget/`, `WidgetDataStore.swift` | — |
 | **edit-profile** | — | 🔜 v1.1 | — | profile |
-| **edit-intentions** | — | 🔜 v1.1 | — | intentions |
-| **feedback** | — | 🔜 v1.1 | — | `feedback` |
+| **settings-intentions** | Settings → Your Intentions | ✅ | `IntentionsEditorView.swift`, `IntentionsGrid.swift` | `selected_intentions` 🔜 |
+| **settings-feedback** | Settings → Send Feedback | ✅ | `FeedbackView.swift`, `FeedbackService.swift` | `feedback` |
 | **cloud-backup** | — | 🔜 v1.1 | — | full sync |
 
 ## System nodes
@@ -118,5 +118,5 @@ flowchart LR
 
 - Supabase cloud backup + live community feed
 - Analytics, share card, sigil export
-- Edit profile / intentions / feedback in Settings
-- Home screen widget
+- Edit profile in Settings
+- Supabase cloud backup + live community feed

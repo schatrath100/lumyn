@@ -6,10 +6,23 @@ struct SettingsView: View {
     @Environment(\.openURL) private var openURL
 
     @State private var showDeleteConfirm = false
+    @State private var showFeedback = false
     @State private var reminderDate = Date()
 
     var body: some View {
         List {
+            Section("Practice") {
+                NavigationLink("Analytics") {
+                    AnalyticsView()
+                }
+                NavigationLink("Your Intentions") {
+                    IntentionsEditorView()
+                }
+                NavigationLink("Daily Word Widget") {
+                    WidgetSetupView()
+                }
+            }
+
             Section("Appearance") {
                 Toggle("Dark Mode", isOn: Binding(
                     get: { appState.settings.darkMode },
@@ -61,6 +74,12 @@ struct SettingsView: View {
                 }
             }
 
+            Section("Support") {
+                Button("Send Feedback") {
+                    showFeedback = true
+                }
+            }
+
             Section("Subscription") {
                 if appState.profile.isSubscribed {
                     Button("Manage Subscription") {
@@ -86,6 +105,16 @@ struct SettingsView: View {
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            let time = ReminderTimeParser.components(from: appState.settings.reminderTime)
+            var comps = DateComponents()
+            comps.hour = time.hour
+            comps.minute = time.minute
+            reminderDate = Calendar.current.date(from: comps) ?? reminderDate
+        }
+        .sheet(isPresented: $showFeedback) {
+            FeedbackView()
+        }
         .confirmationDialog(
             "Delete all local data?",
             isPresented: $showDeleteConfirm,

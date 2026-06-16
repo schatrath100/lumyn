@@ -10,27 +10,40 @@
 		0A9869AA5DDAF6A8E5E2EFAA /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B7B6848473D67553A9820 /* OnboardingContainerView.swift */; };
 		0AA44BF8B5EE0FE152B70ADC /* Color+Lumyn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C722FB2892CE316C17BC279 /* Color+Lumyn.swift */; };
 		0CA179DB3B7637F58D854841 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AB5D638796A8DEC9BF9459A8 /* PrivacyInfo.xcprivacy */; };
+		12DCEA1503BAD88F374AA9AD /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A83C1240754F790B4CAC2E4 /* WidgetSnapshot.swift */; };
 		142676CF1ADFDD2EBCE38696 /* DailyWordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */; };
 		15F45612BBC58CD46430F181 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A316A4B8543B7A8A921440 /* SubscriptionManager.swift */; };
 		17943C6B4DC8D757172913DB /* ComboBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EEE9AECC8ECD446E4514CE /* ComboBuilderView.swift */; };
 		183BD35D4CFC68920C79C094 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */; };
 		19890DA47DBB76E3CB2E8042 /* LumynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1CDD3614220CFA2E970ED /* LumynLayout.swift */; };
+		1B9974153B7988A9289346DF /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F661427EDFC0D6A739C235F /* FeedbackView.swift */; };
+		223CA9030E449889DF9B5572 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A83C1240754F790B4CAC2E4 /* WidgetSnapshot.swift */; };
 		227A64EF3B750E0942D6DCCD /* LumynModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */; };
 		2D46411B1C18EE7615348AAB /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8403A2A06B432F666711920 /* JournalView.swift */; };
+		2EAAE0633FA5BB4D36771629 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7BDE11F80B72FD12DA626F /* AnalyticsView.swift */; };
+		3688428CB8B59F4F7D690436 /* LumynWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E38C9426CC66138158FB8E /* LumynWidgetBundle.swift */; };
 		409072940A77CF01D54EB7C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45852625012FE46C5A58699E /* Assets.xcassets */; };
 		4A4FC6064F04B46726FC5BAC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6F30B9A4BF01F250421A3 /* HomeView.swift */; };
 		4C9CE6D7E0F879D763529694 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A3DFB18EF15D5C5058A00 /* MainTabView.swift */; };
+		4E2B4F269973837A0C8E24E3 /* WidgetSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451276A4FD5751A17097AB1A /* WidgetSetupView.swift */; };
+		4E5B9CD11CDBF62F64FDA898 /* WidgetDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA11376764565B955C6095 /* WidgetDataStore.swift */; };
 		512DCB9556A643768E12AC1A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A530BDF93E2253B6984DD1 /* HapticManager.swift */; };
+		525A55ED35433C8E62EF1354 /* DailyWordWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC82BA8CB0C192B6CC9592A /* DailyWordWidget.swift */; };
 		531B9169EDEAC54892ECCD25 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B78AF27DA0A79B8593912 /* SessionView.swift */; };
 		586F90D53B732E795ACE961B /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9086A82A6E206AFEEA1E98 /* LibraryView.swift */; };
 		58A1A381323CA610C4ADF0BF /* DataCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */; };
 		6708CDBB53B4510FE09EAC37 /* MantraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DF2E3BEB711BCF88CADE /* MantraView.swift */; };
+		7A3E44B40185F1EE92959D89 /* IntentionsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680FFC72C9A9885AC445DEC5 /* IntentionsEditorView.swift */; };
 		7EC746A4D21561CB1F4B4C19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1085AA3161D877F21F194DF /* ContentView.swift */; };
+		833AA6E8118C82D3CE362D02 /* SecretsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B6322A83A1133CF5AC353 /* SecretsProvider.swift */; };
 		86FC9956E66C6E61FEFC4D53 /* OnboardingStepViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */; };
 		948D290B2A64DDD79AEC877C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1EEF5BD00A023A5D38135E /* AppDelegate.swift */; };
+		96C65F87A464E94301712F7E /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F775E09BD5B932D3B5A92E43 /* AnalyticsService.swift */; };
 		9701591BD321EEFE7C516B19 /* MoodResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A978A461AB7F97F8F549F9CF /* MoodResultView.swift */; };
+		9D10EF77B383EB201B08B626 /* WidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581B1BB0A04AE7546FF9114B /* WidgetSnapshotStore.swift */; };
 		9FDF88349654B5AFC988C62C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7E55FAE89962BEFA992BD /* SplashView.swift */; };
 		A59274C58101F7E988CB6129 /* NumerologyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C6EA4C957B2921AD5F280C /* NumerologyService.swift */; };
+		A5FDBEB2E6A30DF7DECF0A6C /* LumynWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8CD04688D1D2254A9F55CB02 /* LumynWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A69976840AA56CB7716DD296 /* PlayfairDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECE5BB6DE4FEBB30555F2814 /* PlayfairDisplay.ttf */; };
 		A83981B6669472CA1E145B7D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC86EAE84801A5663E234F5 /* AppState.swift */; };
 		A9FB10A2296414F866679CAE /* LumynApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3877F445215DEE3B9D29D1EF /* LumynApp.swift */; };
@@ -41,17 +54,47 @@
 		C07A7FE2317DF71389662EA4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */; };
 		C9340FC7FC9DC9825EDB23C3 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */; };
 		D7843A37D7835C6A76BBD1CB /* MoodCheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */; };
+		DA39DFFDF62D4C6211BE6FDF /* IntentionsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAAC01B4B044F2CA19DF88F /* IntentionsGrid.swift */; };
+		DFE25A4AB2E797706707D294 /* WidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581B1BB0A04AE7546FF9114B /* WidgetSnapshotStore.swift */; };
 		E1B5966DAFD444F595AABCAD /* DMSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6438C2DCDC5EAF85FF7FA21 /* DMSans.ttf */; };
 		E4B05F9665EB5A9D211FEEA7 /* LumynComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728787051FBE97458851ED78 /* LumynComponents.swift */; };
 		E5FD8B304464048599291F20 /* LumynTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870052082435C94016F6EDC /* LumynTypography.swift */; };
 		E8949F70C5D042798B0AAB3C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4915C2CAD77FCC70903C /* PaywallView.swift */; };
 		E9E2C495DAE730A981532E6D /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF6101604B8B2C8120A3081 /* WordDetailView.swift */; };
+		F38C5E60CFE2F50050A0521E /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668697BF137D0AFECD068294 /* FeedbackService.swift */; };
 		F7F7C8E4F1A618A0ABA2953F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = E3A4CDE507A191C8E6CDF887 /* OFL.txt */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		95F60EB86327D7AD0D4F2D4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFF0BA1894618C631EB63ADE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06FB87C76A8685405BED9529;
+			remoteInfo = LumynWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4B450202FE235F0CB21AE0F3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A5FDBEB2E6A30DF7DECF0A6C /* LumynWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04D6F30B9A4BF01F250421A3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		175C147028C6B8E93F465559 /* LumynWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LumynWidget.entitlements; sourceTree = "<group>"; };
+		18E38C9426CC66138158FB8E /* LumynWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynWidgetBundle.swift; sourceTree = "<group>"; };
+		1A9B6322A83A1133CF5AC353 /* SecretsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsProvider.swift; sourceTree = "<group>"; };
 		1CC1AE9DC6EBEED30CE2B009 /* SavedCombosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCombosView.swift; sourceTree = "<group>"; };
 		1D8D07F4B145E76DB80986E0 /* Secrets.example.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secrets.example.plist; sourceTree = "<group>"; };
 		24C6EA4C957B2921AD5F280C /* NumerologyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumerologyService.swift; sourceTree = "<group>"; };
@@ -59,18 +102,27 @@
 		3877F445215DEE3B9D29D1EF /* LumynApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynApp.swift; sourceTree = "<group>"; };
 		3B96DF2E3BEB711BCF88CADE /* MantraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantraView.swift; sourceTree = "<group>"; };
 		3C722FB2892CE316C17BC279 /* Color+Lumyn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Lumyn.swift"; sourceTree = "<group>"; };
+		3F661427EDFC0D6A739C235F /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		44A1CDD3614220CFA2E970ED /* LumynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynLayout.swift; sourceTree = "<group>"; };
+		451276A4FD5751A17097AB1A /* WidgetSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSetupView.swift; sourceTree = "<group>"; };
 		45852625012FE46C5A58699E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47A530BDF93E2253B6984DD1 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		4E63F343B3889102FA5EF18D /* Lumyn.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Lumyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckinView.swift; sourceTree = "<group>"; };
 		581A3DFB18EF15D5C5058A00 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		581B1BB0A04AE7546FF9114B /* WidgetSnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshotStore.swift; sourceTree = "<group>"; };
 		5A569576560B753CD5E60840 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCatalog.swift; sourceTree = "<group>"; };
+		668697BF137D0AFECD068294 /* FeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
+		680FFC72C9A9885AC445DEC5 /* IntentionsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionsEditorView.swift; sourceTree = "<group>"; };
+		6EC82BA8CB0C192B6CC9592A /* DailyWordWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordWidget.swift; sourceTree = "<group>"; };
+		6F7BDE11F80B72FD12DA626F /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		728787051FBE97458851ED78 /* LumynComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynComponents.swift; sourceTree = "<group>"; };
 		732B7B6848473D67553A9820 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		7A83C1240754F790B4CAC2E4 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		841E4915C2CAD77FCC70903C /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		8CD04688D1D2254A9F55CB02 /* LumynWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = LumynWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9870052082435C94016F6EDC /* LumynTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynTypography.swift; sourceTree = "<group>"; };
 		A8403A2A06B432F666711920 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		A978A461AB7F97F8F549F9CF /* MoodResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodResultView.swift; sourceTree = "<group>"; };
@@ -86,12 +138,15 @@
 		D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynModels.swift; sourceTree = "<group>"; };
 		D19248A38F249D10043D7649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViews.swift; sourceTree = "<group>"; };
+		E2BA11376764565B955C6095 /* WidgetDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataStore.swift; sourceTree = "<group>"; };
 		E3A4CDE507A191C8E6CDF887 /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		EAAAC01B4B044F2CA19DF88F /* IntentionsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionsGrid.swift; sourceTree = "<group>"; };
 		EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonService.swift; sourceTree = "<group>"; };
 		ECE5BB6DE4FEBB30555F2814 /* PlayfairDisplay.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayfairDisplay.ttf; sourceTree = "<group>"; };
 		ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordService.swift; sourceTree = "<group>"; };
 		F1085AA3161D877F21F194DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F6438C2DCDC5EAF85FF7FA21 /* DMSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DMSans.ttf; sourceTree = "<group>"; };
+		F775E09BD5B932D3B5A92E43 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +154,7 @@
 		0179775D1CD0F32C86C8DB35 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				EAAAC01B4B044F2CA19DF88F /* IntentionsGrid.swift */,
 				728787051FBE97458851ED78 /* LumynComponents.swift */,
 			);
 			path = Shared;
@@ -144,7 +200,11 @@
 		206C23D36EA01861ED9D8AA5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				6F7BDE11F80B72FD12DA626F /* AnalyticsView.swift */,
+				3F661427EDFC0D6A739C235F /* FeedbackView.swift */,
+				680FFC72C9A9885AC445DEC5 /* IntentionsEditorView.swift */,
 				07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */,
+				451276A4FD5751A17097AB1A /* WidgetSetupView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -161,14 +221,18 @@
 		2AD92E38FACCFD3B110C4D5E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F775E09BD5B932D3B5A92E43 /* AnalyticsService.swift */,
 				ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */,
 				642D79F04E0C45EEDEF69A14 /* DataCatalog.swift */,
+				668697BF137D0AFECD068294 /* FeedbackService.swift */,
 				47A530BDF93E2253B6984DD1 /* HapticManager.swift */,
 				EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */,
 				5A569576560B753CD5E60840 /* NotificationManager.swift */,
 				24C6EA4C957B2921AD5F280C /* NumerologyService.swift */,
 				FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */,
+				1A9B6322A83A1133CF5AC353 /* SecretsProvider.swift */,
 				C4A316A4B8543B7A8A921440 /* SubscriptionManager.swift */,
+				E2BA11376764565B955C6095 /* WidgetDataStore.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -179,6 +243,16 @@
 				841E4915C2CAD77FCC70903C /* PaywallView.swift */,
 			);
 			path = Paywall;
+			sourceTree = "<group>";
+		};
+		3B2E1436985B6D1B8E489749 /* LumynWidget */ = {
+			isa = PBXGroup;
+			children = (
+				6EC82BA8CB0C192B6CC9592A /* DailyWordWidget.swift */,
+				175C147028C6B8E93F465559 /* LumynWidget.entitlements */,
+				18E38C9426CC66138158FB8E /* LumynWidgetBundle.swift */,
+			);
+			path = LumynWidget;
 			sourceTree = "<group>";
 		};
 		485647FC37405421140280D1 /* Onboarding */ = {
@@ -239,6 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				75FB175533C4E5C11B49E3E6 /* Lumyn */,
+				8A72E50BB683B3167BA6C511 /* LumynShared */,
+				3B2E1436985B6D1B8E489749 /* LumynWidget */,
 				9D5619B44D360F9ABB74E13D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -249,6 +325,15 @@
 				04D6F30B9A4BF01F250421A3 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8A72E50BB683B3167BA6C511 /* LumynShared */ = {
+			isa = PBXGroup;
+			children = (
+				7A83C1240754F790B4CAC2E4 /* WidgetSnapshot.swift */,
+				581B1BB0A04AE7546FF9114B /* WidgetSnapshotStore.swift */,
+			);
+			path = LumynShared;
 			sourceTree = "<group>";
 		};
 		933BE986B766F47E5675B36C /* Fonts */ = {
@@ -265,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				4E63F343B3889102FA5EF18D /* Lumyn.app */,
+				8CD04688D1D2254A9F55CB02 /* LumynWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,16 +410,35 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		06FB87C76A8685405BED9529 /* LumynWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5CD4FA788EE7D432C4039A /* Build configuration list for PBXNativeTarget "LumynWidgetExtension" */;
+			buildPhases = (
+				9F4900D2F1F5065C03B5A898 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LumynWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = LumynWidgetExtension;
+			productReference = 8CD04688D1D2254A9F55CB02 /* LumynWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FB593CF4A54ACF2BDC99352C /* Lumyn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1E08DF92A34D13FB84BA2D1 /* Build configuration list for PBXNativeTarget "Lumyn" */;
 			buildPhases = (
 				9F973DE674180FA774EEB527 /* Sources */,
 				7023B9AA451B6764E7A8E1A3 /* Resources */,
+				4B450202FE235F0CB21AE0F3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C7CDD53E1C5DBF5CD8530251 /* PBXTargetDependency */,
 			);
 			name = Lumyn;
 			packageProductDependencies = (
@@ -351,6 +456,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					06FB87C76A8685405BED9529 = {
+						DevelopmentTeam = Y76U82LCJ5;
+						ProvisioningStyle = Automatic;
+					};
 					FB593CF4A54ACF2BDC99352C = {
 						DevelopmentTeam = Y76U82LCJ5;
 						ProvisioningStyle = Automatic;
@@ -372,6 +481,7 @@
 			projectRoot = "";
 			targets = (
 				FB593CF4A54ACF2BDC99352C /* Lumyn */,
+				06FB87C76A8685405BED9529 /* LumynWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -393,10 +503,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9F4900D2F1F5065C03B5A898 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525A55ED35433C8E62EF1354 /* DailyWordWidget.swift in Sources */,
+				3688428CB8B59F4F7D690436 /* LumynWidgetBundle.swift in Sources */,
+				223CA9030E449889DF9B5572 /* WidgetSnapshot.swift in Sources */,
+				DFE25A4AB2E797706707D294 /* WidgetSnapshotStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F973DE674180FA774EEB527 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C65F87A464E94301712F7E /* AnalyticsService.swift in Sources */,
+				2EAAE0633FA5BB4D36771629 /* AnalyticsView.swift in Sources */,
 				948D290B2A64DDD79AEC877C /* AppDelegate.swift in Sources */,
 				A83981B6669472CA1E145B7D /* AppState.swift in Sources */,
 				0AA44BF8B5EE0FE152B70ADC /* Color+Lumyn.swift in Sources */,
@@ -405,8 +528,12 @@
 				142676CF1ADFDD2EBCE38696 /* DailyWordService.swift in Sources */,
 				58A1A381323CA610C4ADF0BF /* DataCatalog.swift in Sources */,
 				C9340FC7FC9DC9825EDB23C3 /* DiscoverView.swift in Sources */,
+				F38C5E60CFE2F50050A0521E /* FeedbackService.swift in Sources */,
+				1B9974153B7988A9289346DF /* FeedbackView.swift in Sources */,
 				512DCB9556A643768E12AC1A /* HapticManager.swift in Sources */,
 				4A4FC6064F04B46726FC5BAC /* HomeView.swift in Sources */,
+				7A3E44B40185F1EE92959D89 /* IntentionsEditorView.swift in Sources */,
+				DA39DFFDF62D4C6211BE6FDF /* IntentionsGrid.swift in Sources */,
 				2D46411B1C18EE7615348AAB /* JournalView.swift in Sources */,
 				586F90D53B732E795ACE961B /* LibraryView.swift in Sources */,
 				A9FB10A2296414F866679CAE /* LumynApp.swift in Sources */,
@@ -426,15 +553,28 @@
 				E8949F70C5D042798B0AAB3C /* PaywallView.swift in Sources */,
 				183BD35D4CFC68920C79C094 /* PersistenceManager.swift in Sources */,
 				BCD5B900B5176E2A01A9EB3C /* SavedCombosView.swift in Sources */,
+				833AA6E8118C82D3CE362D02 /* SecretsProvider.swift in Sources */,
 				531B9169EDEAC54892ECCD25 /* SessionView.swift in Sources */,
 				C07A7FE2317DF71389662EA4 /* SettingsView.swift in Sources */,
 				9FDF88349654B5AFC988C62C /* SplashView.swift in Sources */,
 				15F45612BBC58CD46430F181 /* SubscriptionManager.swift in Sources */,
+				4E5B9CD11CDBF62F64FDA898 /* WidgetDataStore.swift in Sources */,
+				4E2B4F269973837A0C8E24E3 /* WidgetSetupView.swift in Sources */,
+				12DCEA1503BAD88F374AA9AD /* WidgetSnapshot.swift in Sources */,
+				9D10EF77B383EB201B08B626 /* WidgetSnapshotStore.swift in Sources */,
 				E9E2C495DAE730A981532E6D /* WordDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7CDD53E1C5DBF5CD8530251 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06FB87C76A8685405BED9529 /* LumynWidgetExtension */;
+			targetProxy = 95F60EB86327D7AD0D4F2D4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2C4C14262FAB74E9D8838F65 /* Release */ = {
@@ -515,6 +655,29 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		52E9B1D389C57E2108454F81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LumynWidget/LumynWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y76U82LCJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumyn;
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whyteboard.lumyn.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		9D838225734C58FAB9B09E80 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -602,6 +765,29 @@
 			};
 			name = Debug;
 		};
+		A4D282E57C507241193A78D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = LumynWidget/LumynWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y76U82LCJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumyn;
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whyteboard.lumyn.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -610,6 +796,15 @@
 			buildConfigurations = (
 				A017AD6BCDC4D595E1DCD4E4 /* Debug */,
 				2C4C14262FAB74E9D8838F65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CF5CD4FA788EE7D432C4039A /* Build configuration list for PBXNativeTarget "LumynWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52E9B1D389C57E2108454F81 /* Debug */,
+				A4D282E57C507241193A78D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

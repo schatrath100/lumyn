@@ -21,6 +21,20 @@
                ReferencedContainer = "container:Lumyn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06FB87C76A8685405BED9529"
+               BuildableName = "LumynWidgetExtension.appex"
+               BlueprintName = "LumynWidgetExtension"
+               ReferencedContainer = "container:Lumyn.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
