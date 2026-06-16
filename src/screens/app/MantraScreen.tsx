@@ -30,7 +30,19 @@ export function MantraScreen() {
     };
   }, [id, setSelectedWord, stopTones]);
 
-  if (!word) return null;
+  if (!word) {
+    return (
+      <div className="screen" style={{ background: '#0F0905' }}>
+        <div className="screen__status">
+          <button type="button" className="btn-back" style={{ color: 'rgba(255,248,242,0.5)', margin: 0 }} onClick={() => navigate('/library')}>← Back</button>
+          <span />
+        </div>
+        <div className="screen__body" style={{ padding: 24, color: '#FEF3EB' }}>
+          <p>Word not found.</p>
+        </div>
+      </div>
+    );
+  }
 
   const target = word.reps;
   const done = count >= target;

@@ -142,33 +142,47 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!supabase || !cloudUserId) return;
+    if (!supabase || !cloudUserId || !state.settings.cloudBackupEnabled) return;
     scheduleCloudPush(cloudUserId);
   }, [state, cloudUserId, scheduleCloudPush]);
 
   useEffect(() => {
-    if (!supabase) return;
+    if (!supabase || !state.settings.cloudBackupEnabled) return;
+
+    const syncFromSession = async (userId: string) => {
+      setCloudUserId(userId);
+      setCloudSyncStatus('connecting');
+      try {
+        const remote = await pullRemoteState(userId);
+        if (remote) {
+          setState({
+            ...remote,
+            settings: { ...remote.settings, cloudBackupEnabled: true },
+          });
+        } else {
+          const next = {
+            ...stateRef.current,
+            settings: { ...stateRef.current.settings, cloudBackupEnabled: true },
+          };
+          await pushRemoteState(userId, next);
+          setState(next);
+        }
+        setCloudSyncStatus('synced');
+        setCloudSyncError(null);
+      } catch {
+        setCloudSyncStatus('error');
+        setCloudSyncError(USER_ERROR_MESSAGE);
+      }
+    };
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        setCloudUserId(session.user.id);
-        setCloudSyncStatus('connecting');
-        pullRemoteState(session.user.id)
-          .then((remote) => {
-            if (remote) setState(remote);
-            setCloudSyncStatus('synced');
-          })
-          .catch(() => {
-            setCloudSyncStatus('error');
-            setCloudSyncError(USER_ERROR_MESSAGE);
-          });
-      }
+      if (session?.user) void syncFromSession(session.user.id);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
+      if (session?.user && stateRef.current.settings.cloudBackupEnabled) {
         setCloudUserId(session.user.id);
-      } else {
+      } else if (!session?.user) {
         setCloudUserId(null);
         setCloudSyncStatus('off');
         setCloudSyncError(null);
@@ -176,7 +190,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [state.settings.cloudBackupEnabled]);
 
   const enableCloudSync = useCallback(async () => {
     if (!supabase) return;
@@ -188,9 +202,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
       const remote = await pullRemoteState(userId);
       if (remote) {
-        setState(remote);
+        setState({
+          ...remote,
+          settings: { ...remote.settings, cloudBackupEnabled: true },
+        });
       } else {
-        await pushRemoteState(userId, stateRef.current);
+        const next = {
+          ...stateRef.current,
+          settings: { ...stateRef.current.settings, cloudBackupEnabled: true },
+        };
+        await pushRemoteState(userId, next);
+        setState(next);
       }
       setCloudUserId(userId);
       setCloudSyncStatus('synced');
@@ -203,6 +225,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const disableCloudSync = useCallback(async () => {
     if (!supabase) return;
     if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    setState((prev) => ({
+      ...prev,
+      settings: { ...prev.settings, cloudBackupEnabled: false },
+    }));
     await supabase.auth.signOut();
     setCloudUserId(null);
     setCloudSyncStatus('off');

@@ -27,8 +27,9 @@ export function PersonalNumberScreen() {
   return (
     <div className="screen screen--card">
       {onboardingComplete ? (
-        <div style={{ padding: '14px 20px 0' }}>
-          <button type="button" className="onboarding-nav__back" onClick={() => navigate('/settings')}>←</button>
+        <div className="onboarding-nav" style={{ paddingBottom: 0 }}>
+          <button type="button" className="onboarding-nav__back" onClick={() => navigate('/settings')} aria-label="Back to settings">←</button>
+          <div className="onboarding-nav__spacer" />
         </div>
       ) : (
         <OnboardingHeader backTo="/onboarding/profile" active={5} />

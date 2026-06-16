@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { StatusBar } from '../../components/StatusBar';
 import { useApp } from '../../context/AppContext';
 import { USER_ERROR_MESSAGE } from '../../lib/errors';
 
@@ -7,24 +8,15 @@ export function ShareCardScreen() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { state } = useApp();
-  const combo = state.savedCombos.find((c) => c.id === id) ?? state.savedCombos[0];
-
-  if (!combo) {
-    return (
-      <div className="screen" style={{ background: 'linear-gradient(160deg,#1E110A 0%,#3A1A05 55%,#2A1208 100%)' }}>
-        <div className="screen__body" style={{ padding: 24, color: '#FEF3EB' }}>
-          <button type="button" onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', color: 'rgba(255,248,242,0.5)', cursor: 'pointer', marginBottom: 16 }}>Close ×</button>
-          <p>No combo found.</p>
-        </div>
-      </div>
-    );
-  }
-
-  const shareText = `My Switch Combo: ${combo.name}\n${combo.words.join(' → ')}\n\nLUMYN — Words that shift your world`;
-
   const [copyError, setCopyError] = useState<string | null>(null);
+  const combo = state.savedCombos.find((c) => c.id === id);
+
+  const shareText = combo
+    ? `My Switch Combo: ${combo.name}\n${combo.words.join(' → ')}\n\nLUMYN — Words that shift your world`
+    : '';
 
   const copyLink = async () => {
+    if (!combo) return;
     try {
       await navigator.clipboard.writeText(shareText);
       setCopyError(null);
@@ -32,6 +24,18 @@ export function ShareCardScreen() {
       setCopyError(USER_ERROR_MESSAGE);
     }
   };
+
+  if (!combo) {
+    return (
+      <div className="screen" style={{ background: 'linear-gradient(160deg,#1E110A 0%,#3A1A05 55%,#2A1208 100%)' }}>
+        <StatusBar />
+        <div className="screen__body" style={{ padding: 24, color: '#FEF3EB' }}>
+          <button type="button" onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', color: 'rgba(255,248,242,0.5)', cursor: 'pointer', marginBottom: 16 }}>Close ×</button>
+          <p>No combo found.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="screen" style={{ background: 'linear-gradient(160deg,#1E110A 0%,#3A1A05 55%,#2A1208 100%)', position: 'relative', overflow: 'hidden' }}>

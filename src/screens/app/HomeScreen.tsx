@@ -45,6 +45,7 @@ export function HomeScreen() {
               className="icon-btn icon-btn--surface"
               onClick={() => navigate('/widget')}
               title="Widget view"
+              aria-label="Open widget view"
             >
               ◫
             </button>
@@ -53,6 +54,7 @@ export function HomeScreen() {
               className="icon-btn icon-btn--accent"
               onClick={() => navigate('/settings')}
               title="Settings"
+              aria-label="Open settings"
             >
               ⚙
             </button>

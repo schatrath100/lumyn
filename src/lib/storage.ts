@@ -28,6 +28,7 @@ export const defaultState: PersistedState = {
     reminderWeekday: 2,
     mantraAmbient: false,
     mantraBinaural: false,
+    cloudBackupEnabled: false,
   },
   savedCombos: [],
   journalEntries: [],
@@ -82,6 +83,7 @@ function normalizeSettings(settings: Record<string, unknown> | undefined): Persi
     reminderWeekday: weekday >= 1 && weekday <= 7 ? weekday : 2,
     mantraAmbient: (settings?.mantraAmbient as boolean) ?? false,
     mantraBinaural: (settings?.mantraBinaural as boolean) ?? false,
+    cloudBackupEnabled: (settings?.cloudBackupEnabled as boolean) ?? false,
   };
 }
 

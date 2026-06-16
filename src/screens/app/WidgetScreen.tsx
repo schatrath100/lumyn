@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { StatusBar } from '../../components/StatusBar';
 import { getDailyWord } from '../../lib/daily-word';
 import { useApp } from '../../context/AppContext';
 
@@ -17,7 +18,8 @@ export function WidgetScreen() {
         justifyContent: 'center',
       }}
     >
-      <div style={{ padding: 24, textAlign: 'center' }}>
+      <StatusBar />
+      <div className="screen__body" style={{ padding: '24px 24px calc(24px + var(--safe-bottom))', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <div style={{ fontSize: 10, color: 'rgba(242,196,74,0.55)', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 12 }}>
           {daily.moonEmoji} Lumyn · {daily.moonLabel}
         </div>

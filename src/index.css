@@ -8,6 +8,7 @@
   --bg-p: #FFF8F2;
   --bg-s: #FFFFFF;
   --bg-c: #FFF4EC;
+  --bg: var(--bg-p);
   --co: #E8784B;
   --cg: #F2C44A;
   --tp: #1E110A;
@@ -142,6 +143,11 @@ body {
 
 .screen__footer--nav {
   padding-bottom: calc(8px + var(--safe-bottom));
+}
+
+.screen__footer--tab {
+  flex-shrink: 0;
+  padding: 14px var(--screen-x) calc(var(--tab-dock-height) + var(--safe-bottom));
 }
 
 /* ——— Tab dock (SHYNE-inspired floating nav) ——— */
@@ -829,8 +835,13 @@ body {
 
 /* ——— Paywall ——— */
 .paywall-screen {
-  background: var(--bg);
+  background: var(--bg-p);
   overflow: hidden;
+}
+
+.paywall-nav {
+  flex-shrink: 0;
+  padding-top: var(--safe-top);
 }
 
 .paywall-scroll {
@@ -1024,7 +1035,7 @@ body {
   flex-shrink: 0;
   padding: 12px 24px calc(20px + var(--safe-bottom));
   border-top: 1px solid var(--bd);
-  background: var(--bg);
+  background: var(--bg-p);
 }
 
 .paywall-billing {
@@ -1075,7 +1086,7 @@ body {
 .sheet-panel {
   width: 100%;
   max-width: 480px;
-  background: var(--bg);
+  background: var(--bg-p);
   border-radius: 20px 20px 0 0;
   padding: 12px 22px calc(24px + var(--safe-bottom));
   max-height: 85vh;

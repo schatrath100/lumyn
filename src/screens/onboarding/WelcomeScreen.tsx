@@ -19,7 +19,7 @@ export function WelcomeScreen() {
         <div className="display" style={{ fontSize: 20, color: 'rgba(30,17,10,0.7)', fontStyle: 'italic', marginBottom: 14, lineHeight: 1.3 }}>Your journey begins now.</div>
         <p style={{ fontSize: 16, color: 'rgba(122,92,69,0.75)', lineHeight: 1.7, margin: 0 }}>Every word spoken with intention<br />creates a ripple in your reality.</p>
       </div>
-      <div style={{ padding: '0 28px 44px', position: 'relative', zIndex: 1 }}>
+      <div style={{ padding: '0 28px calc(28px + var(--safe-bottom))', position: 'relative', zIndex: 1 }}>
         <button type="button" className="btn-primary" onClick={enter}>Continue ✦</button>
       </div>
     </div>

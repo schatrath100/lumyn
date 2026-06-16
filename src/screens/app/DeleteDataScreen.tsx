@@ -6,7 +6,7 @@ import { useApp } from '../../context/AppContext';
 
 export function DeleteDataScreen() {
   const navigate = useNavigate();
-  const { deleteAllData, cloudUserId } = useApp();
+  const { deleteAllData, cloudUserId, state } = useApp();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,12 +30,12 @@ export function DeleteDataScreen() {
         <div className="display" style={{ fontSize: 26, marginBottom: 12 }}>Delete Account</div>
         <p style={{ fontSize: 14, color: 'var(--ts)', lineHeight: 1.65, margin: '0 0 20px' }}>
           This permanently deletes your Lumyn profile, mood history, journal, combos, numerology settings, and preferences on this device.
-          {cloudUserId ? ' Cloud backup for your account will also be permanently removed.' : ''}
+          {state.settings.cloudBackupEnabled && cloudUserId ? ' Cloud backup for your account will also be permanently removed.' : ''}
           {' '}This cannot be undone.
         </p>
         <div style={{ background: 'var(--bg-c)', borderRadius: 14, padding: 16, border: '1px solid var(--bd)', marginBottom: 20 }}>
           <p style={{ fontSize: 13, color: 'var(--ts)', margin: 0, lineHeight: 1.55 }}>
-            {cloudUserId
+            {state.settings.cloudBackupEnabled && cloudUserId
               ? 'Deletes all on-device data and your cloud backup, then signs you out. Required for App Store account deletion guidelines.'
               : 'No cloud account is linked. Only on-device data is removed. Enable Cloud Backup in Settings first if you want data stored remotely.'}
           </p>

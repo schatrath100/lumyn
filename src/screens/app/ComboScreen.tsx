@@ -94,7 +94,7 @@ export function ComboScreen() {
           </div>
         )}
       </div>
-      <div className="screen__footer">
+      <div className="screen__footer screen__footer--tab">
         <button type="button" className="btn-primary" disabled={!comboWords.length} onClick={handleSave}>Save Combo ✦</button>
       </div>
     </>

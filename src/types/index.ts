@@ -89,6 +89,7 @@ export interface AppSettings {
   reminderWeekday: number;
   mantraAmbient: boolean;
   mantraBinaural: boolean;
+  cloudBackupEnabled: boolean;
 }
 
 export interface MoodCheckin {

@@ -142,7 +142,7 @@ export function SettingsScreen() {
             <div className="settings-row">
               <div>
                 <div className="settings-row__label">
-                  {cloudUserId ? 'Backup enabled' : 'Off — device only'}
+                  {state.settings.cloudBackupEnabled && cloudUserId ? 'Backup enabled' : 'Off — device only'}
                 </div>
                 <div className="settings-row__sub">
                   {!isCloudAvailable
@@ -153,11 +153,11 @@ export function SettingsScreen() {
                         ? 'Connecting…'
                         : cloudSyncStatus === 'error'
                           ? (cloudSyncError ?? 'Sync error')
-                          : 'Optional — silent device session'}
+                          : 'Optional — enable to sync across devices'}
                 </div>
               </div>
               {isCloudAvailable && (
-                cloudUserId ? (
+                state.settings.cloudBackupEnabled && cloudUserId ? (
                   <button
                     type="button"
                     onClick={() => void disableCloudSync()}
@@ -185,7 +185,7 @@ export function SettingsScreen() {
             <LegalRow label="Delete Account & Data" onClick={() => navigate('/settings/delete-data')} danger />
           </div>
           <p style={{ fontSize: 11, color: 'var(--tm)', margin: '8px 0 0', lineHeight: 1.5 }}>
-            Permanently removes your profile, moods, journal, and combos{cloudUserId ? ' from this device and cloud' : ''}.
+            Permanently removes your profile, moods, journal, and combos{state.settings.cloudBackupEnabled && cloudUserId ? ' from this device and cloud' : ''}.
           </p>
         </div>
 

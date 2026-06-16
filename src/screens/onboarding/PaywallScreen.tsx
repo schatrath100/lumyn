@@ -57,7 +57,9 @@ export function PaywallScreen() {
 
   return (
     <div className="screen paywall-screen">
-      <ProgressDots total={8} active={8} />
+      <div className="paywall-nav">
+        <ProgressDots total={8} active={8} />
+      </div>
 
       <div className="paywall-scroll">
         <header className="paywall-header">

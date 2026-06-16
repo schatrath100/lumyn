@@ -51,6 +51,12 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
 
   if (profileRes.error) throw profileRes.error;
   if (!profileRes.data) return null;
+  if (combosRes.error) throw combosRes.error;
+  if (journalRes.error) throw journalRes.error;
+  if (syncRes.error) throw syncRes.error;
+  if (wordsRes.error) throw wordsRes.error;
+  if (upvotesRes.error) throw upvotesRes.error;
+  if (moodsRes.error) throw moodsRes.error;
 
   const p = profileRes.data;
   const savedCombos: Combo[] = (combosRes.data ?? []).map((r) => ({
@@ -107,6 +113,7 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
       reminderWeekday: (p.reminder_weekday as number | null) ?? 2,
       mantraAmbient: p.mantra_ambient ?? false,
       mantraBinaural: p.mantra_binaural ?? false,
+      cloudBackupEnabled: false,
     },
     savedCombos,
     journalEntries,

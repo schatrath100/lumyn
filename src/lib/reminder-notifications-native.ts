@@ -70,3 +70,19 @@ export async function cancelCapacitorReminder(): Promise<void> {
     /* native plugin unavailable */
   }
 }
+
+/** Open the app route when the user taps a scheduled reminder notification. */
+export function registerCapacitorNotificationRouting(): void {
+  if (!isCapacitorNative()) return;
+
+  void import('@capacitor/local-notifications').then(({ LocalNotifications }) => {
+    void LocalNotifications.addListener('localNotificationActionPerformed', (event) => {
+      const url = event.notification.extra?.url;
+      if (typeof url === 'string' && url.startsWith('/')) {
+        window.location.assign(url);
+      }
+    });
+  }).catch(() => {
+    /* native plugin unavailable */
+  });
+}
