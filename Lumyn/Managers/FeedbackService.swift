@@ -103,7 +103,7 @@ final class FeedbackService {
 
     private func deviceSignIn(config: SupabaseConfig) async throws -> StoredSession {
         let deviceID = deviceIdentifier()
-        let email = "lumyn-\(deviceID)@device.lumyn.app"
+        let email = "lumyn-\(deviceID)@lumyn.app"
         let password = devicePassword(for: deviceID)
 
         if let session = try? await passwordGrant(email: email, password: password, config: config) {

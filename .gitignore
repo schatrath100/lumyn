@@ -14,6 +14,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+Lumyn/Config/Secrets.plist
 
 # Editor directories and files
 .vscode/*
