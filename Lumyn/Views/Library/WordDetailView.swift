@@ -33,7 +33,7 @@ struct WordDetailView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.lumynInk.opacity(0.05))
+                .background(Color.lumynSurface)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
 
                 HStack(spacing: 12) {

@@ -59,7 +59,7 @@ struct MantraView: View {
             } label: {
                 Text(playing ? "Pause" : done ? "Replay" : "Play Mantra")
                     .font(LumynTypography.ctaLabel)
-                    .foregroundStyle(Color.lumynInk)
+                    .foregroundStyle(Color.lumynButtonInk)
                     .padding(.horizontal, 28)
                     .padding(.vertical, 14)
                     .background(Color.lumynGold)

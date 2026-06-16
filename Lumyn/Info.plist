@@ -24,10 +24,15 @@
 	<false/>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Lumyn can remind you to practice your daily switch word.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/PlayfairDisplay.ttf</string>
+		<string>Fonts/DMSans.ttf</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string></string>
+		<string>LumynBackground</string>
 	</dict>
 	<key>UIRequiresFullScreen</key>
 	<true/>

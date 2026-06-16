@@ -11,7 +11,7 @@ struct PrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(LumynTypography.ctaLabel)
-                .foregroundStyle(Color.lumynInk)
+                .foregroundStyle(Color.lumynButtonInk)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(
@@ -39,7 +39,7 @@ struct ProgressDots: View {
         HStack(spacing: 8) {
             ForEach(0..<total, id: \.self) { index in
                 Capsule()
-                    .fill(index <= current ? Color.lumynCoral : Color.lumynInk.opacity(0.15))
+                    .fill(index <= current ? Color.lumynCoral : Color.lumynInkSoft.opacity(0.35))
                     .frame(width: index == current ? 22 : 8, height: 8)
                     .animation(.easeInOut(duration: 0.25), value: current)
             }
@@ -147,9 +147,14 @@ struct MoodTile: View {
 // MARK: - Screen backgrounds
 
 struct LumynScreenBackground: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         LinearGradient(
-            colors: [Color.lumynBackground, Color.lumynGold.opacity(0.08)],
+            colors: [
+                Color.lumynBackground,
+                Color.lumynGold.opacity(colorScheme == .dark ? 0.04 : 0.08),
+            ],
             startPoint: .top,
             endPoint: .bottom
         )
@@ -201,7 +206,7 @@ struct LumynField: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(14)
-            .background(Color.lumynInk.opacity(0.05))
+            .background(Color.lumynFieldFill)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }

@@ -19,7 +19,7 @@ struct SessionView: View {
 
             ZStack {
                 Circle()
-                    .stroke(Color.lumynInk.opacity(0.1), lineWidth: 10)
+                    .stroke(Color.lumynInkSoft.opacity(0.25), lineWidth: 10)
                 Circle()
                     .trim(from: 0, to: progress)
                     .stroke(Color.lumynCoral, style: StrokeStyle(lineWidth: 10, lineCap: .round))

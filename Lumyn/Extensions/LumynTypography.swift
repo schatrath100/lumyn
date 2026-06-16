@@ -1,13 +1,15 @@
 import SwiftUI
 
-// TODO: Bundle Playfair Display + DM Sans font files and register in Info.plist UIAppFonts.
 enum LumynTypography {
+    private static let serifFamily = "Playfair Display"
+    private static let sansFamily = "DM Sans"
+
     static func serif(size: CGFloat, weight: Font.Weight = .regular) -> Font {
-        .system(size: size, weight: weight, design: .serif)
+        Font.custom(serifFamily, size: size).weight(weight)
     }
 
     static func sans(size: CGFloat, weight: Font.Weight = .regular) -> Font {
-        .system(size: size, weight: weight, design: .rounded)
+        Font.custom(sansFamily, size: size).weight(weight)
     }
 
     static var screenTitle: Font { serif(size: 28, weight: .regular) }

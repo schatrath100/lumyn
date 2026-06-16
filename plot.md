@@ -1,89 +1,88 @@
-# Lumyn — Feature Map
+# Lumyn — Feature Map (native SwiftUI)
 
-Living index of product nodes (screens, systems, and infra). Update this when adding routes, Supabase tables, or guard flows.
+Living index of product nodes for the **native iOS app** (`Lumyn/`). Update when adding screens, managers, or Supabase integration.
 
 ## User journey (high level)
 
 ```mermaid
 flowchart TD
   subgraph onboarding [Onboarding]
-    S1[Splash]
+    S1[SplashView]
     S2[Intro]
     S3[Intentions]
     S4[Profile]
     S5[Number]
     S6[Reminders]
     S7[Welcome]
-    S8[Paywall]
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
   end
 
-  subgraph gates [Guards]
-    OG[OnboardingGuard]
-    PG[PaywallGuard]
-    AG[AppGuard]
+  subgraph gates [Access]
+    PW[PaywallView sheet]
+    CV[ContentView routing]
   end
 
-  subgraph app [Main app]
+  subgraph app [MainTabView]
     H[Home]
     L[Library]
     C[Combo]
     M[Mood]
     J[Journal]
     ST[Settings]
+    DC[Discover]
   end
 
-  S8 -->|isSubscribed| AG
-  AG --> H
-  H --- L & C & M & J & ST
+  S7 --> PW
+  PW -->|isSubscribed| CV
+  CV --> H
+  H --- L & C & M & J
+  H --> ST
+  C --> DC
 ```
 
 ## Feature nodes
 
-| Node | Route / entry | Status | Key files | Supabase |
-|------|---------------|--------|-----------|----------|
-| **onboarding-splash** | `/onboarding` | ✅ | `SplashScreen.tsx` | — |
-| **onboarding-intro** | `/onboarding/intro` | ✅ | `IntroScreen.tsx` | — |
-| **onboarding-intentions** | `/onboarding/intentions` | ✅ | `IntentionsScreen.tsx`, `IntentionsGrid.tsx` | `profiles.selected_intentions` |
-| **onboarding-profile** | `/onboarding/profile` | ✅ | `ProfileScreen.tsx`, `ProfileForm.tsx` | `profiles` name/email/avatar |
-| **onboarding-number** | `/onboarding/number` | ✅ | `PersonalNumberScreen.tsx` | `profiles` numerology fields |
-| **onboarding-reminders** | `/onboarding/reminders` | ✅ | `RemindersScreen.tsx`, `RemindersSheet.tsx` | `reminder_frequency`, `reminder_time`, `reminder_weekday` |
-| **onboarding-welcome** | `/onboarding/welcome` | ✅ | `WelcomeScreen.tsx` | — |
-| **paywall** | `/onboarding/paywall` | ✅ | `PaywallScreen.tsx`, `purchases.ts`, `subscription-plans.ts` | `is_subscribed`, `trial_start_date`, `subscription_plan` |
-| **home** | `/` | ✅ | `HomeScreen.tsx`, `daily-word.ts`, `moon.ts` | streak, moods (tiles) |
-| **library** | `/library`, `/library/:id` | ✅ | `LibraryScreen.tsx`, `WordDetailScreen.tsx` | `saved_words` |
-| **session** | `/session/:id` | ✅ | `SessionScreen.tsx` | journal on complete |
-| **mantra** | `/mantra/:id` | ✅ | `MantraScreen.tsx` | settings mantra flags |
-| **combo-builder** | `/combo` | ✅ | `ComboScreen.tsx` | `saved_combos` |
-| **saved-combos** | `/combos` | ✅ | `SavedCombosScreen.tsx`, `PublishComboSheet.tsx` | `saved_combos`, publish → `community_combos` |
-| **share-card** | `/share/:id` | ✅ | `ShareCardScreen.tsx` | — |
-| **sigil** | `/sigil/:id`, `/sigil/community/:id` | ✅ | `SigilScreen.tsx`, `sigil.ts` | — |
-| **mood-checkin** | `/mood`, `/mood/result` | ✅ | `MoodCheckinScreen.tsx`, `MoodResultScreen.tsx` | `mood_checkins` |
-| **journal** | `/journal` | ✅ | `JournalScreen.tsx` | `journal_entries`, `synchronicity_entries` |
-| **analytics** | `/analytics` | ✅ | `AnalyticsScreen.tsx` | — (local) |
-| **discover** | `/discover` | ✅ | `DiscoverScreen.tsx` | `community_combos`, `community_upvotes` |
-| **widget** | `/widget` | ✅ | `WidgetScreen.tsx`, PWA manifest | — |
-| **settings** | `/settings` | ✅ | `SettingsScreen.tsx` | all profile/settings fields |
-| **settings-intentions** | Settings sheet | ✅ | `IntentionsEditorSheet.tsx` | `selected_intentions` |
-| **settings-reminders** | Settings sheet | ✅ | `RemindersSheet.tsx`, `reminder-scheduler.ts` | reminder columns |
-| **settings-feedback** | Settings sheet | ✅ | `FeedbackSheet.tsx` | `feedback` |
-| **edit-profile** | `/settings/profile` | ✅ | `EditProfileScreen.tsx`, `UserAvatar.tsx` | profile fields |
-| **delete-account** | `/settings/delete-data` | ✅ | `DeleteDataScreen.tsx` | `delete_my_data()` RPC |
-| **numerology** | `/profile/number` | ✅ | `PersonalNumberScreen.tsx` | numerology on `profiles` |
-| **legal-privacy** | `/legal/privacy` | ✅ | `PrivacyScreen.tsx` | — |
-| **legal-terms** | `/legal/terms` | ✅ | `TermsScreen.tsx` | — |
+| Node | Entry | Status | Key files | Supabase |
+|------|-------|--------|-----------|----------|
+| **splash** | App launch | ✅ | `SplashView.swift` | — |
+| **onboarding-intro** | Step 1–2 | ✅ | `OnboardingStepViews.swift`, `OnboardingContainerView.swift` | — |
+| **onboarding-intentions** | Step 3 | ✅ | `OnboardingStepViews.swift` | `profiles.selected_intentions` 🔜 |
+| **onboarding-profile** | Step 4 | ✅ | `OnboardingStepViews.swift` | `profiles` 🔜 |
+| **onboarding-number** | Step 5 | ✅ | `OnboardingStepViews.swift`, `NumerologyService.swift` | numerology fields 🔜 |
+| **onboarding-reminders** | Step 6 | ✅ | `OnboardingStepViews.swift`, `NotificationManager.swift` | reminder columns 🔜 |
+| **onboarding-welcome** | Step 7 | ✅ | `OnboardingStepViews.swift` | — |
+| **paywall** | Sheet after welcome | ✅ | `PaywallView.swift`, `SubscriptionManager.swift` | trial/plan 🔜 |
+| **home** | Home tab | ✅ | `HomeView.swift`, `DailyWordService.swift`, `MoonService.swift` | streak 🔜 |
+| **library** | Library tab | ✅ | `LibraryView.swift`, `WordDetailView.swift` | `saved_words` 🔜 |
+| **session** | Word detail → session | ✅ | `SessionView.swift` | journal on complete 🔜 |
+| **mantra** | Word detail → mantra | ✅ | `MantraView.swift` | — |
+| **combo-builder** | Combo tab | ✅ | `ComboBuilderView.swift` | `saved_combos` 🔜 |
+| **saved-combos** | Combo → Saved | ✅ | `SavedCombosView.swift` | 🔜 |
+| **discover** | Saved → Discover | ✅ | `DiscoverView.swift` (bundled seed) | live feed 🔜 |
+| **mood-checkin** | Mood tab | ✅ | `MoodCheckinView.swift`, `MoodResultView.swift` | `mood_checkins` 🔜 |
+| **journal** | Journal tab | ✅ | `JournalView.swift` | journal + synchronicity 🔜 |
+| **settings** | Home → gear | ✅ | `SettingsView.swift` | profile/settings 🔜 |
+| **share-card** | — | 🔜 v1.1 | — | — |
+| **sigil** | — | 🔜 v1.1 | — | — |
+| **analytics** | — | 🔜 v1.1 | — | local |
+| **widget** | — | 🔜 v1.1 | — | — |
+| **edit-profile** | — | 🔜 v1.1 | — | profile |
+| **edit-intentions** | — | 🔜 v1.1 | — | intentions |
+| **feedback** | — | 🔜 v1.1 | — | `feedback` |
+| **cloud-backup** | — | 🔜 v1.1 | — | full sync |
 
 ## System nodes
 
 | Node | Purpose | Status | Key files |
 |------|---------|--------|-----------|
-| **state-local** | Offline-first persistence | ✅ | `storage.ts`, `AppContext.tsx` |
-| **state-cloud** | Optional Supabase sync | ✅ | `supabase-sync.ts`, `supabase-session.ts`, `device-auth.ts` |
-| **guards** | Onboarding + paywall + app access | ✅ | `Guards.tsx` |
-| **notifications-web** | Daily/weekly reminders (PWA) | ✅ | `reminder-scheduler.ts`, `sw.js` |
-| **notifications-native** | Capacitor local notifications | ✅ | `reminder-notifications-native.ts` |
-| **iap-stub** | Paywall purchase/restore (web dev) | ✅ | `purchases.ts`, `ios/Products.storekit` |
-| **switch-words-db** | 541 words + generator | ✅ | `switch-words-source.csv`, `generate-switch-words.py` |
+| **state-local** | Offline-first persistence | ✅ | `PersistenceManager.swift`, `AppState.swift` |
+| **state-cloud** | Optional Supabase sync | 🔜 v1.1 | `supabase/migrations/` |
+| **routing** | Splash → onboarding → tabs + paywall sheet | ✅ | `ContentView.swift`, `LumynApp.swift` |
+| **notifications** | Daily/weekly local reminders | ✅ | `NotificationManager.swift` |
+| **iap** | StoreKit 2 subscriptions | ✅ | `SubscriptionManager.swift`, `Products.storekit` |
+| **catalog** | Bundled JSON content | ✅ | `DataCatalog.swift`, `Lumyn/Data/` |
+| **switch-words-db** | 541 words + generator | ✅ | `data/switch-words-source.csv`, `generate-switch-words.py` |
+| **design** | Golden Dawn palette + fonts | ✅ | `Color+Lumyn.swift`, `LumynTypography.swift`, `Fonts/` |
 | **keepalive** | Prevent Supabase free-tier pause | ✅ | `.github/workflows/supabase-keepalive.yml` |
 
 ## Supabase migrations (run in order)
@@ -98,24 +97,26 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  U[User] --> OG{OnboardingGuard}
-  OG -->|not subscribed| PG[Paywall]
-  OG -->|onboarding screens| OB[Onboarding]
-  PG -->|subscribed| AG{AppGuard}
-  AG -->|!subscribed| PG
-  AG -->|!onboardingComplete| OB
-  AG --> APP[App routes]
+  U[User] --> SPL[SplashView]
+  SPL --> OB{onboardingComplete?}
+  OB -->|no| ONB[OnboardingContainerView]
+  ONB --> PW[PaywallView]
+  PW -->|subscribed| TABS[MainTabView]
+  OB -->|yes| TABS
+  TABS -->|subscription lapses| PW
 ```
 
-## v1.1 additions (since initial v1)
+## v1.0 native (shipped)
 
-- Mandatory paywall (3-day trial, weekly/quarterly plans)
-- Profile + avatar + edit profile
-- Mood check-in sync to Supabase
-- Device-auth fallback when anonymous auth is off
-- Community combo **publishing** from saved combos
-- Reminders: **Off / Daily / Weekly** + permission UX
-- **Edit intentions** in Settings
-- **In-app feedback** → `feedback` table
-- GitHub **Supabase keepalive** workflow
-- Switch word library expanded to **541** entries
+- SwiftUI app with XcodeGen (`project.yml`)
+- StoreKit 2 paywall (weekly + quarterly, 3-day trial)
+- Adaptive dark mode (Golden Dawn palette)
+- Playfair Display + DM Sans bundled fonts
+- Core practice flows: home, library, session, mantra, mood, combo, journal, discover (seed), settings
+
+## v1.1 planned
+
+- Supabase cloud backup + live community feed
+- Analytics, share card, sigil export
+- Edit profile / intentions / feedback in Settings
+- Home screen widget

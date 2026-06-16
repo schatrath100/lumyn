@@ -68,7 +68,7 @@ struct LibraryView: View {
                 .foregroundStyle(selectedCategory == category ? Color.lumynInk : Color.lumynInkSoft)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 8)
-                .background(selectedCategory == category ? Color.lumynGold.opacity(0.35) : Color.lumynInk.opacity(0.06))
+                .background(selectedCategory == category ? Color.lumynGold.opacity(0.35) : Color.lumynSurface)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)

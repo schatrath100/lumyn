@@ -17,6 +17,7 @@ targets:
           - Data/**
     resources:
       - path: Lumyn/Data
+      - path: Lumyn/Fonts
       - path: Lumyn/Config/Secrets.plist
         optional: true
       - path: Lumyn/Resources/Assets.xcassets
@@ -25,8 +26,11 @@ targets:
       path: Lumyn/Info.plist
       properties:
         CFBundleDisplayName: Lumyn
+        UIAppFonts:
+          - Fonts/PlayfairDisplay.ttf
+          - Fonts/DMSans.ttf
         UILaunchScreen:
-          UIColorName: ""
+          UIColorName: LumynBackground
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UISupportedInterfaceOrientations~ipad:

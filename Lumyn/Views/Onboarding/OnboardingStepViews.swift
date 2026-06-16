@@ -98,7 +98,7 @@ struct OnboardingIntentionsView: View {
                             .foregroundStyle(Color.lumynInk)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
-                            .background(selected ? Color.lumynGold.opacity(0.35) : Color.lumynInk.opacity(0.05))
+                            .background(selected ? Color.lumynGold.opacity(0.35) : Color.lumynSurface)
                             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 14, style: .continuous)

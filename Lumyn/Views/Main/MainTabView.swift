@@ -98,10 +98,10 @@ private struct FloatingTabBar: View {
             VStack(spacing: 6) {
                 Image(systemName: selected == tab ? tab.iconFilled : tab.icon)
                     .font(.system(size: 18))
-                    .foregroundStyle(Color.lumynInk.opacity(selected == tab ? 0.9 : 0.5))
+                    .foregroundStyle(selected == tab ? Color.lumynInk : Color.lumynInkSoft)
                 Text(tab.label)
                     .font(LumynTypography.tabLabel)
-                    .foregroundStyle(Color.lumynInk.opacity(selected == tab ? 0.9 : 0.5))
+                    .foregroundStyle(selected == tab ? Color.lumynInk : Color.lumynInkSoft)
                 focusDash(isActive: selected == tab)
             }
             .frame(maxWidth: .infinity)

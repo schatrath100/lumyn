@@ -10,7 +10,8 @@ Built by [Whyteboard](https://whyteboard.com).
 - **XcodeGen** for project generation (`project.yml`)
 - **StoreKit 2** subscriptions with 3-day free trial
 - **UserDefaults** offline-first persistence
-- Golden Dawn design system (cream, coral, gold, ink)
+- Golden Dawn design system (cream, coral, gold, ink) with adaptive dark mode
+- **Playfair Display** + **DM Sans** bundled in `Lumyn/Fonts/`
 
 ## Features
 

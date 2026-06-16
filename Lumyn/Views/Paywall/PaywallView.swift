@@ -154,7 +154,7 @@ struct PaywallView: View {
             }
             .foregroundStyle(Color.lumynInk)
             .padding(16)
-            .background(selectedPlan == plan ? Color.lumynGold.opacity(0.25) : Color.lumynInk.opacity(0.05))
+            .background(selectedPlan == plan ? Color.lumynGold.opacity(0.25) : Color.lumynSurface)
             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 14, style: .continuous)

@@ -31,6 +31,7 @@
 		9701591BD321EEFE7C516B19 /* MoodResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A978A461AB7F97F8F549F9CF /* MoodResultView.swift */; };
 		9FDF88349654B5AFC988C62C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7E55FAE89962BEFA992BD /* SplashView.swift */; };
 		A59274C58101F7E988CB6129 /* NumerologyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C6EA4C957B2921AD5F280C /* NumerologyService.swift */; };
+		A69976840AA56CB7716DD296 /* PlayfairDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECE5BB6DE4FEBB30555F2814 /* PlayfairDisplay.ttf */; };
 		A83981B6669472CA1E145B7D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC86EAE84801A5663E234F5 /* AppState.swift */; };
 		A9FB10A2296414F866679CAE /* LumynApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3877F445215DEE3B9D29D1EF /* LumynApp.swift */; };
 		B08EFCE1DE46937D404B88C0 /* Secrets.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D8D07F4B145E76DB80986E0 /* Secrets.example.plist */; };
@@ -40,10 +41,12 @@
 		C07A7FE2317DF71389662EA4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE42C22F90D0FEDC105CA0 /* SettingsView.swift */; };
 		C9340FC7FC9DC9825EDB23C3 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87848800AF36ADCDE7FE9F29 /* DiscoverView.swift */; };
 		D7843A37D7835C6A76BBD1CB /* MoodCheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546DB35AD7861AA86BB2E60E /* MoodCheckinView.swift */; };
+		E1B5966DAFD444F595AABCAD /* DMSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6438C2DCDC5EAF85FF7FA21 /* DMSans.ttf */; };
 		E4B05F9665EB5A9D211FEEA7 /* LumynComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728787051FBE97458851ED78 /* LumynComponents.swift */; };
 		E5FD8B304464048599291F20 /* LumynTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870052082435C94016F6EDC /* LumynTypography.swift */; };
 		E8949F70C5D042798B0AAB3C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4915C2CAD77FCC70903C /* PaywallView.swift */; };
 		E9E2C495DAE730A981532E6D /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF6101604B8B2C8120A3081 /* WordDetailView.swift */; };
+		F7F7C8E4F1A618A0ABA2953F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = E3A4CDE507A191C8E6CDF887 /* OFL.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,9 +86,12 @@
 		D04C29CECDC0A29C1DA7AAD7 /* LumynModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumynModels.swift; sourceTree = "<group>"; };
 		D19248A38F249D10043D7649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DAA26F8E7312E6E365DFB916 /* OnboardingStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViews.swift; sourceTree = "<group>"; };
+		E3A4CDE507A191C8E6CDF887 /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		EAF3927D0CCC5A97A7B3D979 /* MoonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonService.swift; sourceTree = "<group>"; };
+		ECE5BB6DE4FEBB30555F2814 /* PlayfairDisplay.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayfairDisplay.ttf; sourceTree = "<group>"; };
 		ED82848A385ADF5D0B0E65B4 /* DailyWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordService.swift; sourceTree = "<group>"; };
 		F1085AA3161D877F21F194DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F6438C2DCDC5EAF85FF7FA21 /* DMSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DMSans.ttf; sourceTree = "<group>"; };
 		FDFAD89215461B933FAE5D7E /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +226,7 @@
 				AB5D638796A8DEC9BF9459A8 /* PrivacyInfo.xcprivacy */,
 				E8E94CA17E2DAB05C33ED356 /* Config */,
 				1FCEA4C33BA1EED69CFCDA40 /* Extensions */,
+				933BE986B766F47E5675B36C /* Fonts */,
 				2AD92E38FACCFD3B110C4D5E /* Managers */,
 				087CCE96C61BD89D407C4438 /* Models */,
 				499E8C0BE8D8020217751D58 /* Resources */,
@@ -242,6 +249,16 @@
 				04D6F30B9A4BF01F250421A3 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		933BE986B766F47E5675B36C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F6438C2DCDC5EAF85FF7FA21 /* DMSans.ttf */,
+				E3A4CDE507A191C8E6CDF887 /* OFL.txt */,
+				ECE5BB6DE4FEBB30555F2814 /* PlayfairDisplay.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		9D5619B44D360F9ABB74E13D /* Products */ = {
@@ -365,6 +382,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				409072940A77CF01D54EB7C7 /* Assets.xcassets in Resources */,
+				E1B5966DAFD444F595AABCAD /* DMSans.ttf in Resources */,
+				F7F7C8E4F1A618A0ABA2953F /* OFL.txt in Resources */,
+				A69976840AA56CB7716DD296 /* PlayfairDisplay.ttf in Resources */,
 				0CA179DB3B7637F58D854841 /* PrivacyInfo.xcprivacy in Resources */,
 				B08EFCE1DE46937D404B88C0 /* Secrets.example.plist in Resources */,
 			);

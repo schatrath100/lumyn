@@ -8,7 +8,7 @@
 - **StoreKit 2** for subscriptions (3-day trial)
 - **UserDefaults** for offline persistence (primary cache)
 - **Supabase** (optional, v1.1) for cloud backup, live community feed, feedback
-- Golden Dawn design system (system serif/rounded fallbacks; Playfair Display + DM Sans planned)
+- Golden Dawn design system (Playfair Display + DM Sans bundled; adaptive dark mode)
 
 ## Features (v1.0 native)
 
