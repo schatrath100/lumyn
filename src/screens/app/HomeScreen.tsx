@@ -33,108 +33,106 @@ export function HomeScreen() {
   return (
     <>
       <StatusBar />
-      <div className="screen__body" style={{ padding: '0 18px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+      <div className="screen__body screen__body--tab">
+        <header className="tab-screen-header">
           <div>
-            <div style={{ fontSize: 8, color: 'var(--tm)', letterSpacing: '0.1em' }}>{daily.moonEmoji} {daily.moonLabel} ✦</div>
-            <div className="display" style={{ fontSize: 14, marginTop: 4, color: 'var(--tp)' }}>Today's Word</div>
+            <div className="tab-screen-header__moon">{daily.moonEmoji} {daily.moonLabel} ✦</div>
+            <h1 className="tab-screen-header__title">Today&apos;s Word</h1>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 10 }}>
             <button
               type="button"
+              className="icon-btn icon-btn--surface"
               onClick={() => navigate('/widget')}
-              style={{ width: 38, height: 38, background: 'var(--bg-s)', border: '1px solid var(--bd)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, cursor: 'pointer', color: 'var(--ts)' }}
               title="Widget view"
             >
               ◫
             </button>
             <button
               type="button"
+              className="icon-btn icon-btn--accent"
               onClick={() => navigate('/settings')}
-              style={{ width: 38, height: 38, background: 'linear-gradient(135deg,#E8784B,#F2C44A)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: 'white', boxShadow: '0 4px 12px rgba(232,120,75,0.3)', border: 'none', cursor: 'pointer' }}
               title="Settings"
             >
               ⚙
             </button>
           </div>
-        </div>
+        </header>
 
-        <button
-          type="button"
-          onClick={openDaily}
-          style={{ width: '100%', textAlign: 'left', background: 'linear-gradient(135deg,#1E110A 0%,#3A2010 100%)', borderRadius: 14, padding: 14, marginBottom: 14, position: 'relative', overflow: 'hidden', cursor: 'pointer', border: 'none' }}
-        >
-          <div style={{ position: 'absolute', width: 100, height: 100, borderRadius: '50%', background: 'radial-gradient(circle,rgba(242,196,74,0.18) 0%,transparent 70%)', top: -20, right: -20 }} />
-          <div style={{ fontSize: 7, color: 'rgba(242,196,74,0.65)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8, position: 'relative', zIndex: 1 }}>
-            Word of the Day{daily.isPersonalized ? ' · For You' : ''}
-          </div>
-          <div className="display" style={{ fontSize: 30, color: '#F2C44A', fontStyle: 'italic', marginBottom: 6, position: 'relative', zIndex: 1 }}>{daily.word.word}</div>
-          <div style={{ fontSize: 9, color: 'rgba(255,248,242,0.45)', position: 'relative', zIndex: 1, marginBottom: 6, lineHeight: 1.5 }}>{daily.ritualPrompt}</div>
-          <div style={{ fontSize: 9, color: 'rgba(255,248,242,0.35)', position: 'relative', zIndex: 1, marginBottom: 8 }}>Repeat {daily.word.reps}×</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, position: 'relative', zIndex: 1 }}>
-            <span style={{ fontSize: 12 }}>🔥</span>
-            <span style={{ fontSize: 9, color: 'rgba(255,248,242,0.7)' }}>
-              {state.streak > 0 ? `${state.streak} day streak` : 'Start your streak'}
-            </span>
-            <span style={{ fontSize: 9, color: 'rgba(242,196,74,0.45)', marginLeft: 'auto' }}>Tap to begin →</span>
-          </div>
-        </button>
-
-        {resonance && resonantWords.length > 0 && (
-          <div style={{ background: 'var(--bg-s)', borderRadius: 16, padding: 14, border: '1px solid var(--bd)', marginBottom: 14 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-              <div className="eyebrow" style={{ fontWeight: 600 }}>Your {resonance} resonance</div>
-              <button type="button" onClick={() => navigate('/profile/number')} style={{ background: 'none', border: 'none', fontSize: 11, color: 'var(--co)', cursor: 'pointer' }}>Edit</button>
+        <div className="tab-screen-content" style={{ paddingTop: 0 }}>
+          <button type="button" className="daily-word-card" onClick={openDaily}>
+            <div className="daily-word-card__glow" />
+            <div className="daily-word-card__eyebrow">
+              Word of the Day{daily.isPersonalized ? ' · For You' : ''}
             </div>
-            <div className="chip-scroll">
-              {resonantWords.map((w) => (
-                <button
-                  key={w.id}
-                  type="button"
-                  onClick={() => { setSelectedWord(w); navigate(`/library/${w.id}`); }}
-                  className="display"
-                  style={{ padding: '6px 12px', borderRadius: 20, border: `1px solid ${w.color}44`, background: `${w.color}12`, fontSize: 12, fontStyle: 'italic', color: w.color, cursor: 'pointer', flexShrink: 0 }}
-                >
-                  {w.word}
-                </button>
-              ))}
+            <div className="daily-word-card__word">{daily.word.word}</div>
+            <div className="daily-word-card__prompt">{daily.ritualPrompt}</div>
+            <div className="daily-word-card__reps">Repeat {daily.word.reps}×</div>
+            <div className="daily-word-card__footer">
+              <span style={{ fontSize: 16 }}>🔥</span>
+              <span className="daily-word-card__streak">
+                {state.streak > 0 ? `${state.streak} day streak` : 'Start your streak'}
+              </span>
+              <span className="daily-word-card__cta">Tap to begin →</span>
             </div>
-            {resonantCombos[0] && (
-              <button
-                type="button"
-                onClick={() => navigate(resonantCombos[0].source === 'yours' ? '/combos' : '/discover')}
-                style={{ marginTop: 10, width: '100%', textAlign: 'left', background: 'var(--bg-c)', border: '1px solid var(--bd)', borderRadius: 10, padding: '8px 10px', cursor: 'pointer', fontSize: 11, color: 'var(--ts)' }}
-              >
-                ◈ Resonant combo: <strong style={{ color: 'var(--tp)' }}>{resonantCombos[0].name}</strong>
-              </button>
-            )}
-          </div>
-        )}
-
-        {!resonance && (
-          <button
-            type="button"
-            onClick={() => navigate('/profile/number')}
-            style={{ width: '100%', background: 'var(--bg-c)', border: '1px dashed var(--bd)', borderRadius: 14, padding: 14, marginBottom: 14, cursor: 'pointer', textAlign: 'left' }}
-          >
-            <div className="eyebrow" style={{ marginBottom: 4 }}>Personalize</div>
-            <div style={{ fontSize: 13, color: 'var(--ts)' }}>Add your name & birth date for resonant words →</div>
           </button>
-        )}
 
-        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--tm)', marginBottom: 10, letterSpacing: '0.08em' }}>How are you feeling?</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 16 }}>
-          {MOODS.map((mood) => (
+          {resonance && resonantWords.length > 0 && (
+            <div style={{ background: 'var(--bg-s)', borderRadius: 18, padding: 16, border: '1px solid var(--bd)', marginBottom: 16 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <div className="eyebrow" style={{ fontWeight: 600 }}>Your {resonance} resonance</div>
+                <button type="button" onClick={() => navigate('/profile/number')} style={{ background: 'none', border: 'none', fontSize: 13, color: 'var(--co)', cursor: 'pointer' }}>Edit</button>
+              </div>
+              <div className="chip-scroll">
+                {resonantWords.map((w) => (
+                  <button
+                    key={w.id}
+                    type="button"
+                    onClick={() => { setSelectedWord(w); navigate(`/library/${w.id}`); }}
+                    className="display"
+                    style={{ padding: '8px 14px', borderRadius: 20, border: `1px solid ${w.color}44`, background: `${w.color}12`, fontSize: 14, fontStyle: 'italic', color: w.color, cursor: 'pointer', flexShrink: 0 }}
+                  >
+                    {w.word}
+                  </button>
+                ))}
+              </div>
+              {resonantCombos[0] && (
+                <button
+                  type="button"
+                  onClick={() => navigate(resonantCombos[0].source === 'yours' ? '/combos' : '/discover')}
+                  style={{ marginTop: 12, width: '100%', textAlign: 'left', background: 'var(--bg-c)', border: '1px solid var(--bd)', borderRadius: 12, padding: '12px 14px', cursor: 'pointer', fontSize: 13, color: 'var(--ts)' }}
+                >
+                  ✦ Resonant combo: <strong style={{ color: 'var(--tp)' }}>{resonantCombos[0].name}</strong>
+                </button>
+              )}
+            </div>
+          )}
+
+          {!resonance && (
             <button
-              key={mood.id}
               type="button"
-              onClick={() => handleMood(mood)}
-              style={{ padding: 9, borderRadius: 10, border: 'none', background: 'var(--bg-s)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}
+              onClick={() => navigate('/profile/number')}
+              style={{ width: '100%', background: 'var(--bg-c)', border: '1px dashed var(--bd)', borderRadius: 16, padding: 16, marginBottom: 16, cursor: 'pointer', textAlign: 'left' }}
             >
-              <div style={{ width: 22, height: 22, borderRadius: 10, background: mood.tileBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, color: mood.color }}>{mood.sym}</div>
-              <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--tp)' }}>{mood.label}</span>
+              <div className="eyebrow" style={{ marginBottom: 6 }}>Personalize</div>
+              <div style={{ fontSize: 15, color: 'var(--ts)', lineHeight: 1.45 }}>Add your name & birth date for resonant words →</div>
             </button>
-          ))}
+          )}
+
+          <div className="section-label">How are you feeling?</div>
+          <div className="mood-grid">
+            {MOODS.map((mood) => (
+              <button
+                key={mood.id}
+                type="button"
+                className="mood-grid__item"
+                onClick={() => handleMood(mood)}
+              >
+                <div className="mood-grid__icon" style={{ background: mood.tileBg, color: mood.color }}>{mood.sym}</div>
+                <span className="mood-grid__label">{mood.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>

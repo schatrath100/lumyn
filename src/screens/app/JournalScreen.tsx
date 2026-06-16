@@ -48,7 +48,7 @@ export function JournalScreen() {
   return (
     <>
       <StatusBar />
-      <div className="screen__body" style={{ padding: '0 18px' }}>
+      <div className="screen__body screen__body--tab" style={{ padding: '0 var(--screen-x)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <div className="display" style={{ fontSize: 26 }}>Journal</div>
           <button

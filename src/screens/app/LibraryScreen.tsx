@@ -29,13 +29,13 @@ export function LibraryScreen() {
   return (
     <>
       <StatusBar />
-      <div style={{ padding: '4px 18px 10px', flexShrink: 0 }}>
-        <div className="display" style={{ fontSize: 18, marginBottom: 12 }}>Library</div>
-        <div style={{ position: 'relative', marginBottom: 10 }}>
-          <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 15, color: 'var(--tm)' }}>⌕</span>
+      <div style={{ padding: '8px var(--screen-x) 12px', flexShrink: 0 }}>
+        <h1 className="display" style={{ fontSize: 26, marginBottom: 14 }}>Library</h1>
+        <div style={{ position: 'relative', marginBottom: 12 }}>
+          <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 16, color: 'var(--tm)' }}>⌕</span>
           <input
             className="input input--surface"
-            style={{ paddingLeft: 36, fontSize: 14, padding: '12px 14px 12px 36px' }}
+            style={{ paddingLeft: 38, fontSize: 15, padding: '14px 14px 14px 38px' }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search words, categories, or descriptions…"
@@ -54,23 +54,23 @@ export function LibraryScreen() {
           ))}
         </div>
       </div>
-      <div className="screen__body" style={{ padding: '0 18px' }}>
+      <div className="screen__body screen__body--tab" style={{ padding: `0 var(--screen-x)` }}>
         {filtered.map((w) => (
           <button
             key={w.id}
             type="button"
             onClick={() => { setSelectedWord(w); navigate(`/library/${w.id}`); }}
-            style={{ width: '100%', textAlign: 'left', background: 'var(--bg-s)', border: 'none', borderRadius: 10, padding: '9px 10px', marginBottom: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}
+            style={{ width: '100%', textAlign: 'left', background: 'var(--bg-s)', border: 'none', borderRadius: 12, padding: '12px 12px', marginBottom: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}
           >
-            <div style={{ width: 4, height: 40, borderRadius: 2, background: w.color, flexShrink: 0 }} />
+            <div style={{ width: 4, height: 44, borderRadius: 2, background: w.color, flexShrink: 0 }} />
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                <span className="display" style={{ fontSize: 13, fontStyle: 'italic' }}>{w.word}</span>
-                <span style={{ padding: '3px 8px', borderRadius: 10, fontSize: 9, fontWeight: 600, color: w.color, background: `${w.color}1A` }}>{w.category}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span className="display" style={{ fontSize: 16, fontStyle: 'italic' }}>{w.word}</span>
+                <span style={{ padding: '3px 8px', borderRadius: 10, fontSize: 10, fontWeight: 600, color: w.color, background: `${w.color}1A` }}>{w.category}</span>
               </div>
-              <div style={{ fontSize: 9, color: 'var(--tm)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{w.intention}</div>
+              <div style={{ fontSize: 12, color: 'var(--tm)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{w.intention}</div>
             </div>
-            <span style={{ fontSize: 13, color: 'var(--tm)' }}>›</span>
+            <span style={{ fontSize: 16, color: 'var(--tm)' }}>›</span>
           </button>
         ))}
         <div style={{ height: 12 }} />

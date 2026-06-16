@@ -29,7 +29,7 @@ export function ComboScreen() {
   return (
     <>
       <StatusBar />
-      <div className="screen__body" style={{ padding: '0 18px' }}>
+      <div className="screen__body screen__body--tab" style={{ padding: '0 var(--screen-x)' }}>
         <div className="display" style={{ fontSize: 26, marginBottom: 16 }}>Combo Builder</div>
         <div style={{ marginBottom: 16 }}>
           <label className="eyebrow" style={{ display: 'block', marginBottom: 7, fontWeight: 600, fontSize: 10 }}>Combo name</label>
