@@ -213,7 +213,10 @@ export function SettingsScreen() {
           type="button"
           className="btn-ghost"
           style={{ color: 'var(--co)', marginBottom: 24 }}
-          onClick={() => { updateProfile({ onboardingComplete: false }); navigate('/onboarding'); }}
+          onClick={() => {
+            updateProfile({ onboardingComplete: false });
+            navigate('/onboarding', { replace: true });
+          }}
         >
           Replay onboarding
         </button>

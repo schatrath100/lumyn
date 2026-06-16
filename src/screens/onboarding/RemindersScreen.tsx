@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProgressDots } from '../../components/ProgressDots';
+import { OnboardingHeader } from '../../components/OnboardingHeader';
 import { RemindersSheet } from '../../components/RemindersSheet';
-import { StatusBar } from '../../components/StatusBar';
 import { useApp } from '../../context/AppContext';
 
 export function RemindersScreen() {
@@ -13,8 +12,7 @@ export function RemindersScreen() {
   return (
     <>
       <div className="screen screen--card">
-        <StatusBar />
-        <ProgressDots total={8} active={6} />
+        <OnboardingHeader backTo="/onboarding/number" active={6} />
         <div className="screen__body" style={{ padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 18, textAlign: 'center' }}>
           <div style={{ width: 76, height: 76, background: 'linear-gradient(135deg,#FFE4CC,#FFF0E0)', borderRadius: 22, margin: '0 auto 18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36, boxShadow: '0 8px 24px rgba(232,120,75,0.16)' }}>🔔</div>
           <h1 className="display" style={{ fontSize: 30, fontWeight: 400, margin: '0 0 8px', lineHeight: 1.25 }}>Stay aligned,<br />every day</h1>

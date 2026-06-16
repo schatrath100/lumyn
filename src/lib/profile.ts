@@ -1,6 +1,6 @@
 import type { UserProfile } from '../types';
 
-export const AVATAR_EMOJIS = ['✦', '☀', '☽', '✿', '◈', '◎', '♡', '∿', '✧', '☘', '△', '◇'] as const;
+export const AVATAR_EMOJIS = ['🌙', '✨', '🌸', '🦋', '🌿', '💫', '🔮', '🌊', '💎', '🌟', '🧿', '🪷', '🌺', '🌱', '🌞', '🌈'] as const;
 
 export function getDisplayName(profile: Pick<UserProfile, 'firstName' | 'lastName' | 'userName'>): string {
   const full = `${profile.firstName} ${profile.lastName}`.trim();

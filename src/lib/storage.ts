@@ -9,7 +9,7 @@ export const defaultState: PersistedState = {
     firstName: '',
     lastName: '',
     email: '',
-    avatarEmoji: '✦',
+    avatarEmoji: '🌙',
     selectedIntentions: [],
     userName: '',
     birthDate: '',

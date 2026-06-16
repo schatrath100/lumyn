@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ProgressDots } from '../../components/ProgressDots';
-import { StatusBar } from '../../components/StatusBar';
+import { OnboardingHeader } from '../../components/OnboardingHeader';
 import { PERSONAL_NUMBER_PROFILES } from '../../data/personal-numbers';
 import { useApp } from '../../context/AppContext';
 import { calcLifePathNumber, calcPersonalNumber } from '../../lib/numerology';
@@ -27,13 +26,12 @@ export function PersonalNumberScreen() {
 
   return (
     <div className="screen screen--card">
-      <StatusBar />
       {onboardingComplete ? (
-        <div style={{ padding: '0 28px' }}>
-          <button type="button" className="btn-back" onClick={() => navigate('/settings')}>← Back</button>
+        <div style={{ padding: '14px 20px 0' }}>
+          <button type="button" className="onboarding-nav__back" onClick={() => navigate('/settings')}>←</button>
         </div>
       ) : (
-        <ProgressDots total={8} active={5} />
+        <OnboardingHeader backTo="/onboarding/profile" active={5} />
       )}
       <div className="screen__body" style={{ padding: '0 28px' }}>
         <div className="eyebrow" style={{ marginBottom: 8 }}>Chaldean Numerology</div>

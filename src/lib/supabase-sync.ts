@@ -88,7 +88,7 @@ export async function pullRemoteState(userId: string): Promise<PersistedState | 
       firstName: p.first_name ?? '',
       lastName: p.last_name ?? '',
       email: p.email ?? '',
-      avatarEmoji: p.avatar_emoji ?? '✦',
+      avatarEmoji: p.avatar_emoji ?? '🌙',
       userName: p.user_name ?? '',
       birthDate: p.birth_date ?? '',
       numerologySystem: p.numerology_system as 'chaldean' | 'pythagorean',

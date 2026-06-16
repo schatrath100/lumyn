@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StatusBar } from '../../components/StatusBar';
 import { ProgressDots } from '../../components/ProgressDots';
 import { TrialTimeline } from '../../components/TrialTimeline';
 import { useApp } from '../../context/AppContext';
@@ -58,7 +57,6 @@ export function PaywallScreen() {
 
   return (
     <div className="screen paywall-screen">
-      <StatusBar />
       <ProgressDots total={8} active={8} />
 
       <div className="paywall-scroll">

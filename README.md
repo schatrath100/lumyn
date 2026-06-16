@@ -75,6 +75,34 @@ npm run lint
 vercel deploy --prod
 ```
 
+## iOS Simulator (native shell)
+
+Lumyn runs as a real iOS app via **Capacitor** — home-screen icon, native notifications, full-screen (not Safari).
+
+```bash
+npm run cap:ios          # build web + sync + launch Simulator
+npm run cap:open         # open Xcode workspace
+npm run cap:sync         # rebuild web assets into ios/App
+```
+
+**First-time setup** (already done if `ios/App` exists):
+
+```bash
+npm install
+npm run build
+npx cap add ios
+cd ios/App && pod install
+```
+
+**Live reload while coding** (Simulator loads your dev server):
+
+```bash
+npm run dev -- --host          # terminal 1
+npx cap run ios -l --external  # terminal 2
+```
+
+**StoreKit testing:** In Xcode, edit scheme **App → Run → Options → StoreKit Configuration** and select `Products.storekit` for subscription sandbox testing.
+
 ## Supabase Setup (optional cloud backup)
 
 1. Create a project at [supabase.com](https://supabase.com)

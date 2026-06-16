@@ -1,26 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { StatusBar } from '../../components/StatusBar';
 
 export function SplashScreen() {
   const navigate = useNavigate();
 
-  const skipToPaywall = () => {
-    navigate('/onboarding/paywall', { replace: true });
-  };
-
   return (
     <div className="screen gradient-splash" style={{ position: 'relative', overflow: 'hidden' }}>
-      <StatusBar />
       <div className="glow-orb" style={{ width: 180, height: 180, top: 140, left: '50%', transform: 'translateX(-50%)' }} />
       <div className="fade-up" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 36px', position: 'relative', zIndex: 1 }}>
-        <div style={{ fontSize: 8, color: 'rgba(232,120,75,0.6)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 18, fontWeight: 400 }}>Welcome to</div>
-        <div className="display" style={{ fontSize: 42, color: '#E8784B', letterSpacing: '0.1em', lineHeight: 1, animation: 'reveal 1.4s ease forwards' }}>LUMYN</div>
-        <div style={{ width: 4, height: 4, background: 'rgba(232,120,75,0.45)', borderRadius: '50%', margin: '12px 0' }} />
-        <div style={{ fontSize: 7, color: 'rgba(122,92,69,0.7)', letterSpacing: '0.18em', textTransform: 'uppercase', textAlign: 'center', fontWeight: 400 }}>Words that shift your world</div>
+        <div style={{ fontSize: 13, color: 'rgba(232,120,75,0.75)', letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 700 }}>Welcome to</div>
+        <div className="display" style={{ fontSize: 56, color: '#E8784B', letterSpacing: '0.12em', lineHeight: 1, fontWeight: 500, animation: 'reveal 1.4s ease forwards' }}>LUMYN</div>
+        <div style={{ width: 4, height: 4, background: 'rgba(232,120,75,0.45)', borderRadius: '50%', margin: '18px 0' }} />
+        <div style={{ fontSize: 14, color: 'rgba(122,92,69,0.85)', letterSpacing: '0.22em', textTransform: 'uppercase', textAlign: 'center', fontWeight: 700 }}>Words that shift your world</div>
       </div>
-      <div style={{ padding: '0 28px 44px', position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ padding: '0 28px 44px', position: 'relative', zIndex: 1 }}>
         <button type="button" className="btn-primary" onClick={() => navigate('/onboarding/intro')}>Begin Your Journey</button>
-        <button type="button" className="btn-ghost" style={{ color: 'rgba(122,92,69,0.65)' }} onClick={skipToPaywall}>Skip to trial</button>
       </div>
     </div>
   );

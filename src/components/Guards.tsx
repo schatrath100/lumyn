@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 
 export function OnboardingGuard() {
   const { state } = useApp();
-  if (state.profile.isSubscribed) return <Navigate to="/" replace />;
+  if (state.profile.isSubscribed && state.profile.onboardingComplete) return <Navigate to="/" replace />;
   return <Outlet />;
 }
 
@@ -15,7 +15,7 @@ export function PaywallGuard() {
 
 export function AppGuard() {
   const { state } = useApp();
-  if (!state.profile.isSubscribed) return <Navigate to="/onboarding/paywall" replace />;
   if (!state.profile.onboardingComplete) return <Navigate to="/onboarding" replace />;
+  if (!state.profile.isSubscribed) return <Navigate to="/onboarding/paywall" replace />;
   return <Outlet />;
 }
